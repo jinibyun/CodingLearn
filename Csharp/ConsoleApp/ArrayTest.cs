@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace ConsoleApp
 {
     public class ArrayTest
-    {
+    { 
         public void Test()
         {
-            // array 
+            // array
 
             // one dimensional
             string[] players = new string[10];
