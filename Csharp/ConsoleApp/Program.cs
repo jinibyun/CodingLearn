@@ -37,7 +37,25 @@ namespace ConsoleApp
             enumTest.Test();
 
             // 6. Operator
-            
+            Console.WriteLine("=================== Operator ================");
+            var operatorTest = new OperatorTest();
+            operatorTest.Test();
+
+            // 7. If
+            Console.WriteLine("=================== If ================");
+            var ifTest = new IfTest();
+            ifTest.Test();
+
+            // 8. loop
+            Console.WriteLine("=================== Loop ================");
+            var loopTest = new LoopTest();
+            loopTest.Test();
+
+            // 9. yield keword: when collection data can be returned one by one in turn
+            Console.WriteLine("=================== yield return ================");
+            var yieldReturnTest = new yieldTest();
+            yieldReturnTest.Test();
+
         }
     }
 }
