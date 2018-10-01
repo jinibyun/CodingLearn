@@ -42,21 +42,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayTest.cs" />
-    <Compile Include="DataType.cs" />
-    <Compile Include="EnumTest.cs" />
-    <Compile Include="IfTest.cs" />
-    <Compile Include="LoopTest.cs" />
-    <Compile Include="OperatorTest.cs" />
+    <Compile Include="Beginner\ArrayTest.cs" />
+    <Compile Include="Intermediate\ClassTest2.cs" />
+    <Compile Include="Intermediate\ClassTest1.cs" />
+    <Compile Include="Beginner\DataType.cs" />
+    <Compile Include="Beginner\EnumTest.cs" />
+    <Compile Include="Beginner\ExceptionTest.cs" />
+    <Compile Include="Beginner\IfTest.cs" />
+    <Compile Include="Beginner\LoopTest.cs" />
+    <Compile Include="Beginner\MethodTest.cs" />
+    <Compile Include="Beginner\NullableTest.cs" />
+    <Compile Include="Beginner\OperatorTest.cs" />
+    <Compile Include="Intermediate\ClassTest3.cs" />
+    <Compile Include="Intermediate\ClassTest4.cs" />
+    <Compile Include="Intermediate\ClassTest5.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringTest.cs" />
-    <Compile Include="VariableAndConstant.cs" />
-    <Compile Include="yieldTest.cs" />
+    <Compile Include="Beginner\StringTest.cs" />
+    <Compile Include="Beginner\StructTest.cs" />
+    <Compile Include="Beginner\VariableAndConstant.cs" />
+    <Compile Include="Beginner\yieldTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ReadMe.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Advanced\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
