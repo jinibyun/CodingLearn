@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Intermediate
 {
-    public class ClassTest2
+    public class ClassTest_Indexer
     {
         string[] words = "The quick brown fox".Split();
 

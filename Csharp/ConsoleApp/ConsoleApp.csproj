@@ -43,8 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Beginner\ArrayTest.cs" />
-    <Compile Include="Intermediate\ClassTest2.cs" />
-    <Compile Include="Intermediate\ClassTest1.cs" />
+    <Compile Include="Intermediate\ClassTest_Basic2.cs" />
+    <Compile Include="Intermediate\ClassTest_Indexer.cs" />
+    <Compile Include="Intermediate\ClassTest_Basic1.cs" />
     <Compile Include="Beginner\DataType.cs" />
     <Compile Include="Beginner\EnumTest.cs" />
     <Compile Include="Beginner\ExceptionTest.cs" />
@@ -53,9 +54,12 @@
     <Compile Include="Beginner\MethodTest.cs" />
     <Compile Include="Beginner\NullableTest.cs" />
     <Compile Include="Beginner\OperatorTest.cs" />
-    <Compile Include="Intermediate\ClassTest3.cs" />
-    <Compile Include="Intermediate\ClassTest4.cs" />
-    <Compile Include="Intermediate\ClassTest5.cs" />
+    <Compile Include="Intermediate\ClassTest_Inheritance1.cs" />
+    <Compile Include="Intermediate\ClassTest_Inheritance2.cs" />
+    <Compile Include="Intermediate\ClassTest_Inheritance3.cs" />
+    <Compile Include="Intermediate\Employee.cs" />
+    <Compile Include="Intermediate\FourLeggedAnimal.cs" />
+    <Compile Include="Intermediate\StaticOrNonStaticClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Beginner\StringTest.cs" />

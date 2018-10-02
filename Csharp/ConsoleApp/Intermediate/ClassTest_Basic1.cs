@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Intermediate
 {
-    public class ClassTest1
+    public class ClassTest_Basic1
     {
         // class's element
         // 1. Method 2. Property  3. Field  4. Event  5.Enum  6.Constant
@@ -25,7 +25,7 @@ namespace ConsoleApp.Intermediate
         public event EventHandler NameChanged;
 
         // Constructor
-        public ClassTest1(string pname, int page, char pgender = 'M')
+        public ClassTest_Basic1(string pname, int page, char pgender = 'M')
         {
             name = pname;
             age = page;
