@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Beginner\ArrayTest.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Intermediate\ClassTest_Basic2.cs" />
     <Compile Include="Intermediate\ClassTest_Indexer.cs" />
     <Compile Include="Intermediate\ClassTest_Basic1.cs" />
