@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Beginner;
+﻿using ConsoleApp.Assignment;
+using ConsoleApp.Beginner;
 using ConsoleApp.Intermediate;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,20 @@ namespace ConsoleApp
             // Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            Intermediate_OOP3Characteristics();
-            Intermediate_OtherThings();
+            // Intermediate_OOP3Characteristics();
+            // Intermediate_OtherThings();
             // C. Advanced
-            // Advanced();          
-        }        
+            // Advanced();         
+
+            // D. Assignment
+            AssignmentTest();
+        }
+
+        private static void AssignmentTest()
+        {
+            var cshsarpTest = new ChsarpTest();
+            cshsarpTest.Test();
+        }
 
         private static void Advanced()
         {

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assignment\ChsarpTest.cs" />
     <Compile Include="Beginner\ArrayTest.cs" />
     <Compile Include="Intermediate\ClassTest_Basic2.cs" />
     <Compile Include="Intermediate\ClassTest_Indexer.cs" />
