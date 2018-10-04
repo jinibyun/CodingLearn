@@ -20,10 +20,10 @@ namespace ConsoleApp.Beginner
 
             // concatenation
             string s3 = s1 + " " + s2;
-            Console.WriteLine("String: {0}", s3);
+            Console.WriteLine("String Concatenation: {0}", s3);
 
             // substring
-            string s3substring = s3.Substring(1, 5);
+            string s3substring = s3.Substring(0, 7);
             Console.WriteLine("Substring: {0}", s3substring);
 
             string s = "C# Studies";
@@ -58,12 +58,22 @@ namespace ConsoleApp.Beginner
 
             // string and stringBuilder
             StringBuilder sb = new StringBuilder();
-
+            //Type of string is immutable, 
             for (int i = 1; i <= 26; i++)
             {
                 sb.Append(i.ToString());
                 sb.Append(System.Environment.NewLine);
             }
+
+
+            //string sbig = "";
+            //for (int i = 1; i <100; i++)
+            //{
+            //    sbig = sibg + i.ToString();
+            //}
+
+
+
             string sbstring = sb.ToString();
 
             Console.WriteLine(sbstring);

@@ -21,8 +21,14 @@ namespace ConsoleApp.Beginner
         }
         public void Test()
         {
+
+            int i = 1000;
+            Console.WriteLine(i);
+            i = i + 1000;
+            Console.WriteLine(globalVar);
+
             // local
-            int localVar;        
+            int localVar;
             localVar = 100;
 
             Console.WriteLine(globalVar);

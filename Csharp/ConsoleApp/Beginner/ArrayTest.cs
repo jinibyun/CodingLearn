@@ -26,7 +26,7 @@ namespace ConsoleApp.Beginner
             int[][] A = new int[3][];
 
             // different size
-            A[0] = new int[2];
+            A[0] = new int[2];                                  
             A[1] = new int[3] { 1, 2, 3 };
             A[2] = new int[4] { 1, 2, 3, 4 };
 

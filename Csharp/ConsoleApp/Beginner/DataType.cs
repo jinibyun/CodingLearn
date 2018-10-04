@@ -14,6 +14,7 @@ namespace ConsoleApp.Beginner
 
             // Bool
             bool b = true;
+            Console.WriteLine(b);
 
             // Numeric
             short sh = -32768;
@@ -27,6 +28,7 @@ namespace ConsoleApp.Beginner
             // Char/String
             char c = 'A';
             string s = "Hello";
+            Console.WriteLine(s);
 
             // DateTime  2011-10-30 12:35
             DateTime dt = new DateTime(2011, 10, 30, 12, 35, 0);
@@ -38,11 +40,15 @@ namespace ConsoleApp.Beginner
             ivalue = 101;
 
             bool? bvalue = null;
+            //Normally, it uses with HasValue Property
+            Console.WriteLine(bvalue.HasValue);
 
             //int? to int
-            Nullable<int> j = null;
+            int? j = null;     //equal to int? j = null;
             j = 10;
             int k = j.Value;
+
+            Console.WriteLine(k);
         }
     }
 }
