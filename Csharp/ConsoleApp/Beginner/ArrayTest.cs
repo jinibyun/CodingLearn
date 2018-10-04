@@ -11,13 +11,22 @@ namespace ConsoleApp.Beginner
         public void Test()
         {
             // array
+            // group of same data type
+            // every array type is reference type (stored in heap memory)
+            // string is char array
+            // most of coding questions use arrays
 
             // one dimensional
             string[] players = new string[10];
             string[] Regions = { "Toronto", "Vancouver", "Montreal" };
+            // same as 
+            // string[] Regions = new string[3] { "Toronto", "Vancouver", "Montreal" };
 
             // 2 dimensional
+            // 방 개수가 같은 어레이들은 이렇게 선언하는게 편함
             string[,] Province = { { "Toronto", "ON" }, { "Vancouver", "BC" } };
+            // it's ok
+            // string[,] Provinces = { { "Toronto", "ON", "ff" }, { "Vancouver", "BC", "f" } };
 
             // jagged array: 
             // 1. each dimension's size can be different. Dynamic 2 dimensional array
