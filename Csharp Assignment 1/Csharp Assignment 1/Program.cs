@@ -312,34 +312,34 @@ namespace Csharp_Assignment_1
             int number = 10;
 
             number += 5;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = 15;
 
             number -= 3;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = 12
 
             number *= 2;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = 24
 
             number /= 3;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = 8
 
             number %= 3;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = 2
 
             number &= 10;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = (binary) 0010 & 1010 = 0010 = (decimal) 2
 
             number |= 14;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = (binary) 0010 | 1110 = 1110 = (decimal) 14
 
             number ^= 12;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = (binary) 1110 ^ 1100 = 0010 = (decimal) 2
             
             number <<= 2;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = 0010 << 2 = 1000 = (decimal) 8
 
             number >>= 3;
-            Console.WriteLine(number);
+            Console.WriteLine(number);  // number = 1000 >> 3 = 0001 = (decimal) 1
 
             Console.WriteLine("\n\n");
             #endregion
