@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Beginner;
+﻿using ConsoleApp.Assignment;
+using ConsoleApp.Beginner;
 using ConsoleApp.Intermediate;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,26 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             // A. Basic - Syntax
-             Basic();
+            //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
             //Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
+
             // C. Advanced
-            // Advanced();          
-        }        
+            // Advanced();     
+
+            //D.Assignment1
+             Assignment1();
+        }
+
+        private static void Assignment1()
+        {
+            // Assignment1
+            Console.WriteLine("=================== Assignment1 Test ================");
+            var assignTest = new Assignment1Test();
+            assignTest.Test();
+        }
 
         private static void Advanced()
         {
@@ -161,9 +174,9 @@ namespace ConsoleApp
             //strTest.Test();
 
             //// 5. Enum 정수형 data의 변환 (value type) class 바깥에 설정
-            Console.WriteLine("=================== Enum ================");
-            var enumTest = new EnumTest();
-            enumTest.Test();
+            //Console.WriteLine("=================== Enum ================");
+            //var enumTest = new EnumTest();
+            //enumTest.Test();
 
             //// 6. Operator
             //Console.WriteLine("=================== Operator ================");
@@ -226,6 +239,7 @@ namespace ConsoleApp
             //// 13-5.            
             //var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
             //Console.WriteLine("params keyword test: " + returnParamsValue);
+                                    
         }
 
         private static void ClassTest_NameChanged(object sender, EventArgs e)
@@ -233,5 +247,6 @@ namespace ConsoleApp
             var obj = (ClassTest_Basic1)sender;
             Console.WriteLine(obj.GetCustomerData());
         }
+
     }
 }

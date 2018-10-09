@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assignment1\Assignment1Test.cs" />
+    <Compile Include="Assignment1\User1.cs" />
+    <Compile Include="Assignment1\User2.cs" />
+    <Compile Include="Assignment1\User3.cs" />
     <Compile Include="Beginner\ArrayTest.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Intermediate\ClassTest_Basic2.cs" />
     <Compile Include="Intermediate\ClassTest_Indexer.cs" />
     <Compile Include="Intermediate\ClassTest_Basic1.cs" />
