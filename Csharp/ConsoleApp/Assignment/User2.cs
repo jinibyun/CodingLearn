@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp.Assignment1
+namespace ConsoleApp.Assignment
 {
     class User2
     {

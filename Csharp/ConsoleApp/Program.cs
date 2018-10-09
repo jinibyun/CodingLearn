@@ -23,16 +23,16 @@ namespace ConsoleApp
             // C. Advanced
             // Advanced();     
 
-            //D.Assignment1
-             Assignment1();
+            //D.Assignment
+             AssignmentTest();
         }
 
-        private static void Assignment1()
+        private static void AssignmentTest()
         {
-            // Assignment1
-            Console.WriteLine("=================== Assignment1 Test ================");
-            var assignTest = new Assignment1Test();
-            assignTest.Test();
+            // Assignment
+            //Console.WriteLine("=================== Assignment1 Test ================");
+            var csharpTest = new CsharpTest();
+            csharpTest.Test();
         }
 
         private static void Advanced()

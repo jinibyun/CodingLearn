@@ -1,5 +1,4 @@
-﻿using ConsoleApp.Assignment1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Assignment
 {
-    class Assignment1Test
+    public class CsharpTest
     {
         public void Test()
         {
+            Console.WriteLine("== Assignment Start ==");
             // 1. string & stringBuilder		
             Console.WriteLine("===== 1. string & stringBuilder ======");
 
@@ -44,7 +44,7 @@ namespace ConsoleApp.Assignment
                    Console.WriteLine("double array: "+dob[i]);
             }
 
-            Console.ReadLine();
+            //Console.ReadLine();
 
             // 3. string type has very useful methods which is used very often.
             Console.WriteLine("===== 3. string method ======");
@@ -132,7 +132,7 @@ namespace ConsoleApp.Assignment
             Console.WriteLine(dt);
             //DateTime.Parse("2018-10-09 am .ToString("yyyy-MM-dd HH:mm:ss"));
 
-            Console.ReadLine();
+            //Console.ReadLine();
 
             // 7. c# operator
             Console.WriteLine("===== 7. c# operator ======");
@@ -171,7 +171,7 @@ namespace ConsoleApp.Assignment
             number >>= 3;
             Console.WriteLine(number);
 
-            Console.ReadLine();
+            //Console.ReadLine();
 
 
             // 8. access modifier
