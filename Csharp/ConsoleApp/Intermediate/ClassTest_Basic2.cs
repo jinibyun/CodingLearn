@@ -10,7 +10,7 @@ namespace ConsoleApp.Intermediate
     {
         public ClassTest_Basic2()
         {
-            BenchmarkShare = 99;
+            BenchmarkShare = 100;
         }
 
         decimal currentPrice;           // The private "backing" field
