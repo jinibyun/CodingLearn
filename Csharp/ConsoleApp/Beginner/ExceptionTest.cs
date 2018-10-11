@@ -25,6 +25,10 @@ namespace ConsoleApp.Beginner
             {
                 Console.WriteLine("Exception caught: {0}", e);
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception caught: {0}", e);
+            }
             finally
             {
                 Console.WriteLine("Result: {0}", result);

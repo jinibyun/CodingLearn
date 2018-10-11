@@ -13,18 +13,18 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            // A. Basic - Syntax
+            //A.Basic - Syntax
             //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            //Intermediate_OOP3Characteristics();
+            Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
 
             // C. Advanced
             // Advanced();     
 
             //D.Assignment
-             AssignmentTest();
+            //AssignmentTest();
         }
 
         private static void AssignmentTest()
@@ -49,7 +49,9 @@ namespace ConsoleApp
             Console.WriteLine(classTest.GetCustomerData());
 
             // event
+            // event subscription : +=
             classTest.NameChanged += ClassTest_NameChanged;
+            classTest.BalanceChanged += ClassTest_BalanceChanged;
             classTest.Name = "Jane";
 
             // overloading method
@@ -134,6 +136,12 @@ namespace ConsoleApp
             Display(new House2 { Name = "Mansion", Mortgage = 100000 });
         }
 
+        private static void ClassTest_BalanceChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("====Event Test===");
+            Console.WriteLine((decimal)sender);
+            Console.WriteLine("====Event Test===");
+        }
         private static void Intermediate_OtherThings()
         {
             // 1. Static Class
@@ -187,12 +195,12 @@ namespace ConsoleApp
             //Console.WriteLine("=================== If ================");
             //var ifTest = new IfTest();
             //ifTest.Test();
-
+            //Console.ReadLine();
             //// 8. loop
             //Console.WriteLine("=================== Loop ================");
             //var loopTest = new LoopTest();
             //loopTest.Test();
-
+            //Console.ReadLine();
             //// 9. yield keword: when collection data can be returned one by one in turn
             //Console.WriteLine("=================== yield return ================");
             //var yieldReturnTest = new yieldTest();
@@ -212,34 +220,36 @@ namespace ConsoleApp
             //Console.WriteLine("=================== Nullable ================");
             //var nullableTest = new NullableTest();
             //nullableTest.Test(null, null, DateTime.Now, null);
-
+            //
             //// 13. Method
-            //Console.WriteLine("=================== Method ================");
-            //var methodTest = new MethodTest();
+            Console.WriteLine("=================== Method ================");
+            var methodTest = new MethodTest();
             //// 13-1
-            //int val = 1000;
-            //methodTest.TestPassByValue(val);
-            //Console.WriteLine("variable val's value is not changed: {0}", val);
+            int val = 1000;
+            methodTest.TestPassByValue(val);
+            Console.WriteLine("variable val's value is not changed: {0}", val);
             //// 13-2
-            //int x = 1;
-            //double y = 1.0;
-            //double ret = methodTest.TestPassByRef(ref x, ref y);
-            //Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
+            int x = 1;
+            double y = 1.0;
+            double ret = methodTest.TestPassByRef(ref x, ref y);
+            Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
+            Console.ReadLine();
             //// 13-3
-            //int c, d;
-            //bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
-            //Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
+            int c, d;
+            bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
+            Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
 
             //// differenc between ref keyword and out keyword 
 
             //// 13-4.
-            //var returnValue = methodTest.TestDefaultParam(1, 2);
-            //Console.WriteLine("Default parameter test: " + returnValue);
+            var returnValue = methodTest.TestDefaultParam(1, 2);
+            Console.WriteLine("Default parameter test: " + returnValue);
 
             //// 13-5.            
-            //var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
-            //Console.WriteLine("params keyword test: " + returnParamsValue);
-                                    
+            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
+            Console.WriteLine("params keyword test: " + returnParamsValue);
+            Console.ReadLine();
+
         }
 
         private static void ClassTest_NameChanged(object sender, EventArgs e)

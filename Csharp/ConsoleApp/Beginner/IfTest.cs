@@ -26,7 +26,7 @@ namespace ConsoleApp.Beginner
                 Console.WriteLine("{0} is equal to 5");
             }
 
-            // switch
+            // switch : multiple if
             char ch;
             Console.WriteLine("Enter an alphabet for switch test");
             ch = Convert.ToChar(Console.ReadLine());
@@ -43,10 +43,15 @@ namespace ConsoleApp.Beginner
                     Console.WriteLine("Vowel");
                     break;
                 case 'o':
-                    Console.WriteLine("Vowel");
+                    Console.WriteLine("Vow;el");
                     break;
                 case 'u':
                     Console.WriteLine("Vowel");
+                    break;
+                case 'b': 
+                case 'c':
+                case 'd':// if(value == 'b' || value =='c' || value == 'd')
+                    Console.WriteLine("Consanant");
                     break;
                 default:
                     Console.WriteLine("Not a vowel");

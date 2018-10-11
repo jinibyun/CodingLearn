@@ -34,9 +34,20 @@ namespace ConsoleApp.Beginner
                 sum += i;
             }
 
+            
             Console.WriteLine("Sum of first {0} natural numbers = {1}", n, sum);
 
-            // 2. while loop
+            int var = 0;
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var = var + i;
+            }
+
+            Console.WriteLine("1에서 10까지의 합은 " +var);
+
+            // 2. while loop // range를 모를때는 while, range가 확실할때는  for문 사용
+
             int i3 = 1;
             while (i3 <= 5)
             {
@@ -55,7 +66,7 @@ namespace ConsoleApp.Beginner
             Console.WriteLine("Sum = {0}", sum4);
 
 
-            // 3. do while loop
+            // 3. do while loop 한번은 실행하고 끝남
             int i5 = 1, n5 = 5, product;
 
             do
@@ -66,13 +77,20 @@ namespace ConsoleApp.Beginner
             } while (i5 <= 10);
 
 
-            // 4. forach loop
+            // 4. foreach loop
             char[] myArray = { 'H', 'e', 'l', 'l', 'o' };
 
             foreach (char ch in myArray)
             {
                 Console.WriteLine(ch);
             }
+
+            //convert foreach to for
+            for (int i = 0; i < myArray.Length; i++)
+            {
+                Console.WriteLine(myArray[i]);
+            }
+            Console.ReadLine();
 
             // 
             char[] gender = { 'm', 'f', 'm', 'm', 'm', 'f', 'f', 'm', 'm', 'f' };

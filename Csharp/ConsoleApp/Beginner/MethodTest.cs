@@ -8,19 +8,21 @@ namespace ConsoleApp.Beginner
 {
     public class MethodTest
     {
-        // pass by value
+        // pass by value : copy가 넘어감
         public void TestPassByValue(int a)
         {
             a *= 2;
         }
 
-        // pass by ref
+        // pass by ref : memory 가 넘어감
+        // you have to initialize ref value.
+
         public double TestPassByRef(ref int a, ref double b)
         {
             return ++a * ++b;
         }
 
-        // pass by out
+        // pass by out : ref 랑 비슷하나 default value 가 필요 없다
         public bool TestPassByOut(int a, int b, out int c, out int d)
         {
             c = a + b;
@@ -46,7 +48,7 @@ namespace ConsoleApp.Beginner
             }
         }
 
-        // params keyword
+        // params keyword : parameter 숫자를 제한하지 않음 
         public long TestParams(params int[] values)
         {
             long sum = 0L;
