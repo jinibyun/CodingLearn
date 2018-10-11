@@ -26,10 +26,10 @@ namespace ConsoleApp.Beginner
                 Console.WriteLine("{0} is equal to 5");
             }
 
-            // switch
+            // switch : multiple if / if가 3개이상이면 switch를 쓰는게 낫다.
             char ch;
             Console.WriteLine("Enter an alphabet for switch test");
-            ch = Convert.ToChar(Console.ReadLine());
+            ch = Convert.ToChar(Console.ReadLine());    //console창에서 입력값을 기다린다.
 
             switch (Char.ToLower(ch))
             {
@@ -48,10 +48,24 @@ namespace ConsoleApp.Beginner
                 case 'u':
                     Console.WriteLine("Vowel");
                     break;
+
+               
+                 //string은 "" 꼭 써야함
+                   
+
+                // case 'b', 'c','d': 이렇게 쓰면 안됨 아래처럼 써야함
+                case 'b':
+                case 'c':   //if(value == 'b' || value == 'c' || value == 'd')
+                case 'd':   // C#에는 === 없음
+                    Console.WriteLine("Consonent!");    //string은 "" 꼭 써야함
+                    break;
+
                 default:
                     Console.WriteLine("Not a vowel");
                     break;
             }
+
+            Console.ReadKey();
         }
     }
 }

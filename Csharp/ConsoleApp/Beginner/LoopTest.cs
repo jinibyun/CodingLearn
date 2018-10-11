@@ -15,18 +15,30 @@ namespace ConsoleApp.Beginner
             for (int i = 1; i <= 5; i++)
             {
                 Console.WriteLine("C# For Loop: Iteration {0}", i);
-            }
+            }   //int i는 }만나는 순간 죽는다
 
-            // without initialization and iterator statment
+            // without initialization and iterator statment 자바는 이방법만 가능
             int i2 = 1;
-            for (; i2 <= 5;)
+            for (; i2 <= 5;)    
             {
                 Console.WriteLine("C# For Loop: Iteration {0}", i2);
                 i2++;
             }
+            Console.WriteLine(i2); //for를 몇바퀴 돌렸는지 알수있다.
+
+           
 
             // sum of n
             int n = 5, sum = 0;
+
+            //for (int i = 1; i < 11; i++)
+            //{
+            //    Console.WriteLine("1~10까지 합:");
+            //    sum = sum + i; //sum += i;
+
+            //}
+
+            sum = 0;
 
             for (int i = 1; i <= n; i++)
             {
@@ -41,7 +53,7 @@ namespace ConsoleApp.Beginner
             while (i3 <= 5)
             {
                 Console.WriteLine("C# For Loop: Iteration {0}", i3);
-                i3++;
+                i3++;   //언젠가는 i3가 6이 되서 while문을 빠져나갈 수 있게 해줘야됨. 안달면 무한loop돌게됨
             }
 
             // sum of n
@@ -58,7 +70,10 @@ namespace ConsoleApp.Beginner
             // 3. do while loop
             int i5 = 1, n5 = 5, product;
 
-            do
+            do //한번은 하고나서 while문 돌린다.
+            {
+
+            } while (true);
             {
                 product = n5 * i5;
                 Console.WriteLine("{0} * {1} = {2}", n5, i5, product);
@@ -66,12 +81,18 @@ namespace ConsoleApp.Beginner
             } while (i5 <= 10);
 
 
-            // 4. forach loop
+            // 4. foreach loop
             char[] myArray = { 'H', 'e', 'l', 'l', 'o' };
+            // = char [] myArray = new char { 'H', 'e', 'l', 'l', 'o' };
 
-            foreach (char ch in myArray)
+            foreach (char hh in myArray)    // myArray 의 변수의 수만큼 돌려준다.
             {
-                Console.WriteLine(ch);
+                Console.WriteLine(hh);
+            }
+
+            //convert foreach to for
+            for (int i = 0; i < myArray.Length; i++) {
+                Console.WriteLine(myArray[i]);
             }
 
             // 

@@ -9,7 +9,7 @@ namespace ConsoleApp.Intermediate
     public class ClassTest_Basic1
     {
         // class's element
-        // 1. Method 2. Property  3. Field  4. Event  5.Enum  6.Constant
+        // *1. Method (디파짓,withdrawl 같은 액션) 2. Property (메소드와 유사) *3. Field = 변수 (잔고)  4. Event  5.Enum  6.Constant
 
         // other consideration
         // access modifier
@@ -24,15 +24,16 @@ namespace ConsoleApp.Intermediate
         // event 
         public event EventHandler NameChanged;
 
-        // Constructor
-        public ClassTest_Basic1(string pname, int page, char pgender = 'M')
+        // Constructor: 클래스명과 동일, public이여야되고 no return타입 
+        // new로 객체(초기화까지)생성 역할
+        public ClassTest_Basic1(string pname, int page, char pgender = 'M') 
         {
-            name = pname;
+            name = pname;   //초기화 시킴
             age = page;
             gender = pgender == 'M' ? "Male" :"Female";
         }
 
-        // Property
+        // Property (special kind of method)
         public string Name
         {
             get { return this.name; }
@@ -54,6 +55,7 @@ namespace ConsoleApp.Intermediate
             set { this.age = value; }
         }
 
+        //read only property 리턴만하는
         public string Gender
         {
             get { return this.gender; }
@@ -70,6 +72,7 @@ namespace ConsoleApp.Intermediate
         // Method Overloading
         public string Foo(int x)
         {
+            Console.WriteLine();
             return string.Format("returning integer: {0}", x);
         }
         public string Foo(double x)
@@ -85,7 +88,7 @@ namespace ConsoleApp.Intermediate
         {
             return string.Format("returning float and integer: {0},{1}", x, y);
         }
-
+       
         // difference between overloading and overriding
     }
 }

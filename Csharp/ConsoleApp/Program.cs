@@ -14,10 +14,10 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             // A. Basic - Syntax
-            // Basic();
+            //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            // Intermediate_OOP3Characteristics();
+            Intermediate_OOP3Characteristics();
             // Intermediate_OtherThings();
             // C. Advanced
             // Advanced();         
@@ -175,7 +175,7 @@ namespace ConsoleApp
             var enumTest = new EnumTest();
             enumTest.Test();
 
-            // 6. Operator
+            // 6. Operator: 사칙연산, 나머지구하기
             Console.WriteLine("=================== Operator ================");
             var operatorTest = new OperatorTest();
             operatorTest.Test();
@@ -189,6 +189,8 @@ namespace ConsoleApp
             Console.WriteLine("=================== Loop ================");
             var loopTest = new LoopTest();
             loopTest.Test();
+
+     
 
             // 9. yield keword: when collection data can be returned one by one in turn
             Console.WriteLine("=================== yield return ================");
@@ -218,11 +220,18 @@ namespace ConsoleApp
             methodTest.TestPassByValue(val);
             Console.WriteLine("variable val's value is not changed: {0}", val);
             // 13-2
+            // ref쓸때는 파라미터 value를 이니셜라이즈 해야됨 (규칙, 디폴트값 필요없음)
             int x = 1;
             double y = 1.0;
             double ret = methodTest.TestPassByRef(ref x, ref y);
             Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
+
+            //테스트
+            //Console.WriteLine(x);
+            //Console.WriteLine(y);
+
             // 13-3
+            // out쓸때는 파라미터 value를 이니셜라이즈 할필요 없다
             int c, d;
             bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
             Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
@@ -232,11 +241,19 @@ namespace ConsoleApp
             // 13-4.
             var returnValue = methodTest.TestDefaultParam(1, 2);
             Console.WriteLine("Default parameter test: " + returnValue);
+            var returnValue2 = methodTest.TestDefaultParam(1, 2, "----");
 
             // 13-5.            
             var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
             Console.WriteLine("params keyword test: " + returnParamsValue);
         }
+
+
+
+
+
+
+
 
         private static void ClassTest_NameChanged(object sender, EventArgs e)
         {

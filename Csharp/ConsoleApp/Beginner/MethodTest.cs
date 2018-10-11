@@ -8,24 +8,26 @@ namespace ConsoleApp.Beginner
 {
     public class MethodTest
     {
-        // pass by value
+        // pass by value 카피본이 넘어감
         public void TestPassByValue(int a)
         {
             a *= 2;
         }
 
-        // pass by ref
+        // pass by ref 실제 메모리주소 자체가 넘어감
+      
         public double TestPassByRef(ref int a, ref double b)
         {
             return ++a * ++b;
         }
 
-        // pass by out
-        public bool TestPassByOut(int a, int b, out int c, out int d)
+        // pass by out 
+        
+        public bool TestPassByOut(int a, int b, out int c, out int d)   //메모리위치자체 값을 바꿔서 c,d를 계산해서 내보냈다. 
         {
             c = a + b;
             d = a - b;
-            return true;
+            return true;    //리턴값 3개 쓸수있다.
         }
 
         // optional or default parameter
