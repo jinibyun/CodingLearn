@@ -13,8 +13,6 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Test();
-
             // A. Basic - Syntax
             //Basic();
 
@@ -42,7 +40,9 @@ namespace ConsoleApp
             Console.WriteLine(classTest.GetCustomerData());
 
             // event
+            // += : event subscription
             classTest.NameChanged += ClassTest_NameChanged;
+            classTest.BalanceChanged += ClassTest_BalanceChanged;
             classTest.Name = "Jane";
 
             // overloading method
@@ -127,6 +127,13 @@ namespace ConsoleApp
             Display(new House2 { Name = "Mansion", Mortgage = 100000 });
         }
 
+        private static void ClassTest_BalanceChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("=================");
+            Console.WriteLine((decimal)sender);
+            Console.WriteLine("=================");
+        }
+
         private static void Intermediate_OtherThings()
         {
             // 1. Static Class
@@ -206,32 +213,37 @@ namespace ConsoleApp
             //var nullableTest = new NullableTest();
             //nullableTest.Test(null, null, DateTime.Now, null);
 
-            //// 13. Method
-            //Console.WriteLine("=================== Method ================");
-            //var methodTest = new MethodTest();
-            //// 13-1
-            //int val = 1000;
-            //methodTest.TestPassByValue(val);
-            //Console.WriteLine("variable val's value is not changed: {0}", val);
-            //// 13-2
-            //int x = 1;
-            //double y = 1.0;
-            //double ret = methodTest.TestPassByRef(ref x, ref y);
-            //Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
-            //// 13-3
-            //int c, d;
-            //bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
-            //Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
+            // 13. Method
+            Console.WriteLine("=================== Method ================");
+            var methodTest = new MethodTest();
+            // 13-1
+            int val = 1000;
+            methodTest.TestPassByValue(val);
+            Console.WriteLine("variable val's value is not changed: {0}", val);
+            // 13-2
+            int x = 1;
+            double y = 1.0;
+            double ret = methodTest.TestPassByRef(ref x, ref y);
+            Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
 
-            //// differenc between ref keyword and out keyword 
+            Console.WriteLine(x);
+            Console.WriteLine(y);
+            // 13-3
+            int c, d;
+            bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
+            Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
 
-            //// 13-4.
-            //var returnValue = methodTest.TestDefaultParam(1, 2);
-            //Console.WriteLine("Default parameter test: " + returnValue);
+            // differenc between ref keyword and out keyword 
+            // variable needs to be initialized before using ref
 
-            //// 13-5.            
-            //var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
-            //Console.WriteLine("params keyword test: " + returnParamsValue);
+            // 13-4.
+            var returnValue = methodTest.TestDefaultParam(1, 2);
+            Console.WriteLine("Default parameter test: " + returnValue);
+            var returnValue2 = methodTest.TestDefaultParam(1,2,"-----");
+
+            // 13-5.            
+            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
+            Console.WriteLine("params keyword test: " + returnParamsValue);
         }
 
 
@@ -245,7 +257,6 @@ namespace ConsoleApp
         {
             var cstest = new CsharpTest();
             cstest.Test();
-
         }
     }
 

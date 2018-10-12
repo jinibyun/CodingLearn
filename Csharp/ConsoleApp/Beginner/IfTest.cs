@@ -48,6 +48,11 @@ namespace ConsoleApp.Beginner
                 case 'u':
                     Console.WriteLine("Vowel");
                     break;
+                case 'b':   //if (valu == 'b' || value == 'c' || value == 'd')
+                case 'c':
+                case 'd':
+                    Console.WriteLine("Consonant");
+                    break;
                 default:
                     Console.WriteLine("Not a vowel");
                     break;

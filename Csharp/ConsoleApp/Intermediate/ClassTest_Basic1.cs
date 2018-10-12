@@ -23,13 +23,17 @@ namespace ConsoleApp.Intermediate
 
         // event 
         public event EventHandler NameChanged;
+        public event EventHandler BalanceChanged;
 
         // Constructor
+        // 1. same as class name   2. must be public   3. no return type
+        // ??making method into an object and it also initializes??
         public ClassTest_Basic1(string pname, int page, char pgender = 'M')
         {
             name = pname;
             age = page;
             gender = pgender == 'M' ? "Male" :"Female";
+
         }
 
         // Property
@@ -45,6 +49,12 @@ namespace ConsoleApp.Intermediate
                     {
                         NameChanged(this, EventArgs.Empty);
                     }
+
+                    if (BalanceChanged != null)
+                    {
+                        decimal balance = 1000M;
+                        BalanceChanged(balance, new EventArgs());
+                    }
                 }
             }
         }
@@ -54,6 +64,7 @@ namespace ConsoleApp.Intermediate
             set { this.age = value; }
         }
 
+        //read only property
         public string Gender
         {
             get { return this.gender; }
@@ -68,6 +79,8 @@ namespace ConsoleApp.Intermediate
         }
 
         // Method Overloading
+        // same signature method 
+        // Condition: Either number of parameter or type must be different
         public string Foo(int x)
         {
             return string.Format("returning integer: {0}", x);
@@ -85,7 +98,7 @@ namespace ConsoleApp.Intermediate
         {
             return string.Format("returning float and integer: {0},{1}", x, y);
         }
-
+        
         // difference between overloading and overriding
     }
 }

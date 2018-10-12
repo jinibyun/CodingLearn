@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Assignment
 {
-    public class CsharpTest
+    class CsharpTest : protectedday
     {
         public void Test()
         {
@@ -114,7 +114,59 @@ namespace ConsoleApp.Assignment
             // NOTE: You may need to create another class file for testing
             // NOTE: among six modifiers, just skip "protected internal" and "private protected"   
 
+            publicday publicdate = new publicday();
+            publicdate.year = "2018";
+            publicdate.month = "October";
+            publicdate.day = "12th";
+            Console.WriteLine("Public: Today is : {1} {2}, {0}", publicdate.year, publicdate.month, publicdate.day);
+
+            privateday privatedate = new privateday();
+            //privatedate.year = "2018";
+            //variables in privateday is inaccessbile
+
+            CsharpTest protecteddate = new CsharpTest();
+            protecteddate.year = "2018";
+            protecteddate.month = "October";
+            protecteddate.day = "12th";
+            Console.WriteLine("Protected: Today is : {1} {2}, {0}", protecteddate.year, protecteddate.month, protecteddate.day);
+
+            internalday internaldate = new internalday();
+            internaldate.year = "2018";
+            internaldate.month = "October";
+            internaldate.day = "12th";
+            Console.WriteLine("Internal: Today is : {1} {2}, {0}", internaldate.year, internaldate.month, internaldate.day);
+
+
         }//End of Test
     }   
+
+    class publicday
+    {
+        public string year;
+        public string month;
+        public string day;
+    }
+
+    class privateday
+    {
+        private string year;
+        private string month;
+        private string day;
+    }
+
+    class protectedday
+    {
+        protected string year;
+        protected string month;
+        protected string day;
+    }
+
+    class internalday
+    {
+        internal string year;
+        internal string month;
+        internal string day;
+    }
+  
 }
 

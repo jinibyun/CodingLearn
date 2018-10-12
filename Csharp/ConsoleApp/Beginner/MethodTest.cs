@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Beginner
 {
+
+    //Method -> return type, signature
+    //              ex) int sum(parameter)
     public class MethodTest
     {
         // pass by value
@@ -15,6 +18,7 @@ namespace ConsoleApp.Beginner
         }
 
         // pass by ref
+        // ref copies the address so the value changes after
         public double TestPassByRef(ref int a, ref double b)
         {
             return ++a * ++b;

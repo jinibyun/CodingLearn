@@ -27,6 +27,18 @@ namespace ConsoleApp.Beginner
 
             // often used with ?? operator
             this._Selected = selected ?? false;
+
+
+            //same as above
+            if (selected.HasValue)
+                this._Selected = selected;
+            else
+                this._Selected = false;
+
+            //same as above
+            this._Selected = selected.HasValue ? selected.HasValue : false;
+                             //condition      ?      true     :     false
+
         }        
     }
 }

@@ -17,11 +17,22 @@ namespace ConsoleApp.Beginner
 
         public void Test(int num1, int num2)
         {
+
+            //Try always has to be used
+
+            //When there are multiple catch
+            //only one is being executed
+            //go down from specific to general
+
             try
             {
                 result = num1 / num2;
             }
-            catch (DivideByZeroException e)
+            catch (DivideByZeroException e) 
+            {
+                Console.WriteLine("Exception caught: {0}", e);
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Exception caught: {0}", e);
             }
