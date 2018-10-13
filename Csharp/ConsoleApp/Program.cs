@@ -1,6 +1,7 @@
 ﻿using ConsoleApp.Assignment;
 using ConsoleApp.Beginner;
 using ConsoleApp.Intermediate;
+using ConsoleApp.Advanced;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace ConsoleApp
             // Intermediate_OOP3Characteristics();
             // Intermediate_OtherThings();
             // C. Advanced
-            // Advanced();         
+            Advanced();         
 
             // D. Assignment
-            AssignmentTest();
+            // AssignmentTest();
         }
 
         private static void AssignmentTest()
@@ -34,7 +35,135 @@ namespace ConsoleApp
 
         private static void Advanced()
         {
-            throw new NotImplementedException();
+            // 1. Generic Class Test
+            Console.WriteLine("============= Generic Class =============");
+            MyStack<int> numberStack = new MyStack<int>();
+            numberStack.Push(1);
+            numberStack.Push(2);
+            var result = numberStack.Pop();
+            Console.WriteLine(result);
+
+            MyStack<string> nameStack = new MyStack<string>();
+            nameStack.Push("This");
+            nameStack.Push("That");
+            var result2 = numberStack.Pop();
+            Console.WriteLine(result2);
+
+            // 2. Net framework support built-in generic type
+            Console.WriteLine("============= .NET Generic Class: List =========");
+            List<string> nameList = new List<string>();
+            nameList.Add("John");
+            nameList.Add("Jane");
+
+            foreach(var member in nameList)
+            {
+                Console.WriteLine(member);
+            }
+            
+            List<decimal> decimalList = new List<decimal>();
+            decimalList.Add(1.345M);
+            decimalList.Add(-92.12M);
+
+            foreach (var member in decimalList)
+            {
+                Console.WriteLine(member);
+            }
+
+            Console.WriteLine("============= .NET Generic Class: Dictionary =========");
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            dic["aaa"] = 100;
+            dic["bbb"] = 90;
+
+            foreach(var member in dic)
+            {
+                Console.WriteLine(dic[member.Key]);
+            }
+
+            Console.WriteLine("============= .NET Generic Class: LinkedList =========");
+            LinkedList<string> linked = new LinkedList<string>();
+            linked.AddLast("cat");
+            linked.AddLast("dog");
+            linked.AddLast("man");
+            linked.AddFirst("first"); // faster inserting, removing then List, but slower than access. Vice Versa
+            foreach (var item in linked)
+            {
+                Console.WriteLine(item);
+            }
+
+            // Generic Constraint 
+            // Go to File "GenericClass.cs" where just definition is explained
+
+            // 3. Interface
+            Console.WriteLine("============= Interface =============");
+            Document doc = new Document();
+            IMachine machine = new MultiFunctionPrinter();
+            if (!true) // it will be decided at runtime
+            {
+                machine = new OldFashionedPrinter();
+            }
+            machine.Print(doc);
+            machine.Fax(doc);
+            machine.Scan(doc);
+
+            // what can be defined: method, property, member, ...
+            // 1. difference between class and interface
+            // 2. difference between abstract class and interface
+            // 3. similarity between abstract class and interface
+            // 4. why interface?
+
+            // 4. delegate
+            Console.WriteLine("============= delegate =============");
+            var delegateTest = new DelegateTest();
+            delegateTest.Test1();
+            delegateTest.Test2();
+            delegateTest.Test3();
+            delegateTest.Test4("anonymous"); // anonymous delegate (Lambda Expression)            
+
+            // 5. Event
+            Console.WriteLine("============= event =============");
+            var publisher = new Publisher();
+            // Event Handling
+            // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);            
+            // antoher way 1
+            // publisher.ButtonClicked += Publisher_ButtonClicked;
+            // antoher way 2: anonymouse method: other method does not need to be defined
+            // publisher.ButtonClicked += delegate () { Console.WriteLine("Event Subscribed"); };
+            // another way 3: lambda expression: very similar to anonymous method but a bit more convinient way
+            publisher.ButtonClicked += () => { Console.WriteLine("Event Subscribed"); };
+
+            publisher.Test();
+
+            // 6. Lambda expression
+            // explained above with anonymous
+            // It is used in LINQ 
+            // a bit more
+            /*
+            () => Write("No");
+            (p) => Write(p);
+            (s, e) => Write(e);
+            (string s, int i) => Write(s, i); 
+            */
+
+
+            // 7. Extension Method
+            // Similar to static method, but it is more flexible and powerful to extend functions in existing class without changing existing class
+            Console.WriteLine("============= Extension Method =============");
+
+
+
+            // 8. async and await
+            Console.WriteLine("============= async and await =============");
+
+
+
+
+            // 9. Net built-in collection and LINQ Basic
+            // Pre-requisite: understanding of anonymouse type, yield return, lambda expression
+        }
+
+        private static void Publisher_ButtonClicked()
+        {
+            Console.WriteLine("Event Subsribed");
         }
 
         private static void Intermediate_OOP3Characteristics()
@@ -46,7 +175,9 @@ namespace ConsoleApp
             Console.WriteLine(classTest.GetCustomerData());
 
             // event
-            classTest.NameChanged += ClassTest_NameChanged;
+            // event subscription :  +=
+            //classTest.NameChanged += ClassTest_NameChanged;
+            //classTest.BalanceChanged += ClassTest_BalanceChanged;
             classTest.Name = "Jane";
 
             // overloading method
@@ -129,6 +260,13 @@ namespace ConsoleApp
             Console.WriteLine("========= OOP characteristic 3 of 3: Class Polymorphism ========");
             Display(new Stock2 { Name = "MSFT", SharesOwned = 1000 });
             Display(new House2 { Name = "Mansion", Mortgage = 100000 });
+        }
+
+        private static void ClassTest_BalanceChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("=======EVENT HANDLING =======");
+            Console.WriteLine((decimal)sender);
+            Console.WriteLine("=======================");
         }
 
         private static void Intermediate_OtherThings()
@@ -216,12 +354,17 @@ namespace ConsoleApp
             // 13-1
             int val = 1000;
             methodTest.TestPassByValue(val);
+
             Console.WriteLine("variable val's value is not changed: {0}", val);
             // 13-2
-            int x = 1;
+            int x = 0;
             double y = 1.0;
             double ret = methodTest.TestPassByRef(ref x, ref y);
             Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
+
+            Console.WriteLine(x);
+            Console.WriteLine(y);
+            
             // 13-3
             int c, d;
             bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
@@ -232,9 +375,10 @@ namespace ConsoleApp
             // 13-4.
             var returnValue = methodTest.TestDefaultParam(1, 2);
             Console.WriteLine("Default parameter test: " + returnValue);
+            var returnValue2 = methodTest.TestDefaultParam(1, 2, "-----");
 
             // 13-5.            
-            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
+            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4,5,6,7,8,9,10);
             Console.WriteLine("params keyword test: " + returnParamsValue);
         }
 

@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Advanced\DelegateTest.cs" />
+    <Compile Include="Advanced\EventTest.cs" />
+    <Compile Include="Advanced\GenericClass.cs" />
+    <Compile Include="Advanced\InterfaceTest.cs" />
     <Compile Include="Assignment\ChsarpTest.cs" />
     <Compile Include="Beginner\ArrayTest.cs" />
     <Compile Include="Intermediate\ClassTest_Basic2.cs" />
@@ -72,8 +76,6 @@
     <None Include="App.config" />
     <None Include="ReadMe.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Advanced\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
