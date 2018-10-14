@@ -144,21 +144,38 @@ namespace ConsoleApp
             (string s, int i) => Write(s, i); 
             */
 
-
             // 7. Extension Method
             // Similar to static method, but it is more flexible and powerful to extend functions in existing class without changing existing class
             Console.WriteLine("============= Extension Method =============");
+            string s = "This is a Test";            
+            string s2 = s.ToChangeCase();
+            bool found = s.Found('z');
+            Console.WriteLine(s2);
+            Console.WriteLine(found);
 
+            // Extension method with very common case
+            List<int> nums = new List<int> { 55, 44, 33, 66, 11 };
 
+            // Where extension method
+            var v = nums.Where(p => p % 3 == 0);
+            List<int> arr = v.ToList<int>();
+            arr.ForEach(n => Console.WriteLine(n));
 
             // 8. async and await
-            Console.WriteLine("============= async and await =============");
-
-
-
+            /*
+            Asynchronous Programming
+            1. async: let compiler to know that the method has await
+            2. more than one "await" can be included. Actually no awit is allowed, but warning comes up.
+            3. awiat generally is used with Task<T> object
+            4. Compiler will add necessary code for main thread "NOT" to stop 
+            5. await Task<T>, when finished Task, then await continue to process next line. At this time, 
+            6. NOTE: After finishing Task, await gurantee that it will make back to "original" thread from Task (regardless of other thread or same thread)
+ 
+            Go to "WinformApp" application to testing
+            */
 
             // 9. Net built-in collection and LINQ Basic
-            // Pre-requisite: understanding of anonymouse type, yield return, lambda expression
+            // Pre-requisite: understanding of anonymouse type, yield return, lambda expression, extension method
         }
 
         private static void Publisher_ButtonClicked()
