@@ -14,6 +14,12 @@ namespace ConsoleApp.Beginner
             {
                 Console.WriteLine(num);
             }
+
+
+            foreach (int num in GetNumber())
+            {
+                Console.WriteLine(num);
+            }
         }
 
         IEnumerable<int> GetNumber()

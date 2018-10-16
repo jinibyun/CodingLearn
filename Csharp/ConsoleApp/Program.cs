@@ -14,10 +14,10 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             // A. Basic - Syntax
-            Basic();
+            //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            //Intermediate_OOP3Characteristics();
+            Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
             // C. Advanced
             // Advanced();          
@@ -39,8 +39,12 @@ namespace ConsoleApp
             Console.WriteLine(classTest.GetCustomerData());
 
             // event
+            // ★★★★★
+            // 아래 예제의 사람이름이 바뀌면 ClassTest_NameChanged라는 이벤트를 call해주는 것이다. 그 이벤트를 보려면 F12눌러서 참고
+            // event subscription : +=
             classTest.NameChanged += ClassTest_NameChanged;
-            classTest.Name = "Jane";
+            classTest.BalanceChanged += ClassTest_BalanceChanged;   //임시로 name이 바뀌면 이것도 호출되게 설정했음. classTest 클래스 코드 참고
+            classTest.Name = "Jane";    // 이름이 바뀌는 순간 위의 Event들이 호출됨
 
             // overloading method
             Console.WriteLine(classTest.Foo(1D));
@@ -124,6 +128,15 @@ namespace ConsoleApp
             Display(new House2 { Name = "Mansion", Mortgage = 100000 });
         }
 
+        private static void ClassTest_BalanceChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("===== EVENT HANDLING =====");
+            Console.WriteLine((decimal)sender);
+            Console.WriteLine("==========================");
+            // default... when it was automatically generated
+            //throw new NotImplementedException();
+        }
+
         private static void Intermediate_OtherThings()
         {
             // 1. Static Class
@@ -164,9 +177,9 @@ namespace ConsoleApp
             //strTest.Test();
 
             // 5. Enum
-            Console.WriteLine("=================== Enum ================");
-            var enumTest = new EnumTest();
-            enumTest.Test();
+            //Console.WriteLine("=================== Enum ================");
+            //var enumTest = new EnumTest();
+            //enumTest.Test();
 
             //// 6. Operator
             //Console.WriteLine("=================== Operator ================");
@@ -184,6 +197,7 @@ namespace ConsoleApp
             //loopTest.Test();
 
             //// 9. yield keword: when collection data can be returned one by one in turn
+            //// Very important. It is used a lot. ★★★★★
             //Console.WriteLine("=================== yield return ================");
             //var yieldReturnTest = new yieldTest();
             //yieldReturnTest.Test();
@@ -194,6 +208,7 @@ namespace ConsoleApp
             //exceptionTest.Test(0, 0);
 
             //// 11. Struct
+            // ★★★★★ 클래스와 비슷한데 value type임. 나중에 검색
             //Console.WriteLine("=================== Struct ================");
             //var structTest = new StructTest();
             //structTest.ToString();
@@ -204,31 +219,38 @@ namespace ConsoleApp
             //nullableTest.Test(null, null, DateTime.Now, null);
 
             //// 13. Method
-            //Console.WriteLine("=================== Method ================");
-            //var methodTest = new MethodTest();
-            //// 13-1
-            //int val = 1000;
-            //methodTest.TestPassByValue(val);
-            //Console.WriteLine("variable val's value is not changed: {0}", val);
-            //// 13-2
-            //int x = 1;
-            //double y = 1.0;
-            //double ret = methodTest.TestPassByRef(ref x, ref y);
-            //Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
-            //// 13-3
-            //int c, d;
-            //bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
-            //Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
+            Console.WriteLine("=================== Method ================");
+            var methodTest = new MethodTest();
+            //// 13-1 pass by value
+            int val = 1000;
+            methodTest.TestPassByValue(val);
+            Console.WriteLine("variable val's value is not changed: {0}", val);
+            // 13-2 pass by ref
+            int x = 1;
+            double y = 1.0;
+            double ret = methodTest.TestPassByRef(ref x, ref y);
+            Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
 
-            //// differenc between ref keyword and out keyword 
+            Console.WriteLine(x);
+            Console.WriteLine(y);
 
-            //// 13-4.
-            //var returnValue = methodTest.TestDefaultParam(1, 2);
-            //Console.WriteLine("Default parameter test: " + returnValue);
+            // 13-3 out
+            int c, d;
+            bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
+            Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
 
-            //// 13-5.            
-            //var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
-            //Console.WriteLine("params keyword test: " + returnParamsValue);
+            // differenc between ref keyword and out keyword 
+
+            // 13-4.
+            // when you move the cursur on the method, it said (int a, int b, [string calcType = "+"])
+            // [] means the input value is optional.
+            var returnValue = methodTest.TestDefaultParam(1, 2);
+            Console.WriteLine("Default parameter test: " + returnValue);
+
+            // 13-5.            
+            // params int[] values 는 value가 몇 개이던지 int이기만 하면 다 받아줌. 10개든 100개든
+            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
+            Console.WriteLine("params keyword test: " + returnParamsValue);
         }
 
         private static void ClassTest_NameChanged(object sender, EventArgs e)

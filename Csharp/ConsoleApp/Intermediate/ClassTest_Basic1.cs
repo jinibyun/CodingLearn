@@ -21,18 +21,26 @@ namespace ConsoleApp.Intermediate
 
         // difference between readonly varialbes and constant
 
-        // event 
+        // event
+        // delegate는 Method memory address를 저장할 수 있는 특이한 데이터타입.
+        // EventHandler는 return type이 delegate로 정의되어 있음.
+        // Prameter는 두개.
         public event EventHandler NameChanged;
+        public event EventHandler BalanceChanged;   // event 설명을 위한 임시 예제
 
         // Constructor
+        // Condition: 1. same as class name 2. must be Public 3. no return type
         public ClassTest_Basic1(string pname, int page, char pgender = 'M')
         {
+            // 생성자는 멤버들의 초기화를 담당
             name = pname;
             age = page;
             gender = pgender == 'M' ? "Male" :"Female";
         }
 
         // Property
+        // a.k.a Special kind of method
+        // 실제 멤버에 대해서 input, output 관리
         public string Name
         {
             get { return this.name; }
@@ -43,7 +51,15 @@ namespace ConsoleApp.Intermediate
                     this.name = value;
                     if (NameChanged != null)
                     {
+                        // Callback
                         NameChanged(this, EventArgs.Empty);
+                    }
+
+                    // event 설명을 위한 예시로 추가됨
+                    if (BalanceChanged != null)
+                    {
+                        decimal balance = 1000M;
+                        BalanceChanged(balance, new EventArgs());
                     }
                 }
             }
@@ -54,6 +70,19 @@ namespace ConsoleApp.Intermediate
             set { this.age = value; }
         }
 
+
+        // Java에서는 아래처럼 씀
+        public int getAge()
+        {
+            return this.age;
+        }
+
+        public void setAge(int value)
+        {
+            this.age = value;
+        }
+
+        // read only property
         public string Gender
         {
             get { return this.gender; }
@@ -68,6 +97,11 @@ namespace ConsoleApp.Intermediate
         }
 
         // Method Overloading
+        // Overloading의 정의: 같은 Signature(Method 이름)의 Method들을 정의할 수 있음.
+        // 조건: Parameter의 개수가 다르거나 타입이 달라야함. Return type은 같아야함.
+        // ★★★★★
+        // 인터뷰 문제: Overloading의 조건?
+        // Parameter count or types must be different. but Return type must be same.
         public string Foo(int x)
         {
             return string.Format("returning integer: {0}", x);

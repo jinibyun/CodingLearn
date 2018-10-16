@@ -34,6 +34,15 @@ namespace ConsoleApp.Beginner
                 sum += i;
             }
 
+            sum = 0;
+
+            for (int i = 1; i <= 10; i++)
+            {
+                sum += i;
+            }
+            Console.WriteLine(sum);
+
+            // if you really wanna escape and move the cursor here, press Ctr + F10 while debugging
             Console.WriteLine("Sum of first {0} natural numbers = {1}", n, sum);
 
             // 2. while loop
@@ -41,7 +50,7 @@ namespace ConsoleApp.Beginner
             while (i3 <= 5)
             {
                 Console.WriteLine("C# For Loop: Iteration {0}", i3);
-                i3++;
+                i3++;   // 무한루프를 피하기 위해 빠져나갈 구실을 만들어 놓는다.
             }
 
             // sum of n
@@ -72,6 +81,12 @@ namespace ConsoleApp.Beginner
             foreach (char ch in myArray)
             {
                 Console.WriteLine(ch);
+            }
+
+            // 4-1. convert foreach to for
+            for (int i = 0; i< myArray.Length; i++ )
+            {
+                Console.WriteLine(myArray[i]);
             }
 
             // 
