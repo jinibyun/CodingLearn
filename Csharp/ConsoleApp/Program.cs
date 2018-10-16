@@ -1,5 +1,7 @@
-﻿using ConsoleApp.Beginner;
+﻿using ConsoleApp.Assignment;
+using ConsoleApp.Beginner;
 using ConsoleApp.Intermediate;
+using ConsoleApp.Advanced;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +19,178 @@ namespace ConsoleApp
             //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
+<<<<<<< HEAD
             Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
             // C. Advanced
             // Advanced();          
 
             Console.ReadKey();
+=======
+            // Intermediate_OOP3Characteristics();
+            // Intermediate_OtherThings();
+            // C. Advanced
+            Advanced();         
+
+            // D. Assignment
+            // AssignmentTest();
+        }
+
+        private static void AssignmentTest()
+        {
+            var cshsarpTest = new ChsarpTest();
+            cshsarpTest.Test();
+>>>>>>> origin/master
         }
 
         private static void Advanced()
         {
-            throw new NotImplementedException();
+            // 1. Generic Class Test
+            Console.WriteLine("============= Generic Class =============");
+            MyStack<int> numberStack = new MyStack<int>();
+            numberStack.Push(1);
+            numberStack.Push(2);
+            var result = numberStack.Pop();
+            Console.WriteLine(result);
+
+            MyStack<string> nameStack = new MyStack<string>();
+            nameStack.Push("This");
+            nameStack.Push("That");
+            var result2 = numberStack.Pop();
+            Console.WriteLine(result2);
+
+            // 2. Net framework support built-in generic type
+            Console.WriteLine("============= .NET Generic Class: List =========");
+            List<string> nameList = new List<string>();
+            nameList.Add("John");
+            nameList.Add("Jane");
+
+            foreach(var member in nameList)
+            {
+                Console.WriteLine(member);
+            }
+            
+            List<decimal> decimalList = new List<decimal>();
+            decimalList.Add(1.345M);
+            decimalList.Add(-92.12M);
+
+            foreach (var member in decimalList)
+            {
+                Console.WriteLine(member);
+            }
+
+            Console.WriteLine("============= .NET Generic Class: Dictionary =========");
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            dic["aaa"] = 100;
+            dic["bbb"] = 90;
+
+            foreach(var member in dic)
+            {
+                Console.WriteLine(dic[member.Key]);
+            }
+
+            Console.WriteLine("============= .NET Generic Class: LinkedList =========");
+            LinkedList<string> linked = new LinkedList<string>();
+            linked.AddLast("cat");
+            linked.AddLast("dog");
+            linked.AddLast("man");
+            linked.AddFirst("first"); // faster inserting, removing then List, but slower than access. Vice Versa
+            foreach (var item in linked)
+            {
+                Console.WriteLine(item);
+            }
+
+            // Generic Constraint 
+            // Go to File "GenericClass.cs" where just definition is explained
+
+            // 3. Interface
+            Console.WriteLine("============= Interface =============");
+            Document doc = new Document();
+            IMachine machine = new MultiFunctionPrinter();
+            if (!true) // it will be decided at runtime
+            {
+                machine = new OldFashionedPrinter();
+            }
+            machine.Print(doc);
+            machine.Fax(doc);
+            machine.Scan(doc);
+
+            // what can be defined: method, property, member, ...
+            // 1. difference between class and interface
+            // 2. difference between abstract class and interface
+            // 3. similarity between abstract class and interface
+            // 4. why interface?
+
+            // 4. delegate
+            Console.WriteLine("============= delegate =============");
+            var delegateTest = new DelegateTest();
+            delegateTest.Test1();
+            delegateTest.Test2();
+            delegateTest.Test3();
+            delegateTest.Test4("anonymous"); // anonymous delegate (Lambda Expression)            
+
+            // 5. Event
+            Console.WriteLine("============= event =============");
+            var publisher = new Publisher();
+            // Event Handling
+            // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);            
+            // antoher way 1
+            // publisher.ButtonClicked += Publisher_ButtonClicked;
+            // antoher way 2: anonymouse method: other method does not need to be defined
+            // publisher.ButtonClicked += delegate () { Console.WriteLine("Event Subscribed"); };
+            // another way 3: lambda expression: very similar to anonymous method but a bit more convinient way
+            publisher.ButtonClicked += () => { Console.WriteLine("Event Subscribed"); };
+
+            publisher.Test();
+
+            // 6. Lambda expression
+            // explained above with anonymous
+            // It is used in LINQ 
+            // a bit more
+            /*
+            () => Write("No");
+            (p) => Write(p);
+            (s, e) => Write(e);
+            (string s, int i) => Write(s, i); 
+            */
+
+            // 7. Extension Method
+            // Similar to static method, but it is more flexible and powerful to extend functions in existing class without changing existing class
+            Console.WriteLine("============= Extension Method =============");
+            string s = "This is a Test";            
+            string s2 = s.ToChangeCase();
+            bool found = s.Found('z');
+            Console.WriteLine(s2);
+            Console.WriteLine(found);
+
+            // Extension method with very common case
+            List<int> nums = new List<int> { 55, 44, 33, 66, 11 };
+
+            // Where extension method
+            var v = nums.Where(p => p % 3 == 0);
+            List<int> arr = v.ToList<int>();
+            arr.ForEach(n => Console.WriteLine(n));
+
+            // 8. async and await
+            /*
+            Asynchronous Programming
+            1. async: let compiler to know that the method has await
+            2. more than one "await" can be included. Actually no awit is allowed, but warning comes up.
+            3. awiat generally is used with Task<T> object
+            4. Compiler will add necessary code for main thread "NOT" to stop 
+            5. await Task<T>, when finished Task, then await continue to process next line. At this time, 
+            6. NOTE: After finishing Task, await gurantee that it will make back to "original" thread from Task (regardless of other thread or same thread)
+ 
+            Go to "WinformApp" application to testing
+            */
+
+            // 9. Net built-in collection and LINQ Basic
+            // Pre-requisite: understanding of anonymouse type, yield return, lambda expression, extension method
+        }
+
+        private static void Publisher_ButtonClicked()
+        {
+            Console.WriteLine("Event Subsribed");
         }
 
         private static void Intermediate_OOP3Characteristics()
@@ -39,12 +202,19 @@ namespace ConsoleApp
             Console.WriteLine(classTest.GetCustomerData());
 
             // event
+<<<<<<< HEAD
             // ★★★★★
             // 아래 예제의 사람이름이 바뀌면 ClassTest_NameChanged라는 이벤트를 call해주는 것이다. 그 이벤트를 보려면 F12눌러서 참고
             // event subscription : +=
             classTest.NameChanged += ClassTest_NameChanged;
             classTest.BalanceChanged += ClassTest_BalanceChanged;   //임시로 name이 바뀌면 이것도 호출되게 설정했음. classTest 클래스 코드 참고
             classTest.Name = "Jane";    // 이름이 바뀌는 순간 위의 Event들이 호출됨
+=======
+            // event subscription :  +=
+            //classTest.NameChanged += ClassTest_NameChanged;
+            //classTest.BalanceChanged += ClassTest_BalanceChanged;
+            classTest.Name = "Jane";
+>>>>>>> origin/master
 
             // overloading method
             Console.WriteLine(classTest.Foo(1D));
@@ -130,11 +300,17 @@ namespace ConsoleApp
 
         private static void ClassTest_BalanceChanged(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             Console.WriteLine("===== EVENT HANDLING =====");
             Console.WriteLine((decimal)sender);
             Console.WriteLine("==========================");
             // default... when it was automatically generated
             //throw new NotImplementedException();
+=======
+            Console.WriteLine("=======EVENT HANDLING =======");
+            Console.WriteLine((decimal)sender);
+            Console.WriteLine("=======================");
+>>>>>>> origin/master
         }
 
         private static void Intermediate_OtherThings()
@@ -224,17 +400,28 @@ namespace ConsoleApp
             //// 13-1 pass by value
             int val = 1000;
             methodTest.TestPassByValue(val);
+
             Console.WriteLine("variable val's value is not changed: {0}", val);
+<<<<<<< HEAD
             // 13-2 pass by ref
             int x = 1;
+=======
+            // 13-2
+            int x = 0;
+>>>>>>> origin/master
             double y = 1.0;
             double ret = methodTest.TestPassByRef(ref x, ref y);
             Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
 
             Console.WriteLine(x);
             Console.WriteLine(y);
+<<<<<<< HEAD
 
             // 13-3 out
+=======
+            
+            // 13-3
+>>>>>>> origin/master
             int c, d;
             bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
             Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
@@ -246,10 +433,15 @@ namespace ConsoleApp
             // [] means the input value is optional.
             var returnValue = methodTest.TestDefaultParam(1, 2);
             Console.WriteLine("Default parameter test: " + returnValue);
+            var returnValue2 = methodTest.TestDefaultParam(1, 2, "-----");
 
             // 13-5.            
+<<<<<<< HEAD
             // params int[] values 는 value가 몇 개이던지 int이기만 하면 다 받아줌. 10개든 100개든
             var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
+=======
+            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4,5,6,7,8,9,10);
+>>>>>>> origin/master
             Console.WriteLine("params keyword test: " + returnParamsValue);
         }
 
