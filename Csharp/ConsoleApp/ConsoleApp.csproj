@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assignment1\CsharpTest.cs" />
-    <Compile Include="Assignment2\assignment2.cs" />
+    <Compile Include="Assignment2\homework2.cs" />
     <Compile Include="Beginner\ArrayTest.cs" />
     <Compile Include="Intermediate\ClassTest_Basic2.cs" />
     <Compile Include="Intermediate\ClassTest_Indexer.cs" />

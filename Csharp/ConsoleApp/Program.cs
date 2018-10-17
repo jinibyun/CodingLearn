@@ -1,6 +1,7 @@
 ﻿using ConsoleApp.Beginner;
 using ConsoleApp.Intermediate;
 using ConsoleApp.Assignment;
+using ConsoleApp.Assignment2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,11 @@ namespace ConsoleApp
             // Advanced(); 
 
             // D. Assignment
-            AssignmentTest();
+            //AssignmentTest();
+            AssignmentTest2();
+            
+
+        
         }
 
         private static void Advanced()
@@ -173,25 +178,25 @@ namespace ConsoleApp
             //var strTest = new StringTest();
             //strTest.Test();
 
-            //// 5. Enum
-            //Console.WriteLine("=================== Enum ================");
-            //var enumTest = new EnumTest();
-            //enumTest.Test();
+            // 5. Enum
+            Console.WriteLine("=================== Enum ================");
+            var enumTest = new EnumTest();
+            enumTest.Test();
 
             //// 6. Operator
             //Console.WriteLine("=================== Operator ================");
             //var operatorTest = new OperatorTest();
             //operatorTest.Test();
 
-            //// 7. If
-            //Console.WriteLine("=================== If ================");
-            //var ifTest = new IfTest();
-            //ifTest.Test();
+            // 7. If
+            Console.WriteLine("=================== If ================");
+            var ifTest = new IfTest();
+            ifTest.Test();
 
-            //// 8. loop
-            //Console.WriteLine("=================== Loop ================");
-            //var loopTest = new LoopTest();
-            //loopTest.Test();
+            // 8. loop
+            Console.WriteLine("=================== Loop ================");
+            var loopTest = new LoopTest();
+            loopTest.Test();
 
             //// 9. yield keword: when collection data can be returned one by one in turn
             //Console.WriteLine("=================== yield return ================");
@@ -208,10 +213,10 @@ namespace ConsoleApp
             //var structTest = new StructTest();
             //structTest.ToString();
 
-            //// 12. Nullable
-            //Console.WriteLine("=================== Nullable ================");
-            //var nullableTest = new NullableTest();
-            //nullableTest.Test(null, null, DateTime.Now, null);
+            // 12. Nullable
+            Console.WriteLine("=================== Nullable ================");
+            var nullableTest = new NullableTest();
+            nullableTest.Test(null, null, DateTime.Now, null);
 
             // 13. Method
             Console.WriteLine("=================== Method ================");
@@ -257,6 +262,14 @@ namespace ConsoleApp
         {
             var cstest = new CsharpTest();
             cstest.Test();
+        }
+
+        private static void AssignmentTest2()
+        {
+            var cstest2 = new homework2();
+            cstest2.Test2();
+            var cstest22 = new Product("Banana", "Produce","OX333",1.99,3);
+            Console.WriteLine(cstest22.Data());
         }
     }
 
