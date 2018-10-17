@@ -13,7 +13,7 @@ namespace ConsoleApp.Beginner
         // 그래서 명시적으로 쓰기 위해 Enum을 씀
         // Value Type에 속함
         // 
-        // 100, 200, 300 으로 처음
+        // 100, 200, 300 으로 처음부터 적용하면 4번째는 301로 시작 (아마도..)
         Seoul,   // 0
         Daejun,  // 1
         Busan = 5,  // 5
