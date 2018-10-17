@@ -17,22 +17,39 @@ namespace ConsoleApp
             //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            Intermediate_OOP3Characteristics();
+            //Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
 
             // C. Advanced
             // Advanced();     
 
             //D.Assignment
-            //AssignmentTest();
+            AssignmentTest();
         }
+
 
         private static void AssignmentTest()
         {
-            // Assignment
+            // Assignment1
             //Console.WriteLine("=================== Assignment1 Test ================");
-            var csharpTest = new CsharpTest();
-            csharpTest.Test();
+            //var csharpTest = new CsharpTest();
+            //csharpTest.Test();
+
+            // Assignment2
+            var csharpTest2 = new CsharpTest2();
+            csharpTest2.Test2();
+
+            Console.WriteLine("=================== Class Product ================");
+            var product = new Product("Sonata", 30000, 10,"Green",'C');
+            Console.WriteLine(string.Format("{0}:{1}:{2}:{3}:{4}", product.Name, product.Price, product.Qty,product.Color,product.KindofProduct));
+            Console.WriteLine(product.GetCustomerData());
+            Console.WriteLine(product.GetStatusData());
+            Console.WriteLine(product.TotalPrice());
+            // overloading method
+
+            Console.WriteLine(product.TotalPrice("Sonata", 25000F));
+            Console.WriteLine(product.TotalPrice("Sorento", 350000F, DateTime.Today ));
+            Console.ReadLine();
         }
 
         private static void Advanced()
