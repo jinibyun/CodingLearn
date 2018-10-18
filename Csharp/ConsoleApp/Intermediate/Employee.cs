@@ -43,6 +43,7 @@ namespace ConsoleApp.Intermediate
         {
 
         }
+        
     }
 
     //public sealed class SubSubManager : SubManager

@@ -20,15 +20,15 @@ namespace ConsoleApp
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
 
-            // Intermediate_OOP3Characteristics();
-            // Intermediate_OtherThings();
+            //Intermediate_OOP3Characteristics();
+            //Intermediate_OtherThings();
             // C. Advanced
-            Advanced();         
+            Advanced();
 
             // D. Assignment
             // AssignmentTest();
 
-            
+
             Console.ReadKey();
         }
 
@@ -41,6 +41,11 @@ namespace ConsoleApp
         private static void Advanced()
         {
             // 1. Generic Class Test
+            // Generic class is Template
+            // it is similar with Inheritance, but a little bit different
+            // parameterized class
+            // any class can be put into <>
+            // 'T' is from "Type", but actually you can define anything. "SFgreagea" is available too.
             Console.WriteLine("============= Generic Class =============");
             MyStack<int> numberStack = new MyStack<int>();
             numberStack.Push(1);
@@ -99,13 +104,35 @@ namespace ConsoleApp
             // Go to File "GenericClass.cs" where just definition is explained
 
             // 3. Interface
+            // Interview Question ★★★★★
+            // Interface is Type? Yes    (Class, Enum, Delegate are type)
+            // 
+            // This is to replace using Inheritance
+            // Inheritance is strongly dependant or strongly tight
+            // If inheritances are used too many in a class, then it's very complex to fix all related calsses later
+            // So Interface is used
+            // Interface has only definitions, not implementations
+            // If a class inherits an Interface, the class must implements the definitions that defined in the Interface
+            // Abstract class is between Interface and non-abstract Class
+            // Interface cannot use New keyword
+            // Interface: definition;   Class: implementation
+            // Interface can do multiple inheritance
+            // Class inheritance is only Single Inheritance available
+
             Console.WriteLine("============= Interface =============");
             Document doc = new Document();
-            IMachine machine = new MultiFunctionPrinter();
-            if (!true) // it will be decided at runtime
+            // IMachine machine2 = new IMachine(); //Interface cannot be initialized like this!!
+            IMachine machine = new MultiFunctionPrinter();  // upcasting 경력있는 사람들은 일부러 이렇게 씀. 그 이유는 아래 예와 같은 조건에 따라서 다른 타입으로 initialize 하려고.
+            bool isModern = false;
+            if (isModern) // it will be decided at runtime
+            {
+                machine = new MultiFunctionPrinter();
+            }
+            else
             {
                 machine = new OldFashionedPrinter();
             }
+            // 뭘로 정의되든 interface 안의 method를 쓸 수 있다.
             machine.Print(doc);
             machine.Fax(doc);
             machine.Scan(doc);
@@ -190,6 +217,13 @@ namespace ConsoleApp
 
         private static void Intermediate_OOP3Characteristics()
         {
+            // Frequent interview question about OOP    ★★★
+            // 1. Encapsulation (클래스 입장에서 숨길만한 건 숨기는 것. Access modifier를 public으로만 하지 않는 것.)
+            // 2. Inheritance
+            // 3. Polymorphism(다형성)
+            // 
+
+
             // 1. Class basic 1
             Console.WriteLine("=================== Class basic 1 ================");
             var classTest = new ClassTest_Basic1("Jini", 32, 'F');
@@ -230,6 +264,13 @@ namespace ConsoleApp
 
             // 4. Class Inheritance
             Console.WriteLine("====== OOP characteristic 2 of 3: Class Inheritance  ======");
+            // Stock and House classes inherit Asset class in the example
+            // Super class: Asset
+            // only Single Inheritance available
+            // Interface can multiple inheritance
+            // Sub class: Stock, House
+            // In .Net, they call them Base Class and Derived class instead of the above names.
+            // Parent class and Child class are OK too.
             Stock msft = new Stock { Name = "MSFT", SharesOwned = 1000 };
 
             Console.WriteLine(msft.Name);         // MSFT
@@ -245,16 +286,23 @@ namespace ConsoleApp
 
             // Upcast & Downcast
             // An upcast creates a base class reference from a subclass reference:
+            // Upcase is always success, but not Downcase
             Stock msft2 = new Stock();
             Asset a = msft2;
 
-            // After the upcast, the two variables still references the same Stock object:
+            // Interview Question ★★★
+            // In this case, what is the type of a?         Asset
+            // It always follows the data type which the object declared with.
+
+
+            // After the upcast, the two variables still references the same Stock object: ★★★
             Console.WriteLine(a == msft2);  // True
 
             // A downcast operation creates a subclass reference from a base class reference.
+            // Success or Fail depending on the situation
             Stock msft3 = new Stock();
             Asset a2 = msft3;                      // Upcast
-            Stock s2 = (Stock)a2;                  // Downcast
+            Stock s2 = (Stock)a2;                  // Downcast              if  Asset a2 = new Asset(), then it cannot Downcast
             Console.WriteLine(s2.SharesOwned);   // <No error>
             Console.WriteLine(s2 == a2);          // True
             Console.WriteLine(s2 == msft3);       // True
@@ -262,29 +310,73 @@ namespace ConsoleApp
             // A downcast requires an explicit cast because it can potentially fail at runtime:
             House h = new House();
             Asset a3 = h;               // Upcast always succeeds
-            // Stock s3 = (Stock)a3;       // ERROR: Downcast fails: a3 is not a Stock 
+                                        // Stock s3 = (Stock)a3;       // ERROR: Downcast fails: a3 is not a Stock 
 
             // TEST: is and as operator
 
-            // 6. virtaul Function
+            // Explane the difference between Overload and Override ★★★★★ Interview question
+            // Overload:
+            // To overload, when the methods's signatures and return types are same, the parameter types or the number of parameter must be different.
+            //
+            // The array of parameters
+            // 
+            // Override:
+            // When we have two classes which are related by inheriatance, redefining the method or property is Override
+            // virtual, override are required to override. sealed is also used
+
+            // 6. virtaul Function  ★
+            // virtual = overridable
+            // C#에서는 derived class에서 base class의 method를 기본적으로 override할 수 없다.(Java는 가능)
+            // virtual을 Base class method에 붙여야 Derived class에서 override할 수 있다. (필수는 아님. 그대로 쓸 수도 있음)
+            // Derived class에서 Method를 override할 때는 Derived class method에 override를 붙여야 한다. (권장)
             Console.WriteLine("========== virtual function, sealed, abstract ========");
             var manager = new Manager(70000, "xyz@test.com", "Jini");
             Console.WriteLine(manager.ToString());
 
             // sealed class
+            // A를 상속한 B가 있고 B를 상속한 C가 있을 때
+            // B가 method를 override하면서 sealed도 하고 싶다면 그냥 sealed만 해도 된다.
             var subManager = new SubManager(5000, "john@test.com", "John");
             Console.WriteLine(subManager.ToString());
 
-            // 7. abstract class
+            // 7. abstract class ★
+            // abstract class can have either non asbtract and abstract methods
+            // abstract method is to force their derived class override the method
             Dog dog = new Dog();
             Console.WriteLine(dog.Describe());
+            Console.WriteLine(dog.Cry());
 
-            // 8. Polymorphism
+            // 8. Polymorphism ★★★
             // A variable of type x can refer to an object that subclasses x.
             // The Display method below accepts an Asset. This means means we can pass it any subtype:
             Console.WriteLine("========= OOP characteristic 3 of 3: Class Polymorphism ========");
-            Display(new Stock2 { Name = "MSFT", SharesOwned = 1000 });
+            Display(new Stock2 { Name = "MSFT", SharesOwned = 1000 });  // upcast Stock to Asset
             Display(new House2 { Name = "Mansion", Mortgage = 100000 });
+
+
+        }
+
+        // Interview question ★★★★★
+        // How do you olverload by overriding?
+        // Here is the example
+        class Employee
+        {
+            public virtual void GetBenefit() { }
+        }
+
+        // derived class
+        class FullStackDeveloper : Employee
+        {
+            // override
+            public override void GetBenefit()
+            {
+                base.GetBenefit();
+            }
+            // overload
+            public void GetBenefit(int i)
+            {
+
+            }
         }
 
         private static void ClassTest_BalanceChanged(object sender, EventArgs e)
@@ -299,11 +391,15 @@ namespace ConsoleApp
         private static void Intermediate_OtherThings()
         {
             // 1. Static Class
+            // Static is generated in Stack memory, not heap memory
+            // Utilities are usually used as static
+            // new Class() format is non-static, so stored in heap memory
+            // static means almost 'shared'
             Console.WriteLine("========= Static Class / Instance Class ========");
             Console.WriteLine(StaticClass.i);
             Console.WriteLine(StaticClass.sum(1, 1));
-            Console.WriteLine(NonStaticClass.sum(2, 2));
-            Console.WriteLine((new NonStaticClass().devide(9, 3)));
+            Console.WriteLine(NonStaticClass.sum(2, 2));    // sum method is static in the example
+            Console.WriteLine((new NonStaticClass().devide(9, 3))); //devide method is non static in the example
 
 
         }

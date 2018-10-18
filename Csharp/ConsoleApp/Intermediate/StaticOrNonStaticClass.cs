@@ -21,6 +21,7 @@ namespace ConsoleApp.Intermediate
         }
 
         // compile error
+        // static class cannot contain non static members
         //public long devide()
         //{
         //    return 100;
@@ -29,6 +30,7 @@ namespace ConsoleApp.Intermediate
 
     public class NonStaticClass
     {
+        // non static class can contain static method
         public static int i = 100;
         public NonStaticClass()
         {

@@ -16,6 +16,7 @@ namespace ConsoleApp.Advanced
 
     public interface IMachine
     {
+        // do not put public because they are already public in default
         void Print(Document d);
         void Fax(Document d);
         void Scan(Document d);
