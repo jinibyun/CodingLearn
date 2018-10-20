@@ -30,8 +30,16 @@ namespace ConsoleApp.Intermediate
         // automatic property
         public decimal BenchmarkPrice { get; set; }
 
+
+        decimal benchmarkPrice;
+        public decimal BenchemarkPrice
+        {
+            get;
+            set;
+        }
+
         // automatic property : readonly (public and private)
-        public int BenchmarkShare { get; private set; }
+        public int BenchmarkShare { get; }
 
         // readonly property
         public decimal Worth
