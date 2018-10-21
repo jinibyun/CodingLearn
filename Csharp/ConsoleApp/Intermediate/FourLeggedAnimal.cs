@@ -12,15 +12,17 @@ namespace ConsoleApp.Intermediate
         {
             return "Not much is known about this four legged animal!";
         }
+
+        public abstract void Cry();
     }
 
     public class Dog : FourLeggedAnimal
     {
-        public override string Describe()
-        {
-            string result = base.Describe();
-            result += " In fact, it's a dog!";
-            return result;
-        }
+        //public override string Describe()
+        //{
+        //    string result = base.Describe();
+        //    result += " In fact, it's a dog!";
+        //    return result;
+        //}
     }
 }

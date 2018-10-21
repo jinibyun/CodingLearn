@@ -57,9 +57,9 @@ namespace ConsoleApp
             Console.WriteLine("=================== Property: Indexer  ================");
 
             var assgnTest = new AssignTest_Indexer();
-            Console.WriteLine("Your pet's name is : " + assgnTest[4]);       // monky
+            Console.WriteLine("Your pet's name is  " + assgnTest[4]);       // monky
             assgnTest[4] = "minky";
-            Console.WriteLine("No, my pet's name is : " + assgnTest[4]);       //minky          
+            Console.WriteLine("No, my pet's name is  " + assgnTest[4]);       //minky          
             Console.ReadLine();
         }
 
