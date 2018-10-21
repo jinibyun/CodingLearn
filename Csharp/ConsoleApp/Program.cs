@@ -36,19 +36,30 @@ namespace ConsoleApp
             //csharpTest.Test();
 
             // Assignment2
-            var csharpTest2 = new CsharpTest2();
-            csharpTest2.Test2();
+            //var csharpTest2 = new CsharpTest2();
+            //csharpTest2.Test2();
 
-            Console.WriteLine("=================== Class Product ================");
-            var product = new Product("Sonata", 30000, 10,"Green",'C');
-            Console.WriteLine(string.Format("{0}:{1}:{2}:{3}:{4}", product.Name, product.Price, product.Qty,product.Color,product.KindofProduct));
-            Console.WriteLine(product.GetCustomerData());
-            Console.WriteLine(product.GetStatusData());
-            Console.WriteLine(product.TotalPrice());
-            // overloading method
+            //Console.WriteLine("=================== Class Product ================");
+            //var product = new Product("Sonata", 30000, 10,"Green",'C');
+            //Console.WriteLine(string.Format("{0}:{1}:{2}:{3}:{4}", product.Name, product.Price, product.Qty,product.Color,product.KindofProduct));
+            //Console.WriteLine(product.GetCustomerData());
+            //Console.WriteLine(product.GetStatusData());
+            //Console.WriteLine(product.TotalPrice());
+            //// overloading method
 
-            Console.WriteLine(product.TotalPrice("Sonata", 25000F));
-            Console.WriteLine(product.TotalPrice("Sorento", 350000F, DateTime.Today ));
+            //Console.WriteLine(product.TotalPrice("Sonata", 25000F));
+            //Console.WriteLine(product.TotalPrice("Sorento", 350000F, DateTime.Today ));
+            //Console.ReadLine();
+
+            // Assignment3
+            var csharpTest3 = new CsharpTest3();
+            csharpTest3.Test3();
+            Console.WriteLine("=================== Property: Indexer  ================");
+
+            var assgnTest = new AssignTest_Indexer();
+            Console.WriteLine("Your pet's name is : " + assgnTest[4]);       // monky
+            assgnTest[4] = "minky";
+            Console.WriteLine("No, my pet's name is : " + assgnTest[4]);       //minky          
             Console.ReadLine();
         }
 
@@ -60,29 +71,29 @@ namespace ConsoleApp
         private static void Intermediate_OOP3Characteristics()
         {
             // 1. Class basic 1
-            Console.WriteLine("=================== Class basic 1 ================");
-            var classTest = new ClassTest_Basic1("Jini", 32, 'F');
-            Console.WriteLine(string.Format("{0}:{1}:{2}", classTest.Name, classTest.Age, classTest.Gender));
-            Console.WriteLine(classTest.GetCustomerData());
+            //Console.WriteLine("=================== Class basic 1 ================");
+            //var classTest = new ClassTest_Basic1("Jini", 32, 'F');
+            //Console.WriteLine(string.Format("{0}:{1}:{2}", classTest.Name, classTest.Age, classTest.Gender));
+            //Console.WriteLine(classTest.GetCustomerData());
 
             // event
             // event subscription : +=
-            classTest.NameChanged += ClassTest_NameChanged;
-            classTest.BalanceChanged += ClassTest_BalanceChanged;
-            classTest.Name = "Jane";
+            //classTest.NameChanged += ClassTest_NameChanged;
+            //classTest.BalanceChanged += ClassTest_BalanceChanged;
+            //classTest.Name = "Jane";
 
             // overloading method
-            Console.WriteLine(classTest.Foo(1D));
-            Console.WriteLine(classTest.Foo(1));
-            Console.WriteLine(classTest.Foo(1F, 2));
-            Console.WriteLine(classTest.Foo(2, 1F));
+            //Console.WriteLine(classTest.Foo(1D));
+            //Console.WriteLine(classTest.Foo(1));
+            //Console.WriteLine(classTest.Foo(1F, 2));
+            //Console.WriteLine(classTest.Foo(2, 1F));
 
             // 2. Class basic 2 Encapsulation
-            Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
-            var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
-            Console.WriteLine(classTest_Basic2.Worth);
-            Console.WriteLine(classTest_Basic2.BenchmarkPrice);
-            Console.WriteLine(classTest_Basic2.BenchmarkShare);
+            //Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
+            //var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
+            //Console.WriteLine(classTest_Basic2.Worth);
+            //Console.WriteLine(classTest_Basic2.BenchmarkPrice);
+            //Console.WriteLine(classTest_Basic2.BenchmarkShare);
 
             // 3. Property: Indexer
             Console.WriteLine("=================== Property: Indexer  ================");
@@ -90,7 +101,7 @@ namespace ConsoleApp
             Console.WriteLine(classTest2[3]);       // fox
             classTest2[3] = "kangaroo";
             Console.WriteLine(classTest2[3]);       // kangaroo           
-
+            Console.ReadLine();
             // partial class and partial method
             // only explanation
 

@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assignment\AssignTest_Indexer.cs" />
     <Compile Include="Assignment\CsharpTest.cs" />
     <Compile Include="Assignment\CsharpTest2.cs" />
+    <Compile Include="Assignment\CsharpTest3.cs" />
     <Compile Include="Assignment\Product.cs" />
     <Compile Include="Assignment\User1.cs" />
     <Compile Include="Assignment\User2.cs" />
