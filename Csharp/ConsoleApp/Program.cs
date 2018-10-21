@@ -17,11 +17,11 @@ namespace ConsoleApp
             //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            //Intermediate_OOP3Characteristics();
+            Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
 
             // C. Advanced
-            // Advanced();     
+            Advanced();     
 
             //D.Assignment
             AssignmentTest();
@@ -89,11 +89,11 @@ namespace ConsoleApp
             //Console.WriteLine(classTest.Foo(2, 1F));
 
             // 2. Class basic 2 Encapsulation
-            //Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
-            //var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
-            //Console.WriteLine(classTest_Basic2.Worth);
-            //Console.WriteLine(classTest_Basic2.BenchmarkPrice);
-            //Console.WriteLine(classTest_Basic2.BenchmarkShare);
+            Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
+            var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
+            Console.WriteLine(classTest_Basic2.Worth);
+            Console.WriteLine(classTest_Basic2.BenchmarkPrice);
+            Console.WriteLine(classTest_Basic2.BenchmarkShare);
 
             // 3. Property: Indexer
             Console.WriteLine("=================== Property: Indexer  ================");
@@ -107,7 +107,7 @@ namespace ConsoleApp
 
             // 4. Class Inheritance
             Console.WriteLine("====== OOP characteristic 2 of 3: Class Inheritance  ======");
-            Stock msft = new Stock { Name = "MSFT", SharesOwned = 1000 };
+            Stock msft = new Stock { SharesOwned = 1000, Name ="aaa"  };
 
             Console.WriteLine(msft.Name);         // MSFT
             Console.WriteLine(msft.SharesOwned);  // 1000

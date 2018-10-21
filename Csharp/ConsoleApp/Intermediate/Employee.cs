@@ -8,14 +8,13 @@ namespace ConsoleApp.Intermediate
 {
     public class Employee
     {
+        public decimal _salary;
         public string Name;
-        public virtual decimal Salary { get { return 100000; } }
+        public virtual decimal Salary { get { return 0M; } }
     }
 
     public class Manager : Employee
     {
-        private decimal _salary;
-
         public Manager()
         {
 
@@ -34,6 +33,11 @@ namespace ConsoleApp.Intermediate
         {
             return string.Format("{0}'s saraly is {1}", this.Name, this.Salary);
         }
+    }
+
+    public class SubManager2 : Manager
+    {
+        public override decimal Salary { get { return _salary; } }
     }
 
     // sealed
