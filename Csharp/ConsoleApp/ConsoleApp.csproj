@@ -42,16 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Advanced\DelegateTest.cs" />
+    <Compile Include="Advanced\EventTest.cs" />
+    <Compile Include="Advanced\ExtensionMethodTest.cs" />
+    <Compile Include="Advanced\GenericClass.cs" />
+    <Compile Include="Advanced\InterfaceTest.cs" />
     <Compile Include="Assignment\AssignTest_Indexer.cs" />
     <Compile Include="Assignment\CsharpTest.cs" />
     <Compile Include="Assignment\CsharpTest2.cs" />
     <Compile Include="Assignment\CsharpTest3.cs" />
-    <Compile Include="Assignment\Java.cs" />
+    <Compile Include="Assignment\IProgrammingLanguageTest.cs" />
+    <Compile Include="Assignment\PolymorphismApplication.cs" />
     <Compile Include="Assignment\Product.cs" />
-    <Compile Include="Assignment\ProgrammingLanguage.cs" />
+    <Compile Include="Assignment\ProgrammingLanguageTest.cs" />
     <Compile Include="Assignment\User1.cs" />
     <Compile Include="Assignment\User2.cs" />
     <Compile Include="Assignment\User3.cs" />
+    <Compile Include="Assignment\Utility.cs" />
     <Compile Include="Beginner\ArrayTest.cs" />
     <Compile Include="Intermediate\ClassTest_Basic2.cs" />
     <Compile Include="Intermediate\ClassTest_Indexer.cs" />
@@ -81,8 +88,6 @@
     <None Include="App.config" />
     <None Include="ReadMe.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Advanced\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

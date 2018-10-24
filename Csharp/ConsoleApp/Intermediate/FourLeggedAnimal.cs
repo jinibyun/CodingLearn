@@ -8,11 +8,13 @@ namespace ConsoleApp.Intermediate
 {
     public abstract class FourLeggedAnimal
     {
+        // override is optional
         public virtual string Describe()
         {
             return "Not much is known about this four legged animal!";
         }
 
+        // must override
         public abstract void Cry();
     }
 

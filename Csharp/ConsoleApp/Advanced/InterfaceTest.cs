@@ -16,6 +16,7 @@ namespace ConsoleApp.Advanced
 
     public interface IMachine
     {
+        // public X
         void Print(Document d);
         void Fax(Document d);
         void Scan(Document d);
@@ -41,15 +42,17 @@ namespace ConsoleApp.Advanced
 
     public class OldFashionedPrinter : IMachine
     {
+        public void Fax(Document d)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Print(Document d)
         {
             Console.WriteLine(string.Format("Old Fashion Printing.....{0}", d.ToString()));
         }
 
-        public void Fax(Document d)
-        {
-            Console.WriteLine("Old Fashion Machine does not support faxing");
-        }
+
 
         public void Scan(Document d)
         {

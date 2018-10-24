@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Assignment;
+﻿using ConsoleApp.Advanced;
+using ConsoleApp.Assignment;
 using ConsoleApp.Beginner;
 using ConsoleApp.Intermediate;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ConsoleApp.Assignment.ProgrammingLanguage;
 
 namespace ConsoleApp
 {
@@ -17,16 +19,15 @@ namespace ConsoleApp
             //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            Intermediate_OOP3Characteristics();
+            //Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
 
             // C. Advanced
-            Advanced();     
+            //Advanced();     
 
             //D.Assignment
             AssignmentTest();
         }
-
 
         private static void AssignmentTest()
         {
@@ -52,20 +53,234 @@ namespace ConsoleApp
             //Console.ReadLine();
 
             // Assignment3
+
             var csharpTest3 = new CsharpTest3();
             csharpTest3.Test3();
-            Console.WriteLine("=================== Property: Indexer  ================");
+
+            Console.WriteLine("***1. Indexer  ***");
 
             var assgnTest = new AssignTest_Indexer();
             Console.WriteLine("Your pet's name is  " + assgnTest[4]);       // monky
             assgnTest[4] = "minky";
             Console.WriteLine("No, my pet's name is  " + assgnTest[4]);       //minky          
+            //Console.ReadLine();
+
+            
+            Console.WriteLine("***2-3. inheritance ***");
+            Csharp csharp = new Csharp(Platform.windows);
+            csharp.name = "Csharp";
+            csharp.version = "6.0";
+            Console.WriteLine(csharp.getInfo() + " ,  Cost is " + "$" + csharp.Cost());
+
+            HTML html = new HTML(Platform.windows);
+            html.name = "HTML";
+            html.version = "5.0";
+            Console.WriteLine(html.getInfo() + " ,  Cost is " + "$" + html.Cost());
+
+            ProgrammingLanguage language = new CSS(Platform.linux);
+
+            language.name = "Javascript";
+            language.version = "1.8.5";
+            language = new Javascript(language);
+
+            Console.WriteLine(language.getInfo() + "$" + language.Cost());
+
+            //Console.ReadLine();
+
+            Console.WriteLine("*** 4-6. Interface ***");
+            Description des = new Description();
+
+            //Python script = new Python();
+            string opt = "A";
+
+            IProgrammingLanguage script = new Python();
+
+            if (opt == "A")
+            {
+                script = new Python();
+                script.GetInfo("Python");
+            }
+
+            else if (opt == "B")
+            {
+                script = new Ruby();
+                script.GetInfo("Ruby");
+            }
+            else if (opt == "C")
+            {
+                script = new Pearl();
+                script.GetInfo("Pearl");
+            }
+
+            script.Gift(des);
+            script.Credit(des);
+        
+            //Console.ReadLine();
+
+            Console.WriteLine("*** 7. Static and Non-Static ***");
+            Console.WriteLine(Utility.isScriptLanguage("JavaScript"));
+            Console.WriteLine(Utility.GetYearOfCreation("Csharp").Year + "years");
+            //Console.ReadLine();
+
+            Console.WriteLine("***8. Polymorphism ***");
+            Console.WriteLine("*** overloading ***");
+            Printdata p = new Printdata();
+
+            p.print(5);
+            p.print(500.263);
+            p.print("Hello C#");
+            //Console.ReadLine();
+
+            Console.WriteLine("*** overriding ***");
+            Rectangle r = new Rectangle(10, 7);
+            double a = r.area();
+            Console.WriteLine("Area: {0}", a);
             Console.ReadLine();
         }
 
         private static void Advanced()
         {
-            throw new NotImplementedException();
+            // 1. Generic Class Test
+            Console.WriteLine("============= Generic Class =============");
+            MyStack<int> numberStack = new MyStack<int>();
+            numberStack.Push(1);
+            numberStack.Push(2);
+            var result = numberStack.Pop();
+            Console.WriteLine(result);
+
+            MyStack<string> nameStack = new MyStack<string>();
+            nameStack.Push("This");
+            nameStack.Push("That");
+            var result2 = numberStack.Pop();
+            Console.WriteLine(result2);
+
+            // 2. Net framework support built-in generic type
+            Console.WriteLine("============= .NET Generic Class: List =========");
+            List<string> nameList = new List<string>();
+            nameList.Add("John");
+            nameList.Add("Jane");
+
+            foreach (var member in nameList)
+            {
+                Console.WriteLine(member);
+            }
+
+            List<decimal> decimalList = new List<decimal>();
+            decimalList.Add(1.345M);
+            decimalList.Add(-92.12M);
+
+            foreach (var member in decimalList)
+            {
+                Console.WriteLine(member);
+            }
+
+            Console.WriteLine("============= .NET Generic Class: Dictionary =========");
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            dic["aaa"] = 100;
+            dic["bbb"] = 90;
+
+            foreach (var member in dic)
+            {
+                Console.WriteLine(dic[member.Key]);
+            }
+
+            Console.WriteLine("============= .NET Generic Class: LinkedList =========");
+            LinkedList<string> linked = new LinkedList<string>();
+            linked.AddLast("cat");
+            linked.AddLast("dog");
+            linked.AddLast("man");
+            linked.AddFirst("first"); // faster inserting, removing then List, but slower than access. Vice Versa
+            foreach (var item in linked)
+            {
+                Console.WriteLine(item);
+            }
+
+            // Generic Constraint 
+            // Go to File "GenericClass.cs" where just definition is explained
+
+            // 3. Interface
+            Console.WriteLine("============= Interface =============");
+            Document doc = new Document();
+            IMachine machine = new MultiFunctionPrinter();
+            if (!true) // it will be decided at runtime
+            {
+                machine = new OldFashionedPrinter();
+            }
+            machine.Print(doc);
+            machine.Fax(doc);
+            machine.Scan(doc);
+
+            // what can be defined: method, property, member, ...
+            // 1. difference between class and interface
+            // 2. difference between abstract class and interface
+            // 3. similarity between abstract class and interface
+            // 4. why interface?
+
+            // 4. delegate
+            Console.WriteLine("============= delegate =============");
+            var delegateTest = new DelegateTest();
+            delegateTest.Test1();
+            delegateTest.Test2();
+            delegateTest.Test3();
+            delegateTest.Test4("anonymous"); // anonymous delegate (Lambda Expression)            
+
+            // 5. Event
+            Console.WriteLine("============= event =============");
+            var publisher = new Publisher();
+            // Event Handling
+            // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);            
+            // antoher way 1
+            // publisher.ButtonClicked += Publisher_ButtonClicked;
+            // antoher way 2: anonymouse method: other method does not need to be defined
+            // publisher.ButtonClicked += delegate () { Console.WriteLine("Event Subscribed"); };
+            // another way 3: lambda expression: very similar to anonymous method but a bit more convinient way
+            publisher.ButtonClicked += () => { Console.WriteLine("Event Subscribed"); };
+
+            publisher.Test();
+
+            // 6. Lambda expression
+            // explained above with anonymous
+            // It is used in LINQ 
+            // a bit more
+            /*
+            () => Write("No");
+            (p) => Write(p);
+            (s, e) => Write(e);
+            (string s, int i) => Write(s, i); 
+            */
+
+            // 7. Extension Method
+            // Similar to static method, but it is more flexible and powerful to extend functions in existing class without changing existing class
+            Console.WriteLine("============= Extension Method =============");
+            string s = "This is a Test";
+            string s2 = s.ToChangeCase();
+            bool found = s.Found('z');
+            Console.WriteLine(s2);
+            Console.WriteLine(found);
+
+            // Extension method with very common case
+            List<int> nums = new List<int> { 55, 44, 33, 66, 11 };
+
+            // Where extension method
+            var v = nums.Where(p => p % 3 == 0);
+            List<int> arr = v.ToList<int>();
+            arr.ForEach(n => Console.WriteLine(n));
+
+            // 8. async and await
+            /*
+            Asynchronous Programming
+            1. async: let compiler to know that the method has await
+            2. more than one "await" can be included. Actually no awit is allowed, but warning comes up.
+            3. awiat generally is used with Task<T> object
+            4. Compiler will add necessary code for main thread "NOT" to stop 
+            5. await Task<T>, when finished Task, then await continue to process next line. At this time, 
+            6. NOTE: After finishing Task, await gurantee that it will make back to "original" thread from Task (regardless of other thread or same thread)
+ 
+            Go to "WinformApp" application to testing
+            */
+
+            // 9. Net built-in collection and LINQ Basic
+            // Pre-requisite: understanding of anonymouse type, yield return, lambda expression, extension method
         }
 
         private static void Intermediate_OOP3Characteristics()
