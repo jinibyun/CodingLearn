@@ -5,9 +5,9 @@ using ConsoleApp.Intermediate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static ConsoleApp.Assignment.CsharpTest3;
 using System.Text;
 using System.Threading.Tasks;
-using static ConsoleApp.Assignment.ProgrammingLanguage;
 
 namespace ConsoleApp
 {
@@ -54,18 +54,15 @@ namespace ConsoleApp
 
             // Assignment3
 
+            Console.WriteLine("== Assignm3 Start ==");
             var csharpTest3 = new CsharpTest3();
-            csharpTest3.Test3();
-
             Console.WriteLine("***1. Indexer  ***");
 
             var assgnTest = new AssignTest_Indexer();
             Console.WriteLine("Your pet's name is  " + assgnTest[4]);       // monky
             assgnTest[4] = "minky";
             Console.WriteLine("No, my pet's name is  " + assgnTest[4]);       //minky          
-            //Console.ReadLine();
-
-            
+                                                                              //Console.ReadLine();
             Console.WriteLine("***2-3. inheritance ***");
             Csharp csharp = new Csharp(Platform.windows);
             csharp.name = "Csharp";
@@ -114,7 +111,7 @@ namespace ConsoleApp
 
             script.Gift(des);
             script.Credit(des);
-        
+
             //Console.ReadLine();
 
             Console.WriteLine("*** 7. Static and Non-Static ***");
@@ -136,7 +133,8 @@ namespace ConsoleApp
             double a = r.area();
             Console.WriteLine("Area: {0}", a);
             Console.ReadLine();
-        }
+        
+    }
 
         private static void Advanced()
         {
