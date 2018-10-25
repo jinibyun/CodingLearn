@@ -20,11 +20,12 @@ namespace ConsoleApp.Intermediate
             return i+j;
         }
 
+        //static method must be used in static class
         // compile error
-        //public long devide()
-        //{
-        //    return 100;
-        //}
+        public static long devide()
+        {
+            return 100;
+        }
     }
 
     public class NonStaticClass

@@ -45,6 +45,8 @@ namespace ConsoleApp.Intermediate
         }
     }
 
+
+
     //public sealed class SubSubManager : SubManager
     //{
     //    public SubSubManager(decimal salary, string email, string name) : base(salary, email, name)

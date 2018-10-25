@@ -14,6 +14,9 @@ namespace ConsoleApp.Advanced
         }
     }
 
+    //like abstract. Has to be used.
+    //class = implementation (single inheritance)
+    //interface = definition. (no new keyword, no public) (multiple inheritance)
     public interface IMachine
     {
         void Print(Document d);

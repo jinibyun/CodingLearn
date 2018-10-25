@@ -51,7 +51,8 @@ namespace ConsoleApp.Advanced
         {
             // Anonymous delegate : short way to write delegate.
             //AnonymousDelegate anonDelegate = new AnonymousDelegate(
-            //delegate(string text) {
+            //delegate (string text)
+            //{
             //    Console.WriteLine(text);
             //});
 
@@ -64,10 +65,12 @@ namespace ConsoleApp.Advanced
             //};
 
             // much more clearer way: Lambda expression with "goes to" operator
-            // Action<string> anonDelegate = text => Console.WriteLine(text);
+            //Action<string> anonDelegate = text => Console.WriteLine(text);
 
             // much much much more clearer way: Lambda expression with "goes to" operator
             AnonymousDelegate anonDelegate = text => Console.WriteLine(text);
+            //                             = parameter => method implementation
+
             anonDelegate(p1);
         }
 

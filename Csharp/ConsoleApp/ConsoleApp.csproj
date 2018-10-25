@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="Assignment1\CsharpTest.cs" />
     <Compile Include="Assignment2\homework2.cs" />
     <Compile Include="Advanced\DelegateTest.cs" />
@@ -50,7 +49,7 @@
     <Compile Include="Advanced\ExtensionMethodTest.cs" />
     <Compile Include="Advanced\GenericClass.cs" />
     <Compile Include="Advanced\InterfaceTest.cs" />
-    <Compile Include="Assignment\ChsarpTest.cs" />
+    <Compile Include="Assignment3\homework3.cs" />
     <Compile Include="Beginner\ArrayTest.cs" />
     <Compile Include="Intermediate\ClassTest_Basic2.cs" />
     <Compile Include="Intermediate\ClassTest_Indexer.cs" />

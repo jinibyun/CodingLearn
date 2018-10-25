@@ -20,7 +20,8 @@ namespace ConsoleApp.Intermediate
             set { currentPrice = value; }
         }
 
-        decimal sharesOwned;           // The private "backing" field
+        decimal sharesOwned;           // The private "backing" field 
+        //member = field = variable
         public decimal SharesOwned     // The public property
         {
             get { return sharesOwned; }
@@ -28,10 +29,11 @@ namespace ConsoleApp.Intermediate
         }
 
         // automatic property
+        // same as above
         public decimal BenchmarkPrice { get; set; }
 
         // automatic property : readonly (public and private)
-        public int BenchmarkShare { get; private set; }
+        public int BenchmarkShare { get; } //private set; }
 
         // readonly property
         public decimal Worth

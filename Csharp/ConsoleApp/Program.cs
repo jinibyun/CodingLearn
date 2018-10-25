@@ -1,7 +1,8 @@
-﻿using ConsoleApp.Assignment;
-using ConsoleApp.Beginner;
+﻿using ConsoleApp.Beginner;
 using ConsoleApp.Intermediate;
+using ConsoleApp.Assignment;
 using ConsoleApp.Assignment2;
+using ConsoleApp.Assignment3;
 using ConsoleApp.Advanced;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,12 @@ namespace ConsoleApp
             //Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
             // C. Advanced
-            // Advanced(); 
+            Advanced(); 
 
             // D. Assignment
             //AssignmentTest();
-            AssignmentTest2();
+            //AssignmentTest2();
+            //AssignmentTest3();
             
 
        
@@ -72,6 +74,8 @@ namespace ConsoleApp
             Dictionary<string, int> dic = new Dictionary<string, int>();
             dic["aaa"] = 100;
             dic["bbb"] = 90;
+            dic.Remove("aaa");
+            dic["aaa"] = 444;
 
             foreach(var member in dic)
             {
@@ -111,6 +115,7 @@ namespace ConsoleApp
             // 4. why interface?
 
             // 4. delegate
+            // One of the reference type
             Console.WriteLine("============= delegate =============");
             var delegateTest = new DelegateTest();
             delegateTest.Test1();
@@ -122,7 +127,8 @@ namespace ConsoleApp
             Console.WriteLine("============= event =============");
             var publisher = new Publisher();
             // Event Handling
-            // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);            
+            // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);    
+            //           event                delegate  (event handler)
             // antoher way 1
             // publisher.ButtonClicked += Publisher_ButtonClicked;
             // antoher way 2: anonymouse method: other method does not need to be defined
@@ -159,6 +165,8 @@ namespace ConsoleApp
             var v = nums.Where(p => p % 3 == 0);
             List<int> arr = v.ToList<int>();
             arr.ForEach(n => Console.WriteLine(n));
+            
+            //Action vs Func 
 
             // 8. async and await
             /*
@@ -205,6 +213,8 @@ namespace ConsoleApp
 
             // 2. Class basic 2 Encapsulation
             Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
+
+            // { } = object
             var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
             Console.WriteLine(classTest_Basic2.Worth);
             Console.WriteLine(classTest_Basic2.BenchmarkPrice);
@@ -236,17 +246,22 @@ namespace ConsoleApp
             Console.WriteLine("=================== Reference Conversion  ================");
 
             // Upcast & Downcast
+            //upcast always work
             // An upcast creates a base class reference from a subclass reference:
             Stock msft2 = new Stock();
             Asset a = msft2;
+            //a = Asset type
+            //if a was stock type, there should have been sharesowned
 
             // After the upcast, the two variables still references the same Stock object:
+            Console.WriteLine("Data Type Comparison: ");
             Console.WriteLine(a == msft2);  // True
 
+            //downcast may or may not work
             // A downcast operation creates a subclass reference from a base class reference.
             Stock msft3 = new Stock();
-            Asset a2 = msft3;                      // Upcast
-            Stock s2 = (Stock)a2;                  // Downcast
+            Asset a2 = msft3;                      // Upcast = no need
+            Stock s2 = (Stock)a2;                  // Downcast = explicit conversion
             Console.WriteLine(s2.SharesOwned);   // <No error>
             Console.WriteLine(s2 == a2);          // True
             Console.WriteLine(s2 == msft3);       // True
@@ -259,6 +274,12 @@ namespace ConsoleApp
             // TEST: is and as operator
 
             // 6. virtaul Function
+            // virtual = over-ridable (for parents)
+
+            // override keyword (which basically includes overridable, only for inherited)
+
+            // sealed keyword (no more over-ride)
+            
             Console.WriteLine("========== virtual function, sealed, abstract ========");
             var manager = new Manager(70000, "xyz@test.com", "Jini");
             Console.WriteLine(manager.ToString());
@@ -421,6 +442,36 @@ namespace ConsoleApp
             cstest2.Test2();
             var cstest22 = new Product("Banana", "Produce","OX333",1.99,3);
             Console.WriteLine(cstest22.Data());
+        }
+
+        private static void AssignmentTest3()
+        {
+            #region 1. Indexer
+            Starbucks coffee = new Starbucks();
+            Console.WriteLine("How would you like your coffee:");
+            Console.WriteLine("0. Dark   1. Medium   2. Light   3. Decaf");
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            if (option <= 3 && option >= 0)
+            Console.WriteLine("Here is your {0} roast coffee!", coffee[option]);
+
+            Console.WriteLine("==============================================");
+            #endregion
+
+            #region 2. Inheritance
+            Java jav = new Java("Java", 11.0f);
+            Console.WriteLine("{0}{1} was last updated by {2}", jav.Name, jav.Version, jav.GetInfo("Oracle"));
+            Javascript javsc = new Javascript("Javascript", 1.85f);
+            Console.WriteLine("{0}{1} was last updated by {2}", javsc.Name, javsc.Version, javsc.GetInfo("Netscape"));
+            Console.WriteLine(javsc.GetInfo(2018));
+            Csharp csharp = new Csharp("CSharp", 7.3f);
+            Console.WriteLine("{0}{1} was last updated by {2}", csharp.Name, csharp.Version, csharp.GetInfo("Microsoft"));
+            Console.WriteLine("==============================================");
+            Platform pform = new Platform();
+            Console.WriteLine("Choose your Operating System");
+            string OS = Console.ReadLine();
+            #endregion
+
         }
     }
 
