@@ -14,7 +14,7 @@ namespace ConsoleApp.Intermediate
         {
             return "Not much is known about this four legged animal!";
         }
-
+        
         // Abstract Method ★★★
         // abstractu method forces its derived class to override the method.
         // abstract class can have abstract method
@@ -36,6 +36,5 @@ namespace ConsoleApp.Intermediate
             result += " In fact, it's a dog!";
             return result;
         }
-
     }
 }

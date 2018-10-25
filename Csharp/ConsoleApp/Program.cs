@@ -19,7 +19,6 @@ namespace ConsoleApp
             //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-
             //Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
             // C. Advanced
@@ -261,7 +260,9 @@ namespace ConsoleApp
 
             // 2. Class basic 2 Encapsulation
             Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
-            var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
+
+            var classTest_Basic2 = new ClassTest_Basic2  { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
+
             Console.WriteLine(classTest_Basic2.Worth);
             Console.WriteLine(classTest_Basic2.BenchmarkPrice);
             Console.WriteLine(classTest_Basic2.BenchmarkShare);
@@ -303,13 +304,13 @@ namespace ConsoleApp
             // Upcase is always success, but not Downcase
             Stock msft2 = new Stock();
             Asset a = msft2;
-
+            
             // Interview Question ★★★
             // In this case, what is the type of a?         Asset
             // It always follows the data type which the object declared with.
 
-
             // After the upcast, the two variables still references the same Stock object: ★★★
+
             Console.WriteLine(a == msft2);  // True
 
             // A downcast operation creates a subclass reference from a base class reference.
