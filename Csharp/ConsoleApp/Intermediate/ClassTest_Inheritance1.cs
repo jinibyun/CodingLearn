@@ -11,10 +11,13 @@ namespace ConsoleApp.Intermediate
         public string Name;
     }
 
+
     public class Stock : Asset   // inherits from Asset      : = inherit
+
     {
         public long SharesOwned;
     }
+
 
     //same as above
     //public class Stock
@@ -25,6 +28,7 @@ namespace ConsoleApp.Intermediate
 
     public class House : Asset   // inherits from Asset
     {
+
         public decimal Mortgage;
     }
 }

@@ -18,6 +18,7 @@ namespace ConsoleApp.Intermediate
 
         public abstract void Cry();
         //abstract = force (must override)
+
     }
 
     public class Dog : FourLeggedAnimal
@@ -32,5 +33,6 @@ namespace ConsoleApp.Intermediate
         {
             throw new NotImplementedException();
         }
+
     }
 }
