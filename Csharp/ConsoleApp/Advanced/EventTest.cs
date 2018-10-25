@@ -22,7 +22,7 @@ namespace ConsoleApp.Advanced
         {
             if(ButtonClicked != null)
             {
-                ButtonClicked(); // ButtonClicked.Invoke();
+                ButtonClicked(); // ButtonClicked.Invoke(); //방송국으로 치면 신호 송출 중. 받으려면 받아라!
             }
         }
     }

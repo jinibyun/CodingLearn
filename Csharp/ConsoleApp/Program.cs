@@ -143,7 +143,8 @@ namespace ConsoleApp
             // 3. similarity between abstract class and interface
             // 4. why interface?
 
-            // 4. delegate
+            // ★★
+            // 4. delegate      (Reference type)
             Console.WriteLine("============= delegate =============");
             var delegateTest = new DelegateTest();
             delegateTest.Test1();
@@ -151,17 +152,22 @@ namespace ConsoleApp
             delegateTest.Test3();
             delegateTest.Test4("anonymous"); // anonymous delegate (Lambda Expression)            
 
+            // ★★
+            // one object publishes an event, and another object which is subscribing the first object receive the event
             // 5. Event
             Console.WriteLine("============= event =============");
             var publisher = new Publisher();
             // Event Handling
-            // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);            
+            //  The followings are all same
+            // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);  
             // antoher way 1
             // publisher.ButtonClicked += Publisher_ButtonClicked;
             // antoher way 2: anonymouse method: other method does not need to be defined
-            // publisher.ButtonClicked += delegate () { Console.WriteLine("Event Subscribed"); };
+            // publisher.ButtonClicked += delegate () { Console.WriteLine("Event Subscribed"); }; //그냥 메쏘드 선언없이 implement 실행
             // another way 3: lambda expression: very similar to anonymous method but a bit more convinient way
             publisher.ButtonClicked += () => { Console.WriteLine("Event Subscribed"); };
+            // () means there is no parameter in the delegate. if there's any parameter, we can put a variable name in the breakits.
+            // please see the Lambda Expression
 
             publisher.Test();
 
@@ -176,7 +182,12 @@ namespace ConsoleApp
             (string s, int i) => Write(s, i); 
             */
 
+            // ★★
             // 7. Extension Method
+            // 만들어지게 된 계기: 메쏘드 50개를 가진 클래스가 있고 거기서 메쏘드 1개 더 추가하려는데 애매할 때
+            //(inheritance는 클라이언트 코드도 바꿔야 되서 별로고.. 그냥 추가하자니 ..)
+            // .NET도 버전업하면서 기존의 코드를 확장할 때 Extension Method로 코드 새로 추가함.
+            //
             // Similar to static method, but it is more flexible and powerful to extend functions in existing class without changing existing class
             Console.WriteLine("============= Extension Method =============");
             string s = "This is a Test";
@@ -189,9 +200,12 @@ namespace ConsoleApp
             List<int> nums = new List<int> { 55, 44, 33, 66, 11 };
 
             // Where extension method
-            var v = nums.Where(p => p % 3 == 0);
+            var v = nums.Where(p => p % 3 == 0);    // p => p % 3 ==0 는 delegate임. 커서를 Where 위에 두면 인수로 delegate가 들어가는 걸 볼 수 있음.
+            // var v = nums.Where(p => { return p % 3 == 0;  });
+            // ★★ Interview question: What is different between Action and Func?
+            // Action은 void 리턴이고 Func는 아무거나 리턴 가능 (general T). Senior Developer 인터뷰 문제
             List<int> arr = v.ToList<int>();
-            arr.ForEach(n => Console.WriteLine(n));
+            arr.ForEach(n => Console.WriteLine(n));     // 람다는 foreach에 좋음. delegate를 쓴다 하면 자체적으로 안에 for root가 돈다고 생각하면 됨.
 
             // 8. async and await
             /*

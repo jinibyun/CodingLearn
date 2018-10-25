@@ -27,18 +27,18 @@ namespace ConsoleApp.Advanced
 
         public void Test2()
         {
-            RunDelegate run = new RunDelegate(RunThis);            
+            RunDelegate run = new RunDelegate(RunThis);            // formal way
             run(1024);
 
             //run = new RunDelegate(RunThat);
             // omit new RunDelegate 
-            run = RunThat; // no parenthesis ()
+            run = RunThat; // no parenthesis () // it is the same way as the above. Don't need to declare ** = new blabla();
             run(1024);
         }
 
         public void Test3()
         {
-            Procedure someProcs = null;
+            Procedure someProcs = null; // it is also possible
             someProcs += new Procedure(Method1);
             someProcs += new Procedure(Method2);            
             someProcs();
@@ -47,8 +47,11 @@ namespace ConsoleApp.Advanced
 
         }
 
+        //★★★★★
         public void Test4(string p1)
         {
+            // they are all same belows
+
             // Anonymous delegate : short way to write delegate.
             //AnonymousDelegate anonDelegate = new AnonymousDelegate(
             //delegate(string text) {
@@ -57,17 +60,26 @@ namespace ConsoleApp.Advanced
 
             // Instead above, we use clearer way: Action or Func (These are built-in delegate)
 
-            // anonymouse method
+            // ★ Action type: delegate which takes only on parameter and no return value
+
+            // anonymouse method        
             //Action<string> anonDelegate = delegate (string text)
             //{
             //    Console.WriteLine(text);
             //};
+            // much more clearer way: Lambda expression with "go to" operator
+            // Action<string> anonDelegate = text => Console.WriteLine(text);     // any name is ok. text is not a keyword
+            //  parameter    => "go to"    implementation
 
-            // much more clearer way: Lambda expression with "goes to" operator
-            // Action<string> anonDelegate = text => Console.WriteLine(text);
 
+            // ★★★
+            // Labmda Expression
             // much much much more clearer way: Lambda expression with "goes to" operator
-            AnonymousDelegate anonDelegate = text => Console.WriteLine(text);
+             AnonymousDelegate anonDelegate = text => Console.WriteLine(text);
+
+            // same as the below. it is more explicity, but use the above. it is for a reference
+            // text is the parameter name.
+            AnonymousDelegate anonDelegate2 = (text) => { Console.WriteLine(text); };
             anonDelegate(p1);
         }
 
