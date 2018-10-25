@@ -1,5 +1,10 @@
+/* ----------------------------------------------------------------------------------
+A: DML : Data MANIPULATION Language
+1. SELECT	2.INSERT	3.UPDATE	4.DELETE
+*-----------------------------------------------------------------------------------*/
+
 /* --------------------------------------------------
-1. Simple Select Statement
+A-1. Simple Select Statement
 
 Basic use of queries and SQL functions
 --------------------------------------------------- */
@@ -98,11 +103,12 @@ SELECT RIGHT(au_fname, 5) FROM authors
 SELECT au_fname, SUBSTRING(au_fname, 3, 2) FROM authors
 
 /* ---------------------------------------------------
-1. Select Statement
+A-1. Select Statement
 
 SELECT query with 
 
-filtering, distinct, order by, group by, join, sub Query
+filtering, distinct, order by, group by, join, sub Query,
+union, select into
 ---------------------------------------------------- */
 USE pubs
 GO
@@ -159,6 +165,9 @@ WHERE (title LIKE 'T%') OR (pub_id = '0877' AND price > $16.00)
 SELECT title_id, title, pub_id, price, pubdate
 FROM titles
 WHERE title LIKE 'T%' OR pub_id = '0877' AND (price > $16.00)
+
+-- TOP
+-- TODO
 
 -- Distinct
 -- compare
@@ -252,7 +261,7 @@ SELECT au_fname, au_lname, pub_name
 FROM authors CROSS JOIN publishers 
 
 -- self join 
-
+-- TODO
 
 -- Sub Query
 SELECT * FROM titles
@@ -266,17 +275,301 @@ WHERE title_id IN -- IN Keyword
 (SELECT DISTINCT title_id FROM sales)
  
 -- related subquery : repalce it with join query
-SELECT ProductName
-FROM Northwind.dbo.Products
-WHERE UnitPrice =
-(SELECT UnitPrice
-FROM Northwind.dbo.Products
-WHERE ProductName = 'Sir Rodney''s Scones')
+-- TODO
 
 
-SELECT Prd1.ProductName
-FROM Northwind.dbo.Products AS Prd1
-JOIN Northwind.dbo.Products AS Prd2
-ON (Prd1.UnitPrice = Prd2.UnitPrice)
-WHERE Prd2.ProductName = 'Sir Rodney''s Scones'
+-- select into
+-- TODO
 
+-- UNION
+
+/* ---------------------------------------------------
+A-2. Insert Statement
+
+SQL datatype in table, default value, null or not null, 
+PK-FK: Referential Integrity
+BEGIN TRAN and COMMIT TRAN
+---------------------------------------------------- */
+CREATE TABLE test1(
+	 columnA varchar(10)
+	,columnB int
+)
+GO
+INSERT INTO test1 VALUES('John',1)
+INSERT INTO test1 VALUES('Jane',2)
+INSERT INTO test1 VALUES('Wilson',3)
+
+-- TODO: Referential Integrity Test
+
+-- Insert with select
+INSERT INTO test1
+SELECT * FROM test1
+
+SELECT * FROM test1
+/* ---------------------------------------------------
+A-3. Update Statement
+
+SQL datatype in table, default value, null or not null, 
+PK-FK: Referential Integrity
+BEGIN TRAN and COMMIT TRAN
+---------------------------------------------------- */
+
+-- Before
+SELECT title_id, price, title 
+FROM titles WHERE title_id like 'BU1032'
+
+UPDATE titles
+SET price = price * 2
+WHERE title_id like 'BU1032'
+
+-- After
+SELECT title_id, price, title 
+FROM titles WHERE title_id like 'BU1032'
+
+-- Update with Select
+UPDATE titles
+SET price = price * 2
+WHERE pub_id IN
+	(SELECT pub_id
+	FROM publishers
+	WHERE pub_name = 'New Moon Books')  
+
+/* ---------------------------------------------------
+A-4. Delete Statement
+
+SQL datatype in table, default value, null or not null, 
+PK-FK: Referential Integrity
+BEGIN TRAN and COMMIT TRAN
+
+Referential Integrity
+DELETE FROM and Trancate Table
+---------------------------------------------------- */
+SELECT * FROM authors
+
+-- NOTE: PK, FK
+DELETE FROM authors
+WHERE au_lname = 'McBadden'
+
+DELETE FROM titleauthor 
+WHERE title_id IN 
+(SELECT title_id 
+FROM titles
+WHERE title LIKE '%computers%')
+
+/* ----------------------------------------------------------------------------------
+B: DDL : Data Definition Language
+1.CREATE  	2.DROP		3.ALTER	
+---------------------------------------------------------------------------------- */
+-- Data Type Confirmation
+-- SQL Object : Table,View, etc
+
+/* ---------------------------------------------------
+B-1. Create 
+---------------------------------------------------- */
+CREATE TABLE testTable(user_id int)
+
+INSERT INTO testTable VALUES(1)INSERT INTO testTable VALUES(2)
+
+SELECT * FROM testTable
+
+CREATE TABLE testTable2(
+	user_id int identity(1,1)
+	,user_content varchar(10)
+)
+INSERT INTO testTable2 VALUES('Hi')
+INSERT INTO testTable2 VALUES('I am hungry')
+--Error : Why?
+INSERT INTO testTable2 VALUES('Hi I am hungry')
+
+--Error : Why?
+INSERT INTO testTable2 VALUES(3, 'Hi')
+SELECT * FROM testTable2 
+
+/* ---------------------------------------------------
+B-2. Alter and Drop
+---------------------------------------------------- */
+ALTER TABLE testTable2 
+ALTER COLUMN user_content VARCHAR(20) NOT NULL
+GO
+
+--Error : Why?
+INSERT INTO testTable2 VALUES('Hi I am hungry')
+
+SELECT * FROM testTable2
+
+ALTER TABLE testTable2 
+ADD gender bit NULL
+GO
+-- see table info
+EXEC sp_help testTable2 
+GO
+
+ALTER TABLE testTable2 
+DROP COLUMN gender GO
+
+EXEC sp_help testTable2 GO
+
+/* ----------------------------------------------------------------------------------
+C: Data Integrity and Consistency
+*-----------------------------------------------------------------------------------*/
+
+-- Domain Integrity: per table 
+	-- column constraint
+-- Referential Integrity: between tables
+	-- PK, FK
+CREATE TABLE testTable4( 
+             Name VARCHAR(10) NOT NULL PRIMARY KEY 
+             ,Age TINYINT NULL 
+)
+
+INSERT INTO testTable4(Name, Age) VALUES('aaa', 19) 
+-- Error
+INSERT INTO testTable4(Name, Age) VALUES('aaa', 20)       
+
+--
+CREATE TABLE Role( 
+             RoleID INT NOT NULL PRIMARY KEY 
+             ,RoleName VARCHAR(10) NOT NULL 
+)
+INSERT INTO Role(RoleID , RoleName ) VALUES(1, 'admin') 
+INSERT INTO Role(RoleID, RoleName ) VALUES(2, 'guest') 
+INSERT INTO Role(RoleID, RoleName ) VALUES(3, 'member')
+
+CREATE TABLE Employee2( 
+             EmpID VARCHAR(10) NOT NULL PRIMARY KEY 
+             ,EmpName VARCHAR(10) NULL 
+             ,RoleID INT NOT NULL 
+             REFERENCES Role(RoleID ) 
+  
+)
+
+INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00001', 'aaaa', 1) 
+													
+INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00002', 'bbbb', 1) 
+													
+INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00003', 'cccc', 2) 
+													
+INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00004', 'dddd', 3) 
+
+--Error: Referential Integrity
+INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00005', 'eeee', 4) 
+
+-- Join
+SELECT e.EmpName, r.RoleName 
+FROM employee2 e INNER JOIN Role r
+ON e.RoleID = r.RoleID
+
+
+/* ----------------------------------------------------------------------------------
+D: PIVOT
+*-----------------------------------------------------------------------------------*/
+CREATE TABLE TestMember (userID char(02) PRIMARY KEY,userName varchar(20)) 
+GO
+
+CREATE TABLE TestProduct (productID char(02) PRIMARY KEY,productName varchar(20))
+
+CREATE TABLE TestOrder(orderID int PRIMARY KEY,userID char(02),productID char(02),sellCount int)
+
+INSERT INTO TestMember VALUES ('M1', 'jini')
+INSERT INTO TestMember VALUES ('M2', 'jason')
+INSERT INTO TestMember VALUES ('M3', 'boyd')
+INSERT INTO TestMember VALUES ('M4', 'Phill')
+INSERT INTO TestMember VALUES ('M5', 'Nick')
+INSERT INTO TestProduct VALUES ('P1', 'bycycle')
+INSERT INTO TestProduct VALUES ('P2', 'camera')
+INSERT INTO TestProduct VALUES ('P3', 'notebook')
+INSERT INTO TestOrder VALUES (1, 'M1', 'P1', 1)
+INSERT INTO TestOrder VALUES (2, 'M2', 'P2', 2)
+INSERT INTO TestOrder VALUES (3, 'M3', 'P1', 1)
+INSERT INTO TestOrder VALUES (4, 'M3', 'P1', 1)
+INSERT INTO TestOrder VALUES (5, 'M2', 'P3', 1)
+INSERT INTO TestOrder VALUES (6, 'M1', 'P2', 3)
+INSERT INTO TestOrder VALUES (7, 'M3', 'P1', 1)
+INSERT INTO TestOrder VALUES (8, 'M1', 'P1', 2)
+INSERT INTO TestOrder VALUES (9, 'M2', 'P3', 1)
+INSERT INTO TestOrder VALUES (10, 'M1', 'P2', 1)
+
+-- Order Count per customer
+SELECT T2.userName, T3.productName, SUM(sellCount ) Total
+FROM TestOrder T1 INNER JOIN TestMember T2 
+ON T1.userID = T2.userIDINNER JOIN TestProduct T3 
+ON T1. productID = T3. productID 
+GROUP BY T2. userName , T3. productName 
+
+-- what if we need "product column" as column and order count
+SELECT * FROM
+(
+SELECT T2. userName , T3. productName , SUM(sellCount ) Total
+FROM TestOrder T1 INNER JOIN TestMember T2 ON T1.userID = T2.userIDINNER JOIN TestProduct T3 
+ON T1. productID = T3. productID 
+GROUP BY T2. userName , T3. productName
+) TPIVOT (SUM(Total) FOR productName IN (bycycle, camera, notebook) ) 
+AS PVT
+
+/* ----------------------------------------------------------------------------------
+D: Ranking Function
+Rank
+Dens Rank
+Row Number
+Ntile
+*-----------------------------------------------------------------------------------*/
+CREATE TABLE Customer (
+CustID int,
+Name varchar(10),
+Gender char(1),
+Score int
+)
+GO
+
+INSERT INTO Customer VALUES(1, 'Gilyong', 'M', 70)
+INSERT INTO Customer VALUES(2, 'Deoken', 'M', 80)
+INSERT INTO Customer VALUES(3, 'Juyeon', 'F', 60)
+INSERT INTO Customer VALUES(4, 'Hodong', 'M', 70)
+INSERT INTO Customer VALUES(5, 'Hyori', 'F', 90)
+INSERT INTO Customer VALUES(6, 'Hani', 'F', 70)
+INSERT INTO Customer VALUES(7, 'Minsoo', 'M', 50)
+INSERT INTO Customer VALUES(8, 'MiJa', 'F', 90)
+INSERT INTO Customer VALUES(9, 'ChoiGuk', 'M', 75)
+INSERT INTO Customer VALUES(10, 'Kobong', 'M', 80)
+GO
+
+SELECT Name, Gender, Score 
+FROM Customer
+ORDER BY Score DESC
+GO
+
+SELECT Name, Gender, Score, 
+RANK() OVER(ORDER BY Score DESC) AS ScoreRank
+FROM Customer
+GO
+
+SELECT Name, Gender, Score, 
+RANK() OVER(PARTITION BY Gender ORDER BY Score DESC) AS ScoreRank
+FROM Customer
+GO
+
+SELECT Name, Gender, Score, 
+DENSE_RANK() OVER(ORDER BY Score DESC) AS ScoreRank
+FROM Customer
+GO
+
+SELECT Name, Gender, Score, 
+DENSE_RANK() OVER(PARTITION BY Gender ORDER BY Score DESC) AS ScoreRank
+FROM Customer
+GO
+
+SELECT ROW_NUMBER() OVER(ORDER BY Score DESC) AS RowNum, Name, Gender, Score
+FROM Customer
+GO
+
+SELECT ROW_NUMBER() OVER(PARTITION BY Gender ORDER BY Score DESC) AS RowNum, Name, Gender, Score
+FROM Customer
+GO
+
+SELECT NTILE(3) OVER(ORDER BY Score DESC) AS ScoreBand, Name, Gender, Score
+FROM Customer
+GO
+
+SELECT NTILE(3) OVER(PARTITION BY Gender ORDER BY Score DESC) AS ScoreBand, Name, Gender, Score
+FROM Customer
+GO
