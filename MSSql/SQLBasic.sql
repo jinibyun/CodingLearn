@@ -9,14 +9,17 @@ A-1. Simple Select Statement
 Basic use of queries and SQL functions
 --------------------------------------------------- */
 
-SELECT @@servername, @@version
 
-USE pubs
-GO
+
+SELECT @@servername, @@version
+-- SQL is NOT case sensitivie
+
+USE Pubs  -- database
+GO -- same as ;
 
 SELECT * FROM titles
 GO
-SELECT title_id, title, type FROM TITLES
+SELECT title_id, title, [type] FROM TITLES
 GO
 SELECT title_id AS bookID, title AS bookTitle, type AS bookType FROM TITLES
 GO
@@ -34,6 +37,7 @@ select * from syscolumns where id = object_id('titles')
 
 -- Declare keyword
 -- specific data type: table
+-- Always @ in front of variable
 DECLARE @T TABLE (id int, name varchar(8))
 INSERT @T values(10,'Joe')
 SELECT * FROM @T
@@ -42,7 +46,7 @@ SELECT * FROM @T
 DECLARE @T1 sql_variant, @T2 sql_variant
 set @T1 = 12345
 set @T2 = 'this is string'
-select @T1
+select @T1  
 select @T2
 
 /* sql built-in function
@@ -89,8 +93,8 @@ SELECT UPPER(au_lname) AS UpperCase FROM authors
 
 
 DECLARE @temp_string varchar(100)
-SET @temp_string = ' abcdefg'
-SELECT LTRIM(@temp_string)
+SET @temp_string = ' abcdefg '
+SELECT TRIM(@temp_string)
 
 SELECT PATINDEX('%the%', title) as firstPlaceOfString FROM titles
 
@@ -100,7 +104,7 @@ SELECT REVERSE(au_fname) FROM authors
 
 SELECT RIGHT(au_fname, 5) FROM authors
 
-SELECT au_fname, SUBSTRING(au_fname, 3, 2) FROM authors
+SELECT au_fname, SUBSTRING(au_fname, 3, 3) FROM authors
 
 /* ---------------------------------------------------
 A-1. Select Statement
@@ -108,20 +112,22 @@ A-1. Select Statement
 SELECT query with 
 
 filtering, distinct, order by, group by, join, sub Query,
-union, select into
+union, select into, top n
 ---------------------------------------------------- */
 USE pubs
 GO
 
 -- where filtering
 SELECT * FROM sales where qty > 10
-
+--                  like if
 SELECT * FROM authors WHERE zip > 90000
 
 -- string: not double quotation, but single one
 SELECT * FROM authors WHERE state = 'CA'
 
 -- NB: price = null 
+-- Null is different than empty
+-- = Null (wrong) IS NULL (right)
 SELECT title FROM titles WHERE price IS NULL
 
 SELECT title_id, ytd_sales 
@@ -132,16 +138,21 @@ SELECT title_id, ytd_sales
 FROM titles 
 WHERE ytd_sales between 4095 AND 12000
 
-SELECT title, type FROM titles 
+-- if one of the developer named the column with a space ex. Home Address. what should I do.  Put it in square bracket
+SELECT title, [type] FROM titles 
 WHERE type IN ('mod_cook', 'trad_cook')
+--same as above
+SELECT title, [type] FROM titles 
+WHERE type = 'mod_cook' or type = 'trad_cook'
 
-SELECT title, type FROM titles 
+SELECT title, [type] FROM titles 
 WHERE type NOT IN ('mod_cook', 'trad_cook')
 
-SELECT title, type FROM titles 
+SELECT title, [type] FROM titles 
 WHERE type = 'mod_cook' OR type = 'trad_cook'
 
 -- Like pattern match
+-- % any character
 SELECT stor_name FROM stores 
 WHERE stor_name LIKE '%Books%'
 
@@ -169,6 +180,8 @@ WHERE title LIKE 'T%' OR pub_id = '0877' AND (price > $16.00)
 -- TOP
 -- TODO
 
+SELECT TOP 10 * FROM titles
+
 -- Distinct
 -- compare
 SELECT au_id FROM titleauthor
@@ -192,6 +205,7 @@ ORDER BY city
 
 -- Same as above
 SELECT city, au_fname, au_lname FROM authors
+WHERE city like '%OAK%'
 ORDER BY city ASC
 
 SELECT city, au_fname, au_lname FROM authors
@@ -202,6 +216,7 @@ ORDER BY city ASC, au_fname ASC
 
 -- group by
 -- analytical data with aggregate function: sum, avg, count, min, max
+
 
 --SELECT select_list
 --FROM table_name
@@ -231,6 +246,8 @@ FROM sales
 WHERE ord_date BETWEEN '1/1/1994' AND '12/31/1994'
 GROUP BY ALL title_id
 
+
+--Normalization: process of minimizing the number of entities
 -- Join
 -- Join by identical column (Physical and Logical)
 -- Data Normalization and Denormalization with ERD
