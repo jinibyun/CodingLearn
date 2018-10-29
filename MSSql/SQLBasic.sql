@@ -2,50 +2,56 @@
 A: DML : Data MANIPULATION Language
 1. SELECT	2.INSERT	3.UPDATE	4.DELETE
 *-----------------------------------------------------------------------------------*/
-
+--
 /* --------------------------------------------------
 A-1. Simple Select Statement
 
 Basic use of queries and SQL functions
 --------------------------------------------------- */
 
-SELECT @@servername, @@version
+SELECT @@servername, @@version	-- ºÐÈ«»ö ±ÛÀÚ´Â ³»ÀåµÇ¾îÀÖ´Â ÇÔ¼ö, º¯¼ö¸¦ ³ªÅ¸³¿. @@´Â Àü¿ªº¯¼ö.
 
 USE pubs
-GO
+GO		-- GO is ';' in programming. it can be skipped.
 
 SELECT * FROM titles
 GO
-SELECT title_id, title, type FROM TITLES
+SELECT title_id, title, [type] FROM TITLES --type Å×ÀÌºí ±ÛÀÚ°¡ ÆÄ¶õ»öÀÌ¾ú´Âµ¥ Çò°¥¸± ¼ö ÀÖÀ¸´Ï []¾È¿¡ ³Ö¾î µÎ¾ú´Ù. ÇØµµ µÇ°í ¾ÈÇØµµ µÇ°í.
 GO
-SELECT title_id AS bookID, title AS bookTitle, type AS bookType FROM TITLES
+SELECT title_id AS bookID, title AS bookTitle, type AS bookType FROM TITLES		-- º¸¿©Áö´Â Column ÀÌ¸§À» ¹Ù²ã¼­ º¸¿©ÁÜ.
 GO
 -- 
 SELECT bookID=title_id, bookTitke=title, bookType=type FROM TITLES
 
 -- TIP: system stored procedure
-EXEC sp_tables
+EXEC sp_tables		-- EXECÀÌ¶ó´Â ÇÔ¼ö¸¦ È£Ãâ. ÇÔ¼öµéÀº pubs/Programmability/Functions¿¡ ÀúÀåµÇ¾î ÀÖ´Ù. Functionµé Àß ¸ð¸£°ÚÀ¸¸é ¿©±æ È®ÀÎÇÏ°Å³ª ±¸±Û¸µ
 
 select * from sysobjects where type = 'U'
 -- system sp
-sp_columns titles
+sp_columns titles		-- ÀÌ°Íµµ ÇÔ¼ö.
 
 select * from syscolumns where id = object_id('titles') 
 
 -- Declare keyword
 -- specific data type: table
-DECLARE @T TABLE (id int, name varchar(8))
-INSERT @T values(10,'Joe')
+DECLARE @T TABLE (id int, name varchar(8))	-- DCLARE´Â º¯¼ö ¼±¾ð. º¯¼ö ¾Õ¿¡´Â @¸¦ ºÙÀÌ´Â °Ô ±ÔÄ¢.
+							-- T¶ó´Â TableÀ» ¼±¾ð.
+INSERT @T values(10,'Joe')	-- record ÇÏ³ª ÀúÀå
 SELECT * FROM @T
 
 -- set keyword, sql_variant type
 DECLARE @T1 sql_variant, @T2 sql_variant
-set @T1 = 12345
+set @T1 = 12345				-- °ªÀ» Áý¾î ³ÖÀ» ¶§ setÀ» ¾´´Ù
 set @T2 = 'this is string'
-select @T1
+select @T1					-- °ªÀ» °¡Á®¿Ã ¶§ select
 select @T2
 
+DECLARE @t1001 INT		-- example
+SET @t1001 = 123456
+select @t1001
+
 /* sql built-in function
+* ¼ö°¡ Áß¿äµµ¸¦ ³ªÅ¸³¿
 ** Aggregate Functions 
 Configuration Functions
 Cursor Functions
@@ -114,15 +120,16 @@ USE pubs
 GO
 
 -- where filtering
-SELECT * FROM sales where qty > 10
+SELECT * FROM sales where qty > 10		-- where´Â if¿Í ºñ½ÁÇÔ.
 
 SELECT * FROM authors WHERE zip > 90000
 
 -- string: not double quotation, but single one
-SELECT * FROM authors WHERE state = 'CA'
+SELECT * FROM authors WHERE state = 'CA'			-- stringµµ ''·Î Ç¥ÇöÇÔ. »ç½Ç SQL¿¡¼± Char°¡ ¾ø°í ¸ðµÎ StringÀÓ
 
 -- NB: price = null 
-SELECT title FROM titles WHERE price IS NULL
+-- price = null (wrong)
+SELECT title FROM titles WHERE price IS NULL	-- price IS NOT NULL
 
 SELECT title_id, ytd_sales 
 FROM titles 
@@ -132,18 +139,26 @@ SELECT title_id, ytd_sales
 FROM titles 
 WHERE ytd_sales between 4095 AND 12000
 
+
+-- Interview Question ¡Ú¡Ú¡Ú
+-- When a stupid guy put a space in a column, then how will you handle it?  like this "Home Address"  (HomeAddress is correct)
+-- In this case, changing the name is very dangerous. do not change it, just put [ ] beside it.
+-- [Home Address]
+-- [type]
 SELECT title, type FROM titles 
 WHERE type IN ('mod_cook', 'trad_cook')
+
 
 SELECT title, type FROM titles 
 WHERE type NOT IN ('mod_cook', 'trad_cook')
 
+-- same as the first above one
 SELECT title, type FROM titles 
 WHERE type = 'mod_cook' OR type = 'trad_cook'
 
 -- Like pattern match
 SELECT stor_name FROM stores 
-WHERE stor_name LIKE '%Books%'
+WHERE stor_name LIKE '%Books%'		-- % is any character
 
 SELECT stor_name FROM stores
 WHERE stor_name LIKE 'Bo%'
@@ -156,7 +171,7 @@ WHERE stor_name LIKE 'B[^a]%'
 
 SELECT title_id, title, pub_id, price, pubdate
 FROM titles
-WHERE (title LIKE 'T%' OR pub_id = '0877') AND (price > $16.00)
+WHERE (title LIKE 'T%' OR pub_id = '0877') AND (price > $16.00)		-- °ýÈ£ºÎÅÍ ½ÇÇàÇÔ. ¿©±â¼­ OR ºÎºÐ °ýÈ£ ¾ø¾Ö¸é AND ºÎÅÍ ½ÇÇàµÊ. ¿Ö³ÄÇÏ¸é AND´Â °öÇÏ±â °³³äÀÌ¶ó. ORÀº ´õÇÏ±â °³³äÀÎ µí
 
 SELECT title_id, title, pub_id, price, pubdate
 FROM titles
@@ -164,17 +179,18 @@ WHERE (title LIKE 'T%') OR (pub_id = '0877' AND price > $16.00)
 
 SELECT title_id, title, pub_id, price, pubdate
 FROM titles
-WHERE title LIKE 'T%' OR pub_id = '0877' AND (price > $16.00)
+WHERE title LIKE 'T%' OR pub_id = '0877' AND (price > $16.00)		-- À§¿¡ ¼³¸íÇÑ´ë·Î ANDºÎÅÍ ½ÇÇàÇÔ.
 
 -- TOP
 -- TODO
+SELECT TOP 10 * FROM titles;		--º¸Åë ÇÑ±¹ »çÀÌÆ® °Ô½ÃÆÇ º¸¸é ÀÌ·±½ÄÀ¸·Î ÃÖ»óÀ§ °Ô½Ã±ÛµéÀ» Ç¥½ÃÇÔ
 
 -- Distinct
 -- compare
 SELECT au_id FROM titleauthor
-SELECT DISTINCT au_id FROM titleauthor
+SELECT DISTINCT au_id FROM titleauthor		-- DISTINCT: °ãÄ¡´Â ³»¿ëÀ» ¾ø¾Ö°í °¡Á®¿È
 
--- NOTE: text type column, image type column are not possible
+-- NOTE: text type column(over 8000 characters), image type column are not possible ¿Ö³ÄÇÏ¸é ½ÇÁ¦ µ¥ÀÌÅÍ°¡ µé¾î°¡ ÀÖ´Â°Ô ¾Æ´Ï¶ó ±×°É °¡¸®Å°´Â ¾îµå·¹½º°¡ ÀúÀåµÇ¾î ÀÖ¾î¼­.
 SELECT DISTINCT * FROM titleauthor
 SELECT * FROM titleauthor
 
@@ -185,29 +201,34 @@ Asc is "by default".
 NOTE: text type column, image type column are not possible
 */
 -- compare
-SELECT city, au_fname, au_lname FROM authors
+SELECT city, au_fname, au_lname FROM authors		-- default order is ascending
 
 SELECT city, au_fname, au_lname FROM authors
 ORDER BY city
 
 -- Same as above
-SELECT city, au_fname, au_lname FROM authors
+SELECT city, au_fname, au_lname FROM authors		--  ex) 1, 2, 3, 4 ..
 ORDER BY city ASC
 
-SELECT city, au_fname, au_lname FROM authors
+SELECT city, au_fname, au_lname FROM authors		--  ex) 4, 3, 2, 1
 ORDER BY city DESC
 
-SELECT city, au_fname, au_lname FROM authors
+SELECT city, au_fname, au_lname FROM authors			
 ORDER BY city ASC, au_fname ASC
 
+SELECT city, au_fname, au_lname FROM authors  WHERE city like '%oak%'		-- where´Â order by ¾Õ¿¡¸¸ ¿Ã ¼ö ÀÖ´Ù
+ORDER BY city ASC
+
+-- ¡Ú¡Ú¡Ú
 -- group by
 -- analytical data with aggregate function: sum, avg, count, min, max
+-- group by´Â ÀÚÃ¼ÀûÀ¸·Î distinct±â´Éµµ ÀÖ´Ù°í º¸¸é µÊ. distinct¾È ½áµµ Áßº¹Àº ¸ðµÎ Á¦°ÅÇÏ°í ±×·ìÁö¾î¼­ º¸¿©ÁÖ±â ¶§¹®
 
 --SELECT select_list
 --FROM table_name
 --[WHERE search_conditions] -- optional
---GROUP BY [ALL] aggregate_free_expression [, aggregate_free_expression…]]
---[HAVING search conditions] – optional
+--GROUP BY [ALL] aggregate_free_expression [, aggregate_free_expression?]
+--[HAVING search conditions] ?optional
 
 -- compare
 select pub_id, type, royalty, ytd_sales 
@@ -215,7 +236,7 @@ from titles
 
 select pub_id, type, royalty, ytd_sales, AVG(price)
 from titles
-GROUP BY pub_id, type, royalty, ytd_sales
+GROUP BY pub_id, type, royalty, ytd_sales	-- GROUP BY¿¡´Â SELECT¿¡ aggregate func»©°í ¸ðµç Ç×¸ñ ÀÌ»óÀÌ µé¾î°¡¾ß ÇÔ. ¾È±×·¯¸é ¿¡·¯.
 
 select type, sum(price)
 from titles
@@ -224,12 +245,22 @@ group by type
 SELECT title_id, copies_sold = SUM(qty)
 FROM sales
 GROUP BY title_id
-HAVING SUM(qty) > 20
+HAVING SUM(qty) > 20			-- HAVINGÀº Group By¸¦ ÅëÇÑ Return¿¡ ´ëÇÑ °á°ú°ª¿¡ ´ëÇÑ Á¶°Ç.  Group ByÀü¿ë WHEREÀÌ¶ó°í º¸¸é µÊ.
 
 SELECT title_id, copies_sold = SUM(qty)
 FROM sales
 WHERE ord_date BETWEEN '1/1/1994' AND '12/31/1994'
-GROUP BY ALL title_id
+GROUP BY ALL title_id			-- NULL°ªµµ °¡Á®¿Å. ALL ¾øÀ¸¸é NULL°ªµéÀº Á¦¿ÜÇÏ°í ¼öÇàÇÔ.
+
+-- Discount°¡ °¡Àå ³ôÀº DiscountTypÀ» Ãâ·Â. SubSelect »ç¿ëÇÔ ¡Ú
+SELECT discounttype, discount 
+FROM discounts 
+WHERE discount = (SELECT MAX(discount) FROM discounts)
+
+-- NormalizationÀº EntityµéÀ» Áßº¹°ªÀ» ¾ø¾Ö ÃÖÀûÈ­ ½ÃÅ°·Á°í ÃÖ¼ÒÇÑÀÇ ÀúÀå´ÜÀ§·Î ³ª´©´Â °É ¸»ÇÔ.
+-- Reciept Entity°¡ ÀÖ°í ¹°Ç° »ê »ç¶÷ Á¤º¸¶û »óÇ° ¸ðµÎ ÀûÇôÀÖÀ¸¸é ¹°°Ç µÎ°³ »ç¸é »ç¶÷ Á¤º¸°¡ µÎ¹øÀÌ³ª Áßº¹µÇ´Ï »ç¶÷ enity¿Í product entity·Î ÂÉ°³´Â °Í.
+-- DeNomalization´Â ¿¬±¸ ¸ñÀûÀ¸·Î ÂÉ°³Áø EntityµéÀ» ´Ù½Ã ÇÕÄ¡´Â °Í.
+-- SSMS¿¡¼­ ERDº¸°í ½ÍÀ¸¸é pubs/Database DIagrams¿¡¼­ ¿À¸¥ÂÊ Å¬¸¯, new DB diagramÇØ¼­ º¸¸é µÊ.
 
 -- Join
 -- Join by identical column (Physical and Logical)
@@ -273,7 +304,7 @@ WHERE title_id = (SELECT title_id FROM sales WHERE title_id like 'PS2106')
 SELECT title FROM titles
 WHERE title_id IN -- IN Keyword
 (SELECT DISTINCT title_id FROM sales)
- 
+?
 -- related subquery : repalce it with join query
 -- TODO
 
@@ -332,7 +363,7 @@ SET price = price * 2
 WHERE pub_id IN
 	(SELECT pub_id
 	FROM publishers
-	WHERE pub_name = 'New Moon Books')  
+	WHERE pub_name = 'New Moon Books') ?
 
 /* ---------------------------------------------------
 A-4. Delete Statement
@@ -424,7 +455,7 @@ CREATE TABLE testTable4(
 
 INSERT INTO testTable4(Name, Age) VALUES('aaa', 19) 
 -- Error
-INSERT INTO testTable4(Name, Age) VALUES('aaa', 20)       
+INSERT INTO testTable4(Name, Age) VALUES('aaa', 20)      ?
 
 --
 CREATE TABLE Role( 
@@ -440,7 +471,7 @@ CREATE TABLE Employee2(
              ,EmpName VARCHAR(10) NULL 
              ,RoleID INT NOT NULL 
              REFERENCES Role(RoleID ) 
-  
+?
 )
 
 INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00001', 'aaaa', 1) 
@@ -452,7 +483,7 @@ INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00003', 'cccc', 2)
 INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00004', 'dddd', 3) 
 
 --Error: Referential Integrity
-INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00005', 'eeee', 4) 
+INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00005', 'eeee', 4)?
 
 -- Join
 SELECT e.EmpName, r.RoleName 

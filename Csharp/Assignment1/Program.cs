@@ -261,12 +261,13 @@ namespace Assignment1
             // assignment: Exercise all methods of DateTime and show result using Console.WriteLine
 
             DateTime date1 = new DateTime(2018, 10, 07, 5, 00, 00);
-            DateTime date2 = new DateTime(2011, 2, 28, 2, 44, 33);
+            DateTime date2 = new DateTime(2011, 2, 28, 15, 44, 33);
             TimeSpan ts1 = new TimeSpan(10000, 10, 10, 10); // days; hours; minutes; seconds;
 
             Console.WriteLine("Date1: " + date1);
             Console.WriteLine("Date2: " + date2);
             Console.WriteLine("yyyy/MM/dd HH:mm:ss format: " + date1.ToString("yyyy/MM/dd HH:mm:ss"));
+            Console.WriteLine("yyyy/MM/dd HH:mm:ss format: " + date2.ToString("yyyy/MM/dd hh:mm"));
             Console.WriteLine("TimeSpan: " + ts1);
 
             Console.WriteLine("Add(TimeSpan): " + date1.Add(ts1));
