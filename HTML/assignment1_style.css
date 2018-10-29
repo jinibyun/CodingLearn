@@ -1,0 +1,37 @@
+﻿#all_page {
+	font-family:verdana;
+	background-color:#202020;
+	color:white;	
+}
+
+#page_center {
+	width:1080px;
+ 	margin-left:auto;
+  	margin-right:auto;	
+}
+
+#margin_horizontal_50px {	
+	margin-left: 50px;
+	margin-right: 50px
+}
+
+#text_center {	
+	text-align: center;
+}
+
+#list_icon_arrow {	
+	list-style-image:url(arrow-icon.png)
+}
+
+#width_200px {	
+	width: 200px
+}
+
+#icon {
+	width: 40px	
+}
+
+#copyright {
+	font-size: x-small;
+	text-align: center;
+}
