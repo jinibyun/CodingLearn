@@ -85,13 +85,37 @@ GROUP BY title_id
 HAVING SUM(qty) > 10
 ORDER BY title_id ASC
 
+
 SELECT DATEPART(year, ord_date) AS year, SUM(qty) AS sum
 FROM sales
 GROUP BY ord_date
 
+-- Modified 
+SELECT yr AS OrderYear, sum (su) as SumofQty
+FROM
+	(
+		SELECT DATEPART(year, ord_date) AS yr, SUM(qty) AS su
+		FROM sales
+		GROUP BY ord_date
+	)t1
+GROUP BY t1.yr
+
+
 SELECT DATEPART(year, ord_date) AS year, DATENAME(month, ord_date) AS month, SUM(qty) AS sum
 FROM sales
 GROUP BY ord_date
+
+--Modified 
+SELECT year AS OrderYear, month AS OrderMOnth, SUM (sum) as SumofQty
+FROM
+	(
+		SELECT DATEPART(year, ord_date) AS year, DATENAME (month, ord_date) AS month, SUM(qty) AS sum
+		FROM sales
+		GROUP BY ord_date
+	)t1
+GROUP BY t1.year, t1.month
+
+
 
 SELECT title_id, AVG(qty) AS avg_QTY
 FROM sales
