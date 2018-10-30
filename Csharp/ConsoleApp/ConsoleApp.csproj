@@ -47,7 +47,13 @@
     <Compile Include="Advanced\ExtensionMethodTest.cs" />
     <Compile Include="Advanced\GenericClass.cs" />
     <Compile Include="Advanced\InterfaceTest.cs" />
-    <Compile Include="Assignment\ChsarpTest.cs" />
+    <Compile Include="Assignment\CsharpTest.cs" />
+    <Compile Include="Assignment\CsharpTest2.cs" />
+    <Compile Include="Assignment\CsharpTest3.cs" />
+    <Compile Include="Assignment\Product.cs" />
+    <Compile Include="Assignment\User1.cs" />
+    <Compile Include="Assignment\User2.cs" />
+    <Compile Include="Assignment\User3.cs" />
     <Compile Include="Beginner\ArrayTest.cs" />
     <Compile Include="Intermediate\ClassTest_Basic2.cs" />
     <Compile Include="Intermediate\ClassTest_Indexer.cs" />

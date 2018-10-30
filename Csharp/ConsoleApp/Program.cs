@@ -1,10 +1,11 @@
-﻿using ConsoleApp.Assignment;
+﻿using ConsoleApp.Advanced;
+using ConsoleApp.Assignment;
 using ConsoleApp.Beginner;
 using ConsoleApp.Intermediate;
-using ConsoleApp.Advanced;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static ConsoleApp.Assignment.CsharpTest3;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,24 +15,126 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            // A. Basic - Syntax
-            // Basic();
+            //A.Basic - Syntax
+            //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            Intermediate_OOP3Characteristics();
-            // Intermediate_OtherThings();
-            // C. Advanced
-            // Advanced();         
+            //Intermediate_OOP3Characteristics();
+            //Intermediate_OtherThings();
 
-            // D. Assignment
-            // AssignmentTest();
+            // C. Advanced
+            //Advanced();     
+
+            //D.Assignment
+            AssignmentTest();
         }
 
         private static void AssignmentTest()
         {
-            var cshsarpTest = new ChsarpTest();
-            cshsarpTest.Test();
-        }
+            // Assignment1
+            //Console.WriteLine("=================== Assignment1 Test ================");
+            //var csharpTest = new CsharpTest();
+            //csharpTest.Test();
+
+            // Assignment2
+            //var csharpTest2 = new CsharpTest2();
+            //csharpTest2.Test2();
+
+            //Console.WriteLine("=================== Class Product ================");
+            //var product = new Product("Sonata", 30000, 10,"Green",'C');
+            //Console.WriteLine(string.Format("{0}:{1}:{2}:{3}:{4}", product.Name, product.Price, product.Qty,product.Color,product.KindofProduct));
+            //Console.WriteLine(product.GetCustomerData());
+            //Console.WriteLine(product.GetStatusData());
+            //Console.WriteLine(product.TotalPrice());
+            //// overloading method
+
+            //Console.WriteLine(product.TotalPrice("Sonata", 25000F));
+            //Console.WriteLine(product.TotalPrice("Sorento", 350000F, DateTime.Today ));
+            //Console.ReadLine();
+
+            // Assignment3
+
+            Console.WriteLine("== Assignm3 Start ==");
+            var csharpTest3 = new CsharpTest3();
+            Console.WriteLine("***1. Indexer  ***");
+
+            var assgnTest = new AssignTest_Indexer();
+            Console.WriteLine("Your pet's name is  " + assgnTest[4]);       // monky
+            assgnTest[4] = "minky";
+            Console.WriteLine("No, my pet's name is  " + assgnTest[4]);       //minky          
+                                                                              //Console.ReadLine();
+            Console.WriteLine("***2-3. inheritance ***");
+            Csharp csharp = new Csharp(Platform.windows);
+            csharp.name = "Csharp";
+            csharp.version = "6.0";
+            Console.WriteLine(csharp.getInfo() + " ,  Cost is " + "$" + csharp.Cost());
+
+            HTML html = new HTML(Platform.windows);
+            html.name = "HTML";
+            html.version = "5.0";
+            Console.WriteLine(html.getInfo() + " ,  Cost is " + "$" + html.Cost());
+
+            ProgrammingLanguage language = new CSS(Platform.linux);
+
+            language.name = "Javascript";
+            language.version = "1.8.5";
+            language = new Javascript(language);
+
+            Console.WriteLine(language.getInfo() + "$" + language.Cost());
+
+            //Console.ReadLine();
+
+            Console.WriteLine("*** 4-6. Interface ***");
+            Description des = new Description();
+
+            //Python script = new Python();
+            string opt = "A";
+
+            IProgrammingLanguage script = new Python();
+
+            if (opt == "A")
+            {
+                script = new Python();
+                script.GetInfo("Python");
+            }
+
+            else if (opt == "B")
+            {
+                script = new Ruby();
+                script.GetInfo("Ruby");
+            }
+            else if (opt == "C")
+            {
+                script = new Pearl();
+                script.GetInfo("Pearl");
+            }
+
+            script.Gift(des);
+            script.Credit(des);
+
+            //Console.ReadLine();
+
+            Console.WriteLine("*** 7. Static and Non-Static ***");
+            Console.WriteLine(Utility.isScriptLanguage("JavaScript"));
+            Console.WriteLine(Utility.GetYearOfCreation("Csharp").Year + "years");
+            //Console.ReadLine();
+
+            Console.WriteLine("***8. Polymorphism ***");
+            Console.WriteLine("*** overloading ***");
+            Printdata p = new Printdata();
+
+            p.print(5);
+            p.print(500.263);
+            p.print("Hello C#");
+            //Console.ReadLine();
+
+            Console.WriteLine("*** overriding ***");
+            Rectangle r = new Rectangle(10, 7);
+            double a = r.area();
+            Console.WriteLine("Area: {0}", a);
+            Console.ReadLine();
+        
+    }
 
         private static void Advanced()
         {
@@ -55,11 +158,11 @@ namespace ConsoleApp
             nameList.Add("John");
             nameList.Add("Jane");
 
-            foreach(var member in nameList)
+            foreach (var member in nameList)
             {
                 Console.WriteLine(member);
             }
-            
+
             List<decimal> decimalList = new List<decimal>();
             decimalList.Add(1.345M);
             decimalList.Add(-92.12M);
@@ -74,7 +177,7 @@ namespace ConsoleApp
             dic["aaa"] = 100;
             dic["bbb"] = 90;
 
-            foreach(var member in dic)
+            foreach (var member in dic)
             {
                 Console.WriteLine(dic[member.Key]);
             }
@@ -147,7 +250,7 @@ namespace ConsoleApp
             // 7. Extension Method
             // Similar to static method, but it is more flexible and powerful to extend functions in existing class without changing existing class
             Console.WriteLine("============= Extension Method =============");
-            string s = "This is a Test";            
+            string s = "This is a Test";
             string s2 = s.ToChangeCase();
             bool found = s.Found('z');
             Console.WriteLine(s2);
@@ -178,36 +281,29 @@ namespace ConsoleApp
             // Pre-requisite: understanding of anonymouse type, yield return, lambda expression, extension method
         }
 
-        private static void Publisher_ButtonClicked()
-        {
-            Console.WriteLine("Event Subsribed");
-        }
-
         private static void Intermediate_OOP3Characteristics()
         {
             // 1. Class basic 1
-            Console.WriteLine("=================== Class basic 1 ================");
-            var classTest = new ClassTest_Basic1("Jini", 32, 'F');
-            Console.WriteLine(string.Format("{0}:{1}:{2}", classTest.Name, classTest.Age, classTest.Gender));
-            Console.WriteLine(classTest.GetCustomerData());
+            //Console.WriteLine("=================== Class basic 1 ================");
+            //var classTest = new ClassTest_Basic1("Jini", 32, 'F');
+            //Console.WriteLine(string.Format("{0}:{1}:{2}", classTest.Name, classTest.Age, classTest.Gender));
+            //Console.WriteLine(classTest.GetCustomerData());
 
             // event
-            // event subscription :  +=
+            // event subscription : +=
             //classTest.NameChanged += ClassTest_NameChanged;
             //classTest.BalanceChanged += ClassTest_BalanceChanged;
-            classTest.Name = "Jane";
+            //classTest.Name = "Jane";
 
             // overloading method
-            Console.WriteLine(classTest.Foo(1D));
-            Console.WriteLine(classTest.Foo(1));
-            Console.WriteLine(classTest.Foo(1F, 2));
-            Console.WriteLine(classTest.Foo(2, 1F));
+            //Console.WriteLine(classTest.Foo(1D));
+            //Console.WriteLine(classTest.Foo(1));
+            //Console.WriteLine(classTest.Foo(1F, 2));
+            //Console.WriteLine(classTest.Foo(2, 1F));
 
             // 2. Class basic 2 Encapsulation
             Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
-
-            var classTest_Basic2 = new ClassTest_Basic2  { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
-
+            var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
             Console.WriteLine(classTest_Basic2.Worth);
             Console.WriteLine(classTest_Basic2.BenchmarkPrice);
             Console.WriteLine(classTest_Basic2.BenchmarkShare);
@@ -218,13 +314,13 @@ namespace ConsoleApp
             Console.WriteLine(classTest2[3]);       // fox
             classTest2[3] = "kangaroo";
             Console.WriteLine(classTest2[3]);       // kangaroo           
-
+            Console.ReadLine();
             // partial class and partial method
             // only explanation
 
             // 4. Class Inheritance
             Console.WriteLine("====== OOP characteristic 2 of 3: Class Inheritance  ======");
-            Stock msft = new Stock { Name = "MSFT", SharesOwned = 1000 };
+            Stock msft = new Stock { SharesOwned = 1000, Name ="aaa"  };
 
             Console.WriteLine(msft.Name);         // MSFT
             Console.WriteLine(msft.SharesOwned);  // 1000
@@ -243,7 +339,6 @@ namespace ConsoleApp
             Asset a = msft2;
 
             // After the upcast, the two variables still references the same Stock object:
-            Console.WriteLine("Data Type Comparison: ");
             Console.WriteLine(a == msft2);  // True
 
             // A downcast operation creates a subclass reference from a base class reference.
@@ -284,11 +379,10 @@ namespace ConsoleApp
 
         private static void ClassTest_BalanceChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("=======EVENT HANDLING =======");
+            Console.WriteLine("====Event Test===");
             Console.WriteLine((decimal)sender);
-            Console.WriteLine("=======================");
+            Console.WriteLine("====Event Test===");
         }
-
         private static void Intermediate_OtherThings()
         {
             // 1. Static Class
@@ -309,97 +403,94 @@ namespace ConsoleApp
         private static void Basic()
         {
             // 1. DataType
-            Console.WriteLine("=================== Data Type ================");
-            var dt = new DataType();
-            dt.Test();
+            //Console.WriteLine("=================== Data Type ================");
+            //var dt = new DataType();
+            //dt.Test();
 
             // 2. Variable And Constant
-            Console.WriteLine("=================== Variable & Constant ================");
-            var vnc = new VariableAndConstant();
-            vnc.Test();
+            //Console.WriteLine("=================== Variable & Constant ================");
+            //var vnc = new VariableAndConstant();
+            //vnc.Test();
 
             // 3. Array
-            Console.WriteLine("=================== Array ================");
-            var arr = new ArrayTest();
-            arr.Test();
+            //Console.WriteLine("=================== Array ================");
+            //var arr = new ArrayTest();
+            //arr.Test();
 
-            // 4. String
-            Console.WriteLine("=================== String ================");
-            var strTest = new StringTest();
-            strTest.Test();
+            //// 4. String
+            //Console.WriteLine("=================== String ================");
+            //var strTest = new StringTest();
+            //strTest.Test();
 
-            // 5. Enum
-            Console.WriteLine("=================== Enum ================");
-            var enumTest = new EnumTest();
-            enumTest.Test();
+            //// 5. Enum 정수형 data의 변환 (value type) class 바깥에 설정
+            //Console.WriteLine("=================== Enum ================");
+            //var enumTest = new EnumTest();
+            //enumTest.Test();
 
-            // 6. Operator
-            Console.WriteLine("=================== Operator ================");
-            var operatorTest = new OperatorTest();
-            operatorTest.Test();
+            //// 6. Operator
+            //Console.WriteLine("=================== Operator ================");
+            //var operatorTest = new OperatorTest();
+            //operatorTest.Test();
 
-            // 7. If
-            Console.WriteLine("=================== If ================");
-            var ifTest = new IfTest();
-            ifTest.Test();
+            //// 7. If
+            //Console.WriteLine("=================== If ================");
+            //var ifTest = new IfTest();
+            //ifTest.Test();
+            //Console.ReadLine();
+            //// 8. loop
+            //Console.WriteLine("=================== Loop ================");
+            //var loopTest = new LoopTest();
+            //loopTest.Test();
+            //Console.ReadLine();
+            //// 9. yield keword: when collection data can be returned one by one in turn
+            //Console.WriteLine("=================== yield return ================");
+            //var yieldReturnTest = new yieldTest();
+            //yieldReturnTest.Test();
 
-            // 8. loop
-            Console.WriteLine("=================== Loop ================");
-            var loopTest = new LoopTest();
-            loopTest.Test();
+            //// 10. Exception
+            //Console.WriteLine("=================== Exception ================");
+            //var exceptionTest = new ExceptionTest();
+            //exceptionTest.Test(0, 0);
 
-            // 9. yield keword: when collection data can be returned one by one in turn
-            Console.WriteLine("=================== yield return ================");
-            var yieldReturnTest = new yieldTest();
-            yieldReturnTest.Test();
+            //// 11. Struct
+            //Console.WriteLine("=================== Struct ================");
+            //var structTest = new StructTest();
+            //structTest.ToString();
 
-            // 10. Exception
-            Console.WriteLine("=================== Exception ================");
-            var exceptionTest = new ExceptionTest();
-            exceptionTest.Test(0, 0);
-
-            // 11. Struct
-            Console.WriteLine("=================== Struct ================");
-            var structTest = new StructTest();
-            structTest.ToString();
-
-            // 12. Nullable
-            Console.WriteLine("=================== Nullable ================");
-            var nullableTest = new NullableTest();
-            nullableTest.Test(null, null, DateTime.Now, null);
-
-            // 13. Method
+            //// 12. Nullable
+            //Console.WriteLine("=================== Nullable ================");
+            //var nullableTest = new NullableTest();
+            //nullableTest.Test(null, null, DateTime.Now, null);
+            //
+            //// 13. Method
             Console.WriteLine("=================== Method ================");
             var methodTest = new MethodTest();
-            // 13-1
+            //// 13-1
             int val = 1000;
             methodTest.TestPassByValue(val);
-
             Console.WriteLine("variable val's value is not changed: {0}", val);
-            // 13-2
-            int x = 0;
+            //// 13-2
+            int x = 1;
             double y = 1.0;
             double ret = methodTest.TestPassByRef(ref x, ref y);
             Console.WriteLine("variable val's value is actually changed: x: {0} y: {1}", x, y);
-
-            Console.WriteLine(x);
-            Console.WriteLine(y);
-            
-            // 13-3
+            Console.ReadLine();
+            //// 13-3
             int c, d;
             bool bret = methodTest.TestPassByOut(10, 20, out c, out d);
             Console.WriteLine("variable val's value is actually changed: c: {0} d: {1}", c, d);
 
-            // differenc between ref keyword and out keyword 
+            //// differenc between ref keyword and out keyword 
 
-            // 13-4.
+            //// 13-4.
             var returnValue = methodTest.TestDefaultParam(1, 2);
             Console.WriteLine("Default parameter test: " + returnValue);
-            var returnValue2 = methodTest.TestDefaultParam(1, 2, "-----");
 
-            // 13-5.            
-            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4,5,6,7,8,9,10);
+            //// 13-5.            
+            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4);
             Console.WriteLine("params keyword test: " + returnParamsValue);
+            Console.ReadLine();
+
         }
 
         private static void ClassTest_NameChanged(object sender, EventArgs e)
@@ -407,5 +498,6 @@ namespace ConsoleApp
             var obj = (ClassTest_Basic1)sender;
             Console.WriteLine(obj.GetCustomerData());
         }
+
     }
 }

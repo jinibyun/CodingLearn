@@ -8,6 +8,7 @@ namespace ConsoleApp.Beginner
 {
     // value type and reference type
     // diff between stuct and class
+    // 복합 data저장소 (value type)
     public struct StructTest
     {
         public int X;

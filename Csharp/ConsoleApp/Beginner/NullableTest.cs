@@ -10,6 +10,7 @@ namespace ConsoleApp.Beginner
     {
         // All referenc type does not need to be nullable because it is originally allowed type of null.
         // Therefore, all value type needs to have nullable
+        // && and, || or , ! not, ?? null check
         double _Sum = 0;
         DateTime _Time;
         bool? _Selected;
@@ -27,6 +28,14 @@ namespace ConsoleApp.Beginner
 
             // often used with ?? operator
             this._Selected = selected ?? false;
+
+            //same as above
+            if (selected.HasValue)
+                this._Selected = selected;
+            else
+                this._Selected = false;
+            //same as above
+            this._Selected = selected.HasValue ? selected.HasValue : false;
         }        
     }
 }

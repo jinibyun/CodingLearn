@@ -23,6 +23,7 @@ namespace ConsoleApp.Beginner
             Console.WriteLine("String: {0}", s3);
 
             // substring
+           
             string s3substring = s3.Substring(1, 5);
             Console.WriteLine("Substring: {0}", s3substring);
 
@@ -64,6 +65,8 @@ namespace ConsoleApp.Beginner
                 sb.Append(i.ToString());
                 sb.Append(System.Environment.NewLine);
             }
+
+            
             string sbstring = sb.ToString();
 
             Console.WriteLine(sbstring);
