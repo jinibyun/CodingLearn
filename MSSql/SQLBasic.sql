@@ -11,14 +11,14 @@ Basic use of queries and SQL functions
 
 SELECT @@servername, @@version
 
-USE pubs
-GO
+USE pubs;
+
 
 SELECT * FROM titles
 GO
 SELECT title_id, title, type FROM TITLES
 GO
-SELECT title_id AS bookID, title AS bookTitle, type AS bookType FROM TITLES
+SELECT title_id AS bookID, title AS bookTitle, [type] AS bookType FROM TITLES
 GO
 -- 
 SELECT bookID=title_id, bookTitke=title, bookType=type FROM TITLES
@@ -34,10 +34,10 @@ select * from syscolumns where id = object_id('titles')
 
 -- Declare keyword
 -- specific data type: table
+
 DECLARE @T TABLE (id int, name varchar(8))
 INSERT @T values(10,'Joe')
 SELECT * FROM @T
-
 -- set keyword, sql_variant type
 DECLARE @T1 sql_variant, @T2 sql_variant
 set @T1 = 12345
@@ -108,7 +108,7 @@ A-1. Select Statement
 SELECT query with 
 
 filtering, distinct, order by, group by, join, sub Query,
-union, select into
+union, select into,top n
 ---------------------------------------------------- */
 USE pubs
 GO
@@ -121,7 +121,8 @@ SELECT * FROM authors WHERE zip > 90000
 -- string: not double quotation, but single one
 SELECT * FROM authors WHERE state = 'CA'
 
--- NB: price = null 
+-- NB: price = null (wrong)
+-- price is null or price is not null ·Î Ç¥Çö
 SELECT title FROM titles WHERE price IS NULL
 
 SELECT title_id, ytd_sales 
@@ -132,13 +133,17 @@ SELECT title_id, ytd_sales
 FROM titles 
 WHERE ytd_sales between 4095 AND 12000
 
-SELECT title, type FROM titles 
-WHERE type IN ('mod_cook', 'trad_cook')
+SELECT title, [type] FROM titles 
+WHERE [type] IN ('mod_cook', 'trad_cook')
 
-SELECT title, type FROM titles 
+-- same as avove
+SELECT title, [type] FROM titles 
+WHERE [type] = 'mod_cook' or [type] = 'trad_cook'
+
+SELECT title, [type] FROM titles 
 WHERE type NOT IN ('mod_cook', 'trad_cook')
 
-SELECT title, type FROM titles 
+SELECT title, [type] FROM titles 
 WHERE type = 'mod_cook' OR type = 'trad_cook'
 
 -- Like pattern match
@@ -169,8 +174,11 @@ WHERE title LIKE 'T%' OR pub_id = '0877' AND (price > $16.00)
 -- TOP
 -- TODO
 
+select top 10 * from titles
+
 -- Distinct
 -- compare
+
 SELECT au_id FROM titleauthor
 SELECT DISTINCT au_id FROM titleauthor
 
@@ -195,6 +203,7 @@ SELECT city, au_fname, au_lname FROM authors
 ORDER BY city ASC
 
 SELECT city, au_fname, au_lname FROM authors
+WHERE city like '%o'
 ORDER BY city DESC
 
 SELECT city, au_fname, au_lname FROM authors
@@ -206,8 +215,8 @@ ORDER BY city ASC, au_fname ASC
 --SELECT select_list
 --FROM table_name
 --[WHERE search_conditions] -- optional
---GROUP BY [ALL] aggregate_free_expression [, aggregate_free_expression…]]
---[HAVING search conditions] – optional
+--GROUP BY [ALL] aggregate_free_expression [, aggregate_free_expression?]
+--[HAVING search conditions] ?optional
 
 -- compare
 select pub_id, type, royalty, ytd_sales 
@@ -221,11 +230,13 @@ select type, sum(price)
 from titles
 group by type
 
+-- HAVING : GROUP BY ¿¡ ÀÇÇÑ °á°ú°ª¿¡ ´ëÇÑ Á¶°Ç
 SELECT title_id, copies_sold = SUM(qty)
 FROM sales
 GROUP BY title_id
 HAVING SUM(qty) > 20
 
+-- GROUP BY ALL :NULLµµ °¡Á®¿È
 SELECT title_id, copies_sold = SUM(qty)
 FROM sales
 WHERE ord_date BETWEEN '1/1/1994' AND '12/31/1994'
@@ -273,7 +284,7 @@ WHERE title_id = (SELECT title_id FROM sales WHERE title_id like 'PS2106')
 SELECT title FROM titles
 WHERE title_id IN -- IN Keyword
 (SELECT DISTINCT title_id FROM sales)
- 
+?
 -- related subquery : repalce it with join query
 -- TODO
 
@@ -332,7 +343,7 @@ SET price = price * 2
 WHERE pub_id IN
 	(SELECT pub_id
 	FROM publishers
-	WHERE pub_name = 'New Moon Books')  
+	WHERE pub_name = 'New Moon Books') ?
 
 /* ---------------------------------------------------
 A-4. Delete Statement
@@ -424,7 +435,7 @@ CREATE TABLE testTable4(
 
 INSERT INTO testTable4(Name, Age) VALUES('aaa', 19) 
 -- Error
-INSERT INTO testTable4(Name, Age) VALUES('aaa', 20)       
+INSERT INTO testTable4(Name, Age) VALUES('aaa', 20)      ?
 
 --
 CREATE TABLE Role( 
@@ -440,7 +451,7 @@ CREATE TABLE Employee2(
              ,EmpName VARCHAR(10) NULL 
              ,RoleID INT NOT NULL 
              REFERENCES Role(RoleID ) 
-  
+?
 )
 
 INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00001', 'aaaa', 1) 
@@ -452,7 +463,7 @@ INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00003', 'cccc', 2)
 INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00004', 'dddd', 3) 
 
 --Error: Referential Integrity
-INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00005', 'eeee', 4) 
+INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00005', 'eeee', 4)?
 
 -- Join
 SELECT e.EmpName, r.RoleName 

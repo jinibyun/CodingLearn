@@ -23,10 +23,10 @@ namespace ConsoleApp
             //Intermediate_OtherThings();
 
             // C. Advanced
-            //Advanced();     
+            Advanced();     
 
             //D.Assignment
-            AssignmentTest();
+            //AssignmentTest();
         }
 
         private static void AssignmentTest()
@@ -214,7 +214,7 @@ namespace ConsoleApp
             // 3. similarity between abstract class and interface
             // 4. why interface?
 
-            // 4. delegate
+            // 4. delegate  : Method의  address를 가지고 있는 DATA TYPE
             Console.WriteLine("============= delegate =============");
             var delegateTest = new DelegateTest();
             delegateTest.Test1();
@@ -222,16 +222,16 @@ namespace ConsoleApp
             delegateTest.Test3();
             delegateTest.Test4("anonymous"); // anonymous delegate (Lambda Expression)            
 
-            // 5. Event
+            // 5. Event  : delegate type으로 정의된 
             Console.WriteLine("============= event =============");
             var publisher = new Publisher();
-            // Event Handling
+            // Event Handling  : event + delegate + event handler
             // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);            
             // antoher way 1
             // publisher.ButtonClicked += Publisher_ButtonClicked;
             // antoher way 2: anonymouse method: other method does not need to be defined
             // publisher.ButtonClicked += delegate () { Console.WriteLine("Event Subscribed"); };
-            // another way 3: lambda expression: very similar to anonymous method but a bit more convinient way
+            // another way 3: lambda expression: very similar to anonymous method but a bit more convinient way(goto Operator)
             publisher.ButtonClicked += () => { Console.WriteLine("Event Subscribed"); };
 
             publisher.Test();
