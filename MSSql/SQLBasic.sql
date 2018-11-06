@@ -1,6 +1,8 @@
 /* ----------------------------------------------------------------------------------
 A: DML : Data MANIPULATION Language
 1. SELECT	2.INSERT	3.UPDATE	4.DELETE
+
+	Table Records 관련
 *-----------------------------------------------------------------------------------*/
 --
 /* --------------------------------------------------
@@ -262,57 +264,119 @@ WHERE discount = (SELECT MAX(discount) FROM discounts)
 -- DeNomalization는 연구 목적으로 쪼개진 Entity들을 다시 합치는 것.
 -- SSMS에서 ERD보고 싶으면 pubs/Database DIagrams에서 오른쪽 클릭, new DB diagram해서 보면 됨.
 
--- Join
+
+
+-- Join ★★★
 -- Join by identical column (Physical and Logical)
 -- Data Normalization and Denormalization with ERD
 -- INNER JOIN / OUTER JOIN / CROSS JOIN/ SELF JOIN
 
+-- if you wanna see a diagram, please see 'Database Diagrams' on Object Explorer, or view dependencies by right clicking on a table
+
 SELECT * from authors
 SELECT * FROM publishers
+
+
+-- inner join
+-- 테이블 두 개, ○와 ○가 있으면 서로 겹치는 부분만 가져옮.
+-- ex) t1: 1, 2, 3, 4; t2: 3, 4, 5, 6 이면 3, 4 겹치는 부분만 가져옮.
 
 SELECT *
 FROM authors AS a INNER JOIN publishers AS p
 ON a.city = p.city
 
+--표준형식
 -- ANSI Syntax
 SELECT pub_name, title
-FROM titles INNER JOIN publishers
-ON titles.pub_id = publishers.pub_id
+FROM titles t1 INNER JOIN publishers t2
+ON titles.pub_id = publishers.pub_id	-- On equality condition
+WHERE t1.price > 20
+
+
+--마이크로소프트가 뭔가 만든 건데 위에걸 추천
 -- T-SQL Syntax
 SELECT authors.au_lname, authors.state, publishers.*
 FROM publishers, authors
 WHERE publishers.city = authors.city
 
+
+
 -- outer join
+-- innerjoing + 칼럼값이 같지 않은 부분들까지 SELECT. 칼럼값 존재하지 않으면 null로 가져옴.
+-- LEFT는 왼쪽에 쓰인 테이블의 모든 레코드를 가져옮. 오른쪽 테이블과 겹치든 안겹치든. RIGHT는 그 반대.
+-- 근데 실제로는 사람들이 RIGHT 쓰기 귀찮아서 차라리 Table이름들 순서만 바꿔서 사용함.
+-- ex) LEFT OUTER JOIN 하나도 안 팔린 책을 가져올 때 outer join 사용. 안팔린 책들은 팔린 history저장한 테이블에 기록이 없으니.
+-- ex) RIGHT의 경우 사실 없는 책을 팔 순 없으니 null값이 안나옮.
 SELECT title, stor_id, ord_num, qty, ord_date
 FROM titles LEFT OUTER JOIN sales
 ON titles.title_id = sales.title_id
+
+
+-- 다음에 설명. written in 2018/10/31
 -- cross join
 SELECT au_fname, au_lname, pub_name
 FROM authors CROSS JOIN publishers 
 
 -- self join 
 -- TODO
+select t1.* from titleauthor t1 order by t1.title_id asc
+-- same as the below. 테이블 하나를 두개로 나눠서 조인한 것처럼 보임. 아래는 두번씩 중복되는 데 위의 셀프조인은 중복은 안보여 주는 듯.
+select t1.* from titleauthor t1 INNER JOIN titleauthor t2 ON t1.title_id = t2.title_id order by t1.title_id asc
 
 -- Sub Query
 SELECT * FROM titles
 WHERE title_id IN (SELECT title_id FROM sales)
+-- 아래와 같다고 보면 됨
+	SELECT * FROM titles
+	WHERE title_id IN ('BU1032', 'BU1111', 'BU2075', '.........')
 
+
+-- 참고지식: =로 컨디션을 넣을 때 비교대상은 무조건 하나여야 함.
+-- 두개 이상이 될 것 같으면 위나 그 아래의 예제처럼 IN (값1, 값2) 이렇게 넣어야함.
+-- 아래 sub query는 그것의 결과값이 하나뿐이라 작동함.
 SELECT * FROM titles
 WHERE title_id = (SELECT title_id FROM sales WHERE title_id like 'PS2106')
 
 SELECT title FROM titles
 WHERE title_id IN -- IN Keyword
 (SELECT DISTINCT title_id FROM sales)
-?
+
 -- related subquery : repalce it with join query
 -- TODO
 
 
--- select into
+-- select into: create a table from another table
+-- 실제로 sales2라는 테이블은 없는데 만들어서 SELECT 값을 모두 넣음
+-- 실행 후 DB refresh하면 새로 생성된 sales2를 볼 수 있음.
+SELECT * 
+INTO sales2
+FROM sales
+
+Select * FROM sales2
+DROP TABLE sales2
 -- TODO
 
+
+
+
 -- UNION
+-- 두 테이블의 records를 모두 합침. Row 기준으로.
+-- 조건: record의 column 수가 같아야함.
+
+
+-- Interview question: What is different between UNION and UNION ALL? ★★
+-- A: UNION은 UNIQUE일 경우 중복되는 애들은 추가 안하고 중복 안되는 애들만 포함해서 모두 합침.
+--	  UNION ALL은 UNIQUE든 아니든 모두 합쳐서 결과를 냄. 중복 가능.
+-- EX
+Select * FROM sales t1
+UNION ALL
+Select * FROM sales2 t2
+-- 둘의 stor_id가 Unique속성이라 중복되서 합쳐서 42줄이 아니라 21줄이 나옴.
+-- UNION ALL을 사용하면 총 42줄이 됨.
+
+-- Another Interview question:
+--  최상위 2개만 select
+SELECT TOP 2 * FROM sales t1 order by t1.qty 
 
 /* ---------------------------------------------------
 A-2. Insert Statement
@@ -322,17 +386,66 @@ PK-FK: Referential Integrity
 BEGIN TRAN and COMMIT TRAN
 ---------------------------------------------------- */
 CREATE TABLE test1(
-	 columnA varchar(10)
+	 columnA varchar(10)	-- column name, type
 	,columnB int
 )
 GO
+
 INSERT INTO test1 VALUES('John',1)
 INSERT INTO test1 VALUES('Jane',2)
 INSERT INTO test1 VALUES('Wilson',3)
+DROP TABLE test1;
 
--- TODO: Referential Integrity Test
+
+-- TODO: Referential Integrity Test ★★★★★★
+-- Interview Question: Referential Integrity 설명하라. 그럼 무조건 PK, FK가 답으로 나와야 함
+-- 참조받는 PK를 갖고 있는 테이블이 부모 테이블이고 FK가 있는 테이블이 자식 테이블임.
+-- Integrity란 무결성을 뜻함. 쓰레기 데이터가 있으면 안됨. 쓰레기데이터 입력 예방해야함. 
+-- 1st Integrity: FK에 존재하지 PK키가 입력되면 제한함.
+-- 2nd Integrity: 참조받는 PK를 지울 수 없음.
+-- Relational Database 관련 문제가 나오면 이거 꼭 나옴.
+
+CREATE TABLE Category(
+	 id int PRIMARY KEY		-- Primary Key: not null, not duplicate
+	,name nvarchar(50)
+	-- varchar: varchar(1)이면 1바이트. 한 글자에 1바이트만 할당되기에 기본적으로 정해진 1바이트짜리 글자들밖에 못들어감.
+	-- nvarchar: nvarchar(1)이면 2바이트 할당됨. 한 글자를 무조건 2바이트로 보고 할당함. 한글이나 한자 등 영어가 아닌 글도 저장하기에 좋음.
+)
+GO
+
+CREATE TABLE Product(
+	CategoryId int
+	, id int PRIMARY KEY		-- Primary Key: not null, not duplicate
+	,name nvarchar(50)
+)
+GO
+
+INSERT INTO Category(id, name) VALUES (1, 'Electronic' );
+INSERT INTO Category(id, name) VALUES (2, 'Home');
+INSERT INTO Product(CategoryID, id, name) VALUES (1, 1, 'Smartphone' );
+INSERT INTO Product(CategoryId, id, name) VALUES (2, 2, 'Humidifier');
+INSERT INTO Product(CategoryId, id, name) VALUES (1, 3, 'Laptop');
+-- PK, FK relationship through using GUI: Table Designer tab > Relationship Icon button
+
+SELECT t1.name as 'category', t2.name as 'product' from Category t1 inner join Product t2 on t1.id = t2.CategoryId;
+
+INSERT INTO Product(CategoryId, id, name) VALUES (3, 4, 'Laptop');
+
+
+SELECT * FROM Category
+GO
+SELECT * FROM Product
+GO
+
+DROP TABLE Category, Product;
+
+
+
+
+
 
 -- Insert with select
+-- Insert records into a table from Select records from another table.
 INSERT INTO test1
 SELECT * FROM test1
 
@@ -363,7 +476,7 @@ SET price = price * 2
 WHERE pub_id IN
 	(SELECT pub_id
 	FROM publishers
-	WHERE pub_name = 'New Moon Books') ?
+	WHERE pub_name = 'New Moon Books')
 
 /* ---------------------------------------------------
 A-4. Delete Statement
@@ -375,6 +488,14 @@ BEGIN TRAN and COMMIT TRAN
 Referential Integrity
 DELETE FROM and Trancate Table
 ---------------------------------------------------- */
+SELECT * FROM Category 
+SELECT * FROM Product 
+
+DELETE FROM Category	-- Interview Question ★★ Delete 하나만 있으면 Record를 지움.
+WHERE id = 1
+
+
+
 SELECT * FROM authors
 
 -- NOTE: PK, FK
@@ -392,7 +513,8 @@ B: DDL : Data Definition Language
 1.CREATE  	2.DROP		3.ALTER	
 ---------------------------------------------------------------------------------- */
 -- Data Type Confirmation
--- SQL Object : Table,View, etc
+-- SQL Object : Table, View, etc
+-- DB의 Object 관련으로만.. DML (Data Manipulation Language) 위에 한 A파트는 DB의 Record 관련
 
 /* ---------------------------------------------------
 B-1. Create 
@@ -408,13 +530,12 @@ CREATE TABLE testTable2(
 	,user_content varchar(10)
 )
 INSERT INTO testTable2 VALUES('Hi')
-INSERT INTO testTable2 VALUES('I am hungry')
---Error : Why?
+--Error : Why?				 vchar(10)인데 10글자 넘어가서 truncated, 즉 잘려버림.
 INSERT INTO testTable2 VALUES('Hi I am hungry')
 
---Error : Why?
+--Error : Why?				 Identity 설정된 user_id를 직접 입력할 수 없음. 자동생성되기 때문에
 INSERT INTO testTable2 VALUES(3, 'Hi')
-SELECT * FROM testTable2 
+SELECT * FROM testTable2	
 
 /* ---------------------------------------------------
 B-2. Alter and Drop
@@ -423,7 +544,7 @@ ALTER TABLE testTable2
 ALTER COLUMN user_content VARCHAR(20) NOT NULL
 GO
 
---Error : Why?
+--Error : Why work?		Solved after Alter the data type VARCHAR(10) to VARCHAR(20)
 INSERT INTO testTable2 VALUES('Hi I am hungry')
 
 SELECT * FROM testTable2
@@ -449,29 +570,28 @@ C: Data Integrity and Consistency
 -- Referential Integrity: between tables
 	-- PK, FK
 CREATE TABLE testTable4( 
-젨젨젨젨젨젨 Name VARCHAR(10) NOT NULL PRIMARY KEY 
-젨젨젨젨젨젨 ,Age TINYINT NULL 
+       Name VARCHAR(10) NOT NULL PRIMARY KEY 
+       ,Age TINYINT NULL 
 )
 
 INSERT INTO testTable4(Name, Age) VALUES('aaa', 19) 
 -- Error
-INSERT INTO testTable4(Name, Age) VALUES('aaa', 20)젨젨젨?
+INSERT INTO testTable4(Name, Age) VALUES('aaa', 20)
 
 --
 CREATE TABLE Role( 
-젨젨젨젨젨젨 RoleID INT NOT NULL PRIMARY KEY 
-젨젨젨젨젨젨 ,RoleName VARCHAR(10) NOT NULL 
+       RoleID INT NOT NULL PRIMARY KEY 
+       ,RoleName VARCHAR(10) NOT NULL 
 )
 INSERT INTO Role(RoleID , RoleName ) VALUES(1, 'admin') 
 INSERT INTO Role(RoleID, RoleName ) VALUES(2, 'guest') 
 INSERT INTO Role(RoleID, RoleName ) VALUES(3, 'member')
 
 CREATE TABLE Employee2( 
-젨젨젨젨젨젨 EmpID VARCHAR(10) NOT NULL PRIMARY KEY 
-젨젨젨젨젨젨 ,EmpName VARCHAR(10) NULL 
-젨젨젨젨젨젨 ,RoleID INT NOT NULL 
-젨젨젨젨젨젨 REFERENCES Role(RoleID ) 
-?
+       EmpID VARCHAR(10) NOT NULL PRIMARY KEY 
+       ,EmpName VARCHAR(10) NULL 
+       ,RoleID INT NOT NULL 
+       REFERENCES Role(RoleID ) 
 )
 
 INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00001', 'aaaa', 1) 
@@ -483,7 +603,7 @@ INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00003', 'cccc', 2)
 INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00004', 'dddd', 3) 
 
 --Error: Referential Integrity
-INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00005', 'eeee', 4)?
+INSERT INTO Employee2(EmpID, EmpName, RoleID) VALUES('00005', 'eeee', 4)
 
 -- Join
 SELECT e.EmpName, r.RoleName 

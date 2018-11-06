@@ -19,10 +19,10 @@ namespace ConsoleApp
             //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-            //Intermediate_OOP3Characteristics();
+            Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
             // C. Advanced
-            Advanced();
+            //Advanced();
 
             // D. Assignment
             // AssignmentTest();
@@ -208,6 +208,15 @@ namespace ConsoleApp
 
             // 8. async and await
             /*
+            Asynchronous: anti-synchronous: 싱크로 아님.
+            쓰레드가 2개 이상이 있고 서로 기다리지 않고 일을 따로따로 수행하다 어느 한지점에서 서로 결과를 공유.
+            ex) 웹에 파일 업로드하면서 다른 기능도 사용.
+                만약 Synchronous라면 업로드시간이 1시간이면 업로드하는 동안 다른 걸 아무것도 못함.
+
+
+
+
+            
             Asynchronous Programming
             1. async: let compiler to know that the method has await
             2. more than one "await" can be included. Actually no awit is allowed, but warning comes up.

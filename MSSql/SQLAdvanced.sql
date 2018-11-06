@@ -7,6 +7,7 @@ VIEW, STORED PROCEDURE, FUNCTION
 
 /* --------------------------------------------------
 A-1. VIEW
+	°¡»óÀÇ Å×ÀÌºí
 --------------------------------------------------- */
 CREATE VIEW vTitleAuthorPublisher
 AS
@@ -15,32 +16,56 @@ FROM titles INNER JOIN titleauthor ON titles.title_id = titleauthor.title_id
 INNER JOIN authors ON titleauthor.au_id = authors.au_id
 INNER JOIN publishers ON titles.pub_id = publishers.pub_id
 GO
+DROP VIEW vTitleAuthorPublisher GO
 
 select * from vTitleAuthorPublisher
 sp_helptext vTitleAuthorPublisher 
 
 /* --------------------------------------------------
 A-2. STORED PROCEDURE
+	Function°ú ºñ½Á
+	ÀúÀåµÈ PROCEDURE È®ÀÎÇÏ·Á¸é Object Explorer > DB > Programmability > Stored Procedures
 --------------------------------------------------- */
-CREATE PROC uspGetPricePerBook
+-- PROC: Procedure. PROCEDURE ½áµµ °¡´É
+-- PROCEDURE°¡ VIEW°¡ ÇÏ´Â °Í ¿Ü¿¡ ´Ù¸¥ ¸¹Àº °Íµéµµ ÇÒ ¼ö ÀÖ¾î¼­ º¸Åë PROCEDURE ¾¸
+
+CREATE PROC uspGetPricePerBook	
 AS
 SELECT pub_id, type, royalty, ytd_sales, AVG(price) 
 FROM titlesGROUP BY pub_id, type, royalty, ytd_sales
-GO 
+GO
+
+DROP PROC uspGetPricePerBook GO
+
+-- EXEC: Execute. ¹°·Ð EXECUTEµµ °¡´É
+EXEC uspGetPricePerBook
 
 
 -- 1 create
-CREATE PROC uspGetTitleWithPrice 
-@v_price int
+DROP PROC uspGetTitleWithPrice
+
+CREATE PROC uspGetTitleWithPrice
+@v_price int-- all variables start with @ or @@
 AS
 SELECT * FROM titles 
 WHERE price > @v_price 
 
-EXEC uspGetTitleWithPrice 30 
+EXEC uspGetTitleWithPrice 30 -- 30À» @v_price¿¡ Áý¾î³Ö¾î ½ÇÇà
+
+
+CREATE PROC uspGetTitleWithPrice
+@v_price int
+AS
+BEGIN	-- BEGIN, END´Â ÇÁ·Î±×·¥¿¡¼­ '{'¿Í '}'°úµµ °°Àº µ¥ MSSql¿¡¼± »ý·« °¡´É.. ´Ù¸¥ SQL¿¡¼± ¾ÈµÉ ¼ö ÀÖÀ½
+	SELECT * FROM titles 
+	WHERE price > @v_price 
+	
+	-- EXEC uspGetTitleWithPrice 30 
+END
 
 -- 2. alter
 ALTER PROC 
-uspGetTitleWithPrice 
+uspGetTitleWithPrice
 @v_price int
 AS
 SELECT * FROM titles 
@@ -49,32 +74,44 @@ WHERE price <= @v_price
 -- execution
 EXEC uspGetTitleWithPrice 30 
 
--- 3. sp for insert
-CREATE TABLE ForSP(c1 int, c2 varchar(10)) 
+-- 3. sp for insert	(Stored Procedure)
+CREATE TABLE ForSP
+(
+	c1 int,
+	c2 varchar(10)
+) 
 go
 
 CREATE PROC uspSaveForSP
-@v_c1 int, @v_c2 varchar(10)
+	@v_c1 int,
+	@v_c2 varchar(10)
 AS
-INSERT INTO ForSP(c1, c2) 
-VALUES(@v_c1, @v_c2)
+BEGIN
+	INSERT INTO ForSP(c1, c2) 
+	VALUES(@v_c1, @v_c2)
+END
 
 -- execution
-EXEC uspSaveForSP 1, 'Hi~'EXEC uspSaveForSP 2, 'test'
+EXEC uspSaveForSP 1, 'Hi~'
+EXEC uspSaveForSP 2, 'test'
 
 -- confirmation
 SELECT * FROM ForSP
 
 -- 4. dynamic sql with stored proc
-CREATE PROC uspDynamicSP
-@v_tblname varchar(20), 
-@v_title_id varchar(20)
-AS
-	DECLARE @v_strSQL VARCHAR(200)
-	SET @v_strSQL = 'SELECT * FROM ' + @v_tblname + ' WHERE title_id = ''' + @v_title_id + ''''
+DROP PROC uspDynamicSP
 
-	EXEC(@v_strSQL) -– sp_sqlexec
-	--SELECT @v_strSQL-- 
+CREATE PROC uspDynamicSP
+	@v_tblname varchar(20), 
+	@v_title_id varchar(20)
+AS
+	DECLARE @v_strSQL VARCHAR(200)-- declare variable
+	SET @v_strSQL = 'SELECT * FROM ' + @v_tblname +
+					' WHERE title_id = ''' + @v_title_id + ''''	-- SELECT * FROM  v1  WHERE title_id = '   v2    '    
+										-- SQLÀÌ Æ¯¹®À» ¹®¹ýÃ³·³ ÀÎ½Ä ¸øÇÏµµ·Ï '¸¦ ´Ù¸¥ ÇÁ·Î±×·¡¹ÖÀÇ /Ã³·³ Æ¯¹® ¾Õ¿¡ ½á¼­ Ç¥ÇöÇÔ.
+	EXEC(@v_strSQL) --sp_sqlexec
+					--SELECT @v_strSQL-- 
+GO
 
 -- execute	
 EXEC uspDynamicSP 'titles', 'BU1032'
@@ -84,17 +121,17 @@ EXEC uspDynamicSP 'titleauthor', 'BU1032'
 
 --5. stored proc with output parameter
 CREATE PROC uspSPwithOUTPUT
-@v_title_id varchar(10)
-, @v_output int OUTPUT
+	@v_title_id varchar(10), 
+	@v_output int OUTPUT		-- OUTPUT is used for Return ´ÜÀÏ°ª ¸®ÅÏÇÏ´Â °æ¿ì »ç¿ëµÊ. ¾Æ·¡ ¼½¼Ç°ú °°ÀÌ returnµµ ÀÖÁö¸¸ OUTPUTÀÌ ´õ ¸¹ÀÌ »ç¿ëµÊ
 AS
-UPDATE titles SET price = price * 2
-WHERE title_id = @v_title_id
+	UPDATE titles SET price = price * 2
+	WHERE title_id = @v_title_id
 
-SET @v_output = (SELECT @@ROWCOUNT)
+SET @v_output = (SELECT @@ROWCOUNT)		-- @@ system variable
 
 --execute 
 DECLARE @v_effected_rows int
-EXEC uspSPwithOUTPUT 'BU1032', @v_effected_rows OUTPUT
+EXEC uspSPwithOUTPUT 'BU1032', @v_effected_rows OUTPUT	--OUTPUT 
 SELECT @v_effected_rows
 
 --execute
@@ -124,6 +161,14 @@ SELECT @v_effected_rows
 
 /* --------------------------------------------------
 A-3. FUNCTION
+
+100ÀÌ °¡Àå ¸¹ÀÌ ¾²ÀÌ´Â °Å¶ó¸é 99´Â Stored Procedure »ç¿ëÇÔ.
+±×·¯³ª FUNCTIONÀº ±×·¸°Ô ¸¹ÀÌ ¾²ÀÌÁö ¾ÊÀ½.
+
+Interview question ¡Ú¡Ú¡Ú
+What is different between Sotred Procedure and Function?
+A: °¡Àå ¾Æ·¡ Á¤¸®µÈ ±Û Âü°í
+
 --------------------------------------------------- */
 
 CREATE FUNCTION whichContinent 
@@ -133,7 +178,7 @@ AS
 BEGIN
 declare @Return varchar(30)
 select @return = 
-	case @Country
+	case @Country		-- SwitchÀÇ case¿Í ºñ½Á. ÀÌÇØ¸¸ ÇÏ¸é µÊ
 		when 'Argentina' then 'South America'
 		when 'Belgium' then 'Europe'
 		when 'Brazil' then 'South America'
@@ -146,7 +191,7 @@ select @return =
 return @return
 end 
 -- execute: Not like stored proc, function can be used wherever varchar(30) return value is used in sql statement
--- ex) select list item , where clause
+-- ex) select list item , where clause	->	SELECT * FROM FUNCTION °¡´É. SP´Â ¾ÈµÊ. È£ÃâÇÏ´Â ¹æ½Ä, ¾îµð¿¡ ¾²ÀÌ´À³ÄÀÇ Â÷ÀÌ.
 --NOTE: when executing, 'dbo' (schema name) should be used
 print dbo.WhichContinent('USA')
 
@@ -155,8 +200,8 @@ from customers
 
 create table test 
 (
-	Country varchar(15)
-,	Continent as (dbo.WhichContinent(Country))
+	Country varchar(15),
+	Continent as (dbo.WhichContinent(Country))
 ) 
 
 insert into test (country) 
@@ -223,16 +268,17 @@ SELECT * FROM dbo.customersbycountry('CANADA')
 SELECT * FROM dbo.customersbycountry('ADF') 
 
 
-/* Difference Between Function and Stored Procedure */
+
+/* Difference Between Function and Stored Procedure ¡Ú¡Ú¡Ú¡Ú¡Ú */
 /*
-SP: Pre-Comipled
+SP: Pre-Comipled				SP°¡ °¡Àå ¸¹ÀÌ ¾²ÀÌ´Â ÀÌÀ¯°¡ µ¥ÀÌÅÍ Ã³¸®ÇÏ´Âµ¥ SP¸¸Å­ °¡Àå ºü¸¥ °Ô ¾øÀ½. Pre-compiled¶ó¼­. ´ÜÁ¡: Debugging Èûµê.
 Function: Not Pre-Compiled
 
 SP: Can return more than one value
 Function: only one at a time
 
-SP: Cannot be called in DML
-Function: Can be called in DML – it depends
+SP: Cannot be called in DML, but can be executed independently
+Function: Can be called in DML and it depends
 
 SP: no limitation of return type
 Function: cannot return image, text , timestamp
@@ -245,6 +291,7 @@ Function: Must return
 
 SP: parameters is either in or out
 Function: always in, Out is Not possible
+
 
 */
 
