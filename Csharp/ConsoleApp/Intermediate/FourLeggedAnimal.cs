@@ -24,5 +24,9 @@ namespace ConsoleApp.Intermediate
         //    result += " In fact, it's a dog!";
         //    return result;
         //}
+        public override void Cry()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
