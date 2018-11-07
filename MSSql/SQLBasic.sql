@@ -254,26 +254,31 @@ GROUP BY ALL title_id
 -- INNER JOIN / OUTER JOIN / CROSS JOIN/ SELF JOIN
 
 SELECT * from authors
-SELECT * FROM publishers
+SELECT * FROM publishers;
 
 SELECT *
-FROM authors AS a INNER JOIN publishers AS p
+FROM authors AS a JOIN publishers AS p
 ON a.city = p.city
 
 -- ANSI Syntax
 SELECT pub_name, title
 FROM titles INNER JOIN publishers
-ON titles.pub_id = publishers.pub_id
--- T-SQL Syntax
+ON titles.pub_id = publishers.pub_id  -- ON eqaulity Condition
+
+
+-- T-SQL Syntax  (it is less important)
 SELECT authors.au_lname, authors.state, publishers.*
 FROM publishers, authors
 WHERE publishers.city = authors.city
 
 -- outer join
-SELECT title, stor_id, ord_num, qty, ord_date
+-- usually only use left outer join and change the right table to left
+SELECT title, stor_id, ord_num, qty, ord_date, titles.*
 FROM titles LEFT OUTER JOIN sales
 ON titles.title_id = sales.title_id
+
 -- cross join
+-- not used very often
 SELECT au_fname, au_lname, pub_name
 FROM authors CROSS JOIN publishers 
 
@@ -281,6 +286,14 @@ FROM authors CROSS JOIN publishers
 -- TODO
 
 -- Sub Query
+select t1.* from titleauthor t1 order by t1.title_id asc
+
+select * from titleauthor t1 
+INNER JOIN titleauthor t2
+ON t1.title_id = t2.title_id
+order by t1.title_id asc
+
+
 SELECT * FROM titles
 WHERE title_id IN (SELECT title_id FROM sales)
 
@@ -295,8 +308,17 @@ WHERE title_id IN -- IN Keyword
 -- TODO
 
 
--- select into
+-- select into: create table from table
 -- TODO
+
+select *
+into sales2 
+from sales
+
+
+select * from sales
+UNION ALL -- without ALL, it will retrieve only the unique data
+select * from sales2
 
 -- UNION
 
@@ -308,15 +330,47 @@ PK-FK: Referential Integrity
 BEGIN TRAN and COMMIT TRAN
 ---------------------------------------------------- */
 CREATE TABLE test1(
-	 columnA varchar(10)
-	,columnB int
+	 columnA varchar(10) -- column name, type
+	,columnB int		
 )
 GO
-INSERT INTO test1 VALUES('John',1)
-INSERT INTO test1 VALUES('Jane',2)
-INSERT INTO test1 VALUES('Wilson',3)
+select * from test2
+
+INSERT INTO test2 VALUES('John',1)
+INSERT INTO test2 VALUES('Jane',2)
+INSERT INTO test2 VALUES('Wilson',3)
 
 -- TODO: Referential Integrity Test
+CREATE TABLE Category(
+	 id int PRIMARY KEY	--NOT NULL / NOT DUPILCAE
+	,name nvarchar(50)		
+)
+GO
+
+CREATE TABLE Product(
+	CategoryId int,
+	id int PRIMARY KEY	--NOT NULL / NOT DUPILCAE
+	,name nvarchar(50)		
+)
+GO
+
+INSERT INTO Category(id, name) VALUES (1, 'ELECTRONIC')
+INSERT INTO Category(id, name) VALUES (2, 'HOME')
+
+INSERT INTO Product(CategoryID, id, name) VALUES (1, 1, 'Smartphone')
+INSERT INTO Product(CategoryID, id, name) VALUES (1, 2, 'Humidifier')
+INSERT INTO Product(CategoryID, id, name) VALUES (1, 3, 'Laptop')
+--UI: PK, FK relationship: Table Designer > Make Relationship
+
+select t1.name as 'category', t2.name as 'product' from Category t1 inner join Product t2
+on t1.Id = t2.CategoryId
+
+INSERT INTO Product(CategoryID, id, name) VALUES (3, 4, 'TV')
+
+select * from Product
+
+select * from category
+
 
 -- Insert with select
 INSERT INTO test1
@@ -361,6 +415,12 @@ BEGIN TRAN and COMMIT TRAN
 Referential Integrity
 DELETE FROM and Trancate Table
 ---------------------------------------------------- */
+select * from category
+select * from product
+
+delete from category
+where id = 1
+
 SELECT * FROM authors
 
 -- NOTE: PK, FK
@@ -390,11 +450,13 @@ INSERT INTO testTable VALUES(1)INSERT INTO testTable VALUES(2)
 SELECT * FROM testTable
 
 CREATE TABLE testTable2(
-	user_id int identity(1,1)
+	user_id int identity(1,1)  -- automatic increment value, implicit PK
 	,user_content varchar(10)
 )
-INSERT INTO testTable2 VALUES('Hi')
-INSERT INTO testTable2 VALUES('I am hungry')
+select * from testTable2
+
+INSERT INTO testTable2(user_id, user_content) VALUES(1, 'Hi') -- error
+INSERT INTO testTable2(user_content) VALUES('I am hi')
 --Error : Why?
 INSERT INTO testTable2 VALUES('Hi I am hungry')
 
@@ -453,7 +515,7 @@ INSERT INTO Role(RoleID, RoleName ) VALUES(2, 'guest')
 INSERT INTO Role(RoleID, RoleName ) VALUES(3, 'member')
 
 CREATE TABLE Employee2( 
-             EmpID VARCHAR(10) NOT NULL PRIMARY KEY 
+             EmpID VARCHAR(10) PRIMARY KEY --NOT NULL
              ,EmpName VARCHAR(10) NULL 
              ,RoleID INT NOT NULL 
              REFERENCES Role(RoleID ) 

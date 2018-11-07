@@ -8,6 +8,9 @@ VIEW, STORED PROCEDURE, FUNCTION
 /* --------------------------------------------------
 A-1. VIEW
 --------------------------------------------------- */
+USE pubs
+GO
+
 CREATE VIEW vTitleAuthorPublisher
 AS
 SELECT titles.title, authors.au_lname, publishers.pub_name
@@ -15,36 +18,44 @@ FROM titles INNER JOIN titleauthor ON titles.title_id = titleauthor.title_id
 INNER JOIN authors ON titleauthor.au_id = authors.au_id
 INNER JOIN publishers ON titles.pub_id = publishers.pub_id
 GO
-
+DROP VIEW vTitleAuthorPublisher
 select * from vTitleAuthorPublisher
 sp_helptext vTitleAuthorPublisher 
 
 /* --------------------------------------------------
 A-2. STORED PROCEDURE
 --------------------------------------------------- */
-CREATE PROC uspGetPricePerBook
+CREATE PROCEDURE uspGetPricePerBook
 AS
 SELECT pub_id, type, royalty, ytd_sales, AVG(price) 
 FROM titlesGROUP BY pub_id, type, royalty, ytd_sales
 GO 
 
+DROP PROCEDURE uspGetPricePerBook
+EXEC uspGetPricePerBook
 
 -- 1 create
 CREATE PROC uspGetTitleWithPrice 
-@v_price int
+@v_price int-- all variable start with @ or @@
 AS
-SELECT * FROM titles 
-WHERE price > @v_price 
+BEGIN --optional
+	SELECT * FROM titles 
+	WHERE price > @v_price 
 
-EXEC uspGetTitleWithPrice 30 
+	--EXEC uspGetTitleWithPrice 30 
+END -- optional
+
+EXEC uspGetTitleWithPrice 30
 
 -- 2. alter
 ALTER PROC 
 uspGetTitleWithPrice 
 @v_price int
-AS
-SELECT * FROM titles 
-WHERE price <= @v_price
+AS
+BEGIN
+	SELECT * FROM titles 
+	WHERE price <= @v_price
+END
 
 -- execution
 EXEC uspGetTitleWithPrice 30 
@@ -55,12 +66,15 @@ go
 
 CREATE PROC uspSaveForSP
 @v_c1 int, @v_c2 varchar(10)
-AS
-INSERT INTO ForSP(c1, c2) 
-VALUES(@v_c1, @v_c2)
+AS
+BEGIN
+	INSERT INTO ForSP(c1, c2) 
+	VALUES(@v_c1, @v_c2)
+END
 
 -- execution
-EXEC uspSaveForSP 1, 'Hi~'EXEC uspSaveForSP 2, 'test'
+EXEC uspSaveForSP 1, 'Hi~'
+EXEC uspSaveForSP 2, 'test'
 
 -- confirmation
 SELECT * FROM ForSP
@@ -70,7 +84,7 @@ CREATE PROC uspDynamicSP
 @v_tblname varchar(20), 
 @v_title_id varchar(20)
 AS
-	DECLARE @v_strSQL VARCHAR(200)
+	DECLARE @v_strSQL VARCHAR(200)-- declare variable
 	SET @v_strSQL = 'SELECT * FROM ' + @v_tblname + ' WHERE title_id = ''' + @v_title_id + ''''
 
 	EXEC(@v_strSQL) -– sp_sqlexec
@@ -84,13 +98,13 @@ EXEC uspDynamicSP 'titleauthor', 'BU1032'
 
 --5. stored proc with output parameter
 CREATE PROC uspSPwithOUTPUT
-@v_title_id varchar(10)
-, @v_output int OUTPUT
+@v_title_id varchar(10), 
+@v_output int OUTPUT
 AS
 UPDATE titles SET price = price * 2
 WHERE title_id = @v_title_id
 
-SET @v_output = (SELECT @@ROWCOUNT)
+SET @v_output = (SELECT @@ROWCOUNT)  --@@ system variable
 
 --execute 
 DECLARE @v_effected_rows int
@@ -104,6 +118,7 @@ SELECT @v_effected_rows
 
 
 -- 6 store proc with return keyword
+-- less common than output
 CREATE PROC uspReturnSP
 @v_title_id varchar(10)
 AS
@@ -147,8 +162,8 @@ return @return
 end 
 -- execute: Not like stored proc, function can be used wherever varchar(30) return value is used in sql statement
 -- ex) select list item , where clause
---NOTE: when executing, 'dbo' (schema name) should be used
-print dbo.WhichContinent('USA')
+--NOTE: when executing, 'dbo' (schema name) should be used, databas owner
+select dbo.WhichContinent('USA')
 
 select dbo.WhichContinent(Customers.Country), customers.* 
 from customers
@@ -225,11 +240,10 @@ SELECT * FROM dbo.customersbycountry('ADF')
 
 /* Difference Between Function and Stored Procedure */
 /*
+SP can process fastest but debugging is more complicated
+
 SP: Pre-Comipled
 Function: Not Pre-Compiled
-
-SP: Can return more than one value
-Function: only one at a time
 
 SP: Cannot be called in DML
 Function: Can be called in DML – it depends
