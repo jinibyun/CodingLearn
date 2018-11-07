@@ -282,7 +282,7 @@ SELECT * FROM publishers
 -- ex) t1: 1, 2, 3, 4; t2: 3, 4, 5, 6 이면 3, 4 겹치는 부분만 가져옮.
 
 SELECT *
-FROM authors AS a INNER JOIN publishers AS p
+FROM authors AS a INNER JOIN publishers AS p	-- After Table name, 'AS'can be used or skipped,  but they are same
 ON a.city = p.city
 
 --표준형식
