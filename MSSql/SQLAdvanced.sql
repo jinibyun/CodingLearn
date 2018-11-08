@@ -295,4 +295,18 @@ Function: always in, Out is Not possible
 
 */
 
+-- Entity Framework 설명 중에 TransactionSupport부분을 위해 썼음.
 
+BEGIN TRAN [SACTION]	-- TRANSACTION이라 써도 됨. All done / All cancel	-> All commmit / All rollback
+						-- Transaction 내에서 하나라도 에러 뜨면 Transaction내 모든 것을 취소시킴.
+						-- 돈거래, 계좌 돈출금 등등에서 쓰임
+	INSERT INTO CART...
+	DELETE FROM INVENTORY
+	INSERT INTO DELIVERY
+	UPDATE MEMBER
+	UPDATE MEMBERPOINT
+	if @@error = 0
+		COMMIT TRANSACTION
+	else
+		COMMIT ROLLBACK
+END TRAN

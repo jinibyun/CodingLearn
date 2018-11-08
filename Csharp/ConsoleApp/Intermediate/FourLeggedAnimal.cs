@@ -24,6 +24,7 @@ namespace ConsoleApp.Intermediate
 
     public class Dog : FourLeggedAnimal
     {
+<<<<<<< HEAD
         public override string Cry()
         {
             return "Bark Bark";
@@ -35,6 +36,17 @@ namespace ConsoleApp.Intermediate
             string result = base.Describe();
             result += " In fact, it's a dog!";
             return result;
+=======
+        //public override string Describe()
+        //{
+        //    string result = base.Describe();
+        //    result += " In fact, it's a dog!";
+        //    return result;
+        //}
+        public override void Cry()
+        {
+            throw new NotImplementedException();
+>>>>>>> origin/master
         }
     }
 }
