@@ -20,17 +20,11 @@ namespace ConsoleApp
             //Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
-<<<<<<< HEAD
             //Intermediate_OOP3Characteristics();
             //Intermediate_OtherThings();
+
             // C. Advanced
             Advanced(); 
-=======
-            Intermediate_OOP3Characteristics();
-            // Intermediate_OtherThings();
-            // C. Advanced
-            // Advanced();         
->>>>>>> 39206441d334d0e4555317d17661b06f963a551a
 
             // D. Assignment
             //AssignmentTest();
@@ -221,13 +215,8 @@ namespace ConsoleApp
             // 2. Class basic 2 Encapsulation
             Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
 
-<<<<<<< HEAD
             // { } = object
             var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
-=======
-            var classTest_Basic2 = new ClassTest_Basic2  { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
-
->>>>>>> 39206441d334d0e4555317d17661b06f963a551a
             Console.WriteLine(classTest_Basic2.Worth);
             Console.WriteLine(classTest_Basic2.BenchmarkPrice);
             Console.WriteLine(classTest_Basic2.BenchmarkShare);
