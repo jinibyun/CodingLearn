@@ -224,8 +224,15 @@ INSERT RequestQ6 VALUES(
 (SELECT t1.Id FROM CustomerQ6 t1 WHERE t1.UserName = @v_userName),	-- user id
 @v_RequestContent, @v_RequestDate, @v_CompleteDate, @v_Status, @v_Comment, @v_IsNotifiedToCustomer, @v_IsNotifiedToTechnician);
 
-EXEC uspAddCustomerRequest 'MichaelJackson'
+--Execute Procedure
+declare @requestDate date
+set @requestDate = CONVERT(datetime, '2017-05-22', 120)
+declare @completeDate date
+set @completeDate = CONVERT(datetime, '2017-05-27', 120)
+EXEC uspAddCustomerRequest 'MichaelJackson', 'Laptop Repair', @requestDate, @completeDate, 'Complete', 'Please be careful about its fan module'
+, 1, 1
 
+SELECT * FROM RequestQ6 
 
 
 
