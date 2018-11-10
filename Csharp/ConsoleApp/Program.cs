@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace ConsoleApp
 {
@@ -24,11 +25,11 @@ namespace ConsoleApp
             //Intermediate_OtherThings();
 
             // C. Advanced
-            Advanced(); 
+            //Advanced(); 
 
             // D. Assignment
             //AssignmentTest();
-            //AssignmentTest2();
+            AssignmentTest2();
             //AssignmentTest3();
             
 
@@ -442,7 +443,9 @@ namespace ConsoleApp
             var cstest2 = new homework2();
             cstest2.Test2();
             var cstest22 = new Product("Banana", "Produce","OX333",1.99,3);
-            Console.WriteLine(cstest22.Data());
+            Console.WriteLine("Scan the product: ");
+            Thread.Sleep(3000);
+            cstest22.getItem("0X333");
         }
 
         private static void AssignmentTest3()

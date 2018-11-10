@@ -129,13 +129,15 @@ namespace ConsoleApp.Assignment
             protecteddate.month = "October";
             protecteddate.day = "12th";
             Console.WriteLine("Protected: Today is : {1} {2}, {0}", protecteddate.year, protecteddate.month, protecteddate.day);
+            //protected method is only accessible within its class
+            //Or in its derived(inherited) class which is current method Csharpt: protectedday
 
             internalday internaldate = new internalday();
             internaldate.year = "2018";
             internaldate.month = "October";
             internaldate.day = "12th";
             Console.WriteLine("Internal: Today is : {1} {2}, {0}", internaldate.year, internaldate.month, internaldate.day);
-
+            //internal method is only accessible within current project
 
         }//End of Test
     }   
