@@ -41,7 +41,8 @@ ORDER BY saleRank ASC
 SELECT stor_id, qty, RANK() OVER (ORDER BY qty DESC) as qtyRank from sales
 
 -- ANSWER:
--- note: when a SELECt query is used as a table, "ORDER BY" in the subquery cannot be used.
+-- note: when a SELECT query is used as a table, "ORDER BY" in the subquery cannot be used.
+--			also its alias is necessary. ('t' in the following query)
 SELECt * FROM
 (SELECT t1.stor_id, COUNT(*) as saleCount, RANK() OVER (ORDER BY COUNT(*) DESC) as saleRank 
 FROM sales t1 group by t1.stor_id) t WHERE t.saleRank = 2
@@ -225,6 +226,7 @@ INSERT RequestQ6 VALUES(
 @v_RequestContent, @v_RequestDate, @v_CompleteDate, @v_Status, @v_Comment, @v_IsNotifiedToCustomer, @v_IsNotifiedToTechnician);
 
 --Execute Procedure
+-- CONVERT datetime cannot be used directly as an argument in a solved procedure, so declare variables
 declare @requestDate date
 set @requestDate = CONVERT(datetime, '2017-05-22', 120)
 declare @completeDate date
