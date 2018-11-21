@@ -1,0 +1,57 @@
+@import url(http://font.googleapis.com/earlyaccess/nanogothic.css);
+*{
+    font-family:'Nanum Gothic';
+} 
+a .nav-link{
+    color:#000000;
+    text-decoration: none;
+}
+a .nav-link:hoover{
+    color:#bbbbbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+.navbar-default{
+    background-color:#000000;
+    border-color: #000000;
+}
+.navbar-default .navbar-brand{
+    color:#ffffff;
+} 
+.navbar-default .navbar-brand:hoover,
+.navbar-default .navbar-brand:focus {
+    background-color:transparent;
+    color: #bbbbbb;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hoover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color:#000000;
+    color:white;
+}
+
+.navbar-default .navbar-nav > li > a:hoover,
+.navbar-default .navbar-nav > li > a:focus {
+    color:#bbbbbb;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hoover,
+.navbar-default .navbar-nav > .open> a:focus {
+    color:white;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color:#bbbbbb;
+}
+
+@media (max-width:767px){
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color:#ffffff;
+    }  
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hoover
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color:#bbbbbb;
+    }  
+
+}
