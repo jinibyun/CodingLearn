@@ -1,13 +1,13 @@
 // Two or more data types are combined using the pipe symbol (|) to denote a Union Type
 // NOTE: confirm how it is changed to javascript
-var val;
+var val; // union type; string이 될수도 있고 number가 될수도 있다
 val = 12;
 console.log("numeric value of val " + val);
 val = "This is a string";
 console.log("string value of val " + val);
 // union type and function parameter
 function disp7(name) {
-    if (typeof name == "string") {
+    if (typeof name == "string") { // typeof는 변수의 type을 알고자 할 때 씀
         console.log(name);
     }
     else {

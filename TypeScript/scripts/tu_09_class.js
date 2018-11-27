@@ -90,7 +90,7 @@ var StringPrinter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     StringPrinter.prototype.doPrint = function () {
-        _super.prototype.doPrint.call(this);
+        _super.prototype.doPrint.call(this); // c#에선 base.
         console.log("doPrint() is printing a string…");
     };
     return StringPrinter;
@@ -115,7 +115,7 @@ var Person2 = /** @class */ (function () {
     return Person2;
 }());
 var objPerson2 = new Person2();
-var isPerson = objPerson2 instanceof Person2;
+var isPerson = objPerson2 instanceof Person2; // Person2의 instance인지 확인해서 true or false 반환
 console.log(" obj is an instance of Person " + isPerson);
 var AgriLoan = /** @class */ (function () {
     function AgriLoan(interest, rebate) {
@@ -154,7 +154,8 @@ console.log(teacher.lastname);
 var student = {
     firstName: "Tom",
     lastName: "Hanks",
-    sayHello: function () { } //Type template 
+    sayHello: function () { } //Type template ;  anonymous function으로 sayHello를 정의한 것
+    // 이름: 값   이렇게 있으면 ':'는 'as'로 생각하면 편함
 };
 student.sayHello = function () {
     console.log("hello " + student.firstName);
@@ -177,9 +178,9 @@ var invokeperson2 = function (obj) {
 };
 invokeperson2({ firstname: "Sachin", lastname: "Tendulkar" });
 function addPoints(p1, p2) {
-    var x = p1.x + p2.x;
-    var y = p1.y + p2.y;
-    return { x: x, y: y };
+    var a = p1.x + p2.x;
+    var b = p1.y + p2.y;
+    return { x: a, y: b };
 }
 //Valid 
 var newPoint = addPoints({ x: 3, y: 4 }, { x: 5, y: 1 });

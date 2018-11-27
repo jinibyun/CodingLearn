@@ -1,0 +1,27 @@
+// You can create "assignment" folder on your typescript project
+// Unless the folder is excluded in "tsconfig.json", once you command "tsc", it will transcomplie all your ts files
+// and it will generate relevant js files under "scripts" folder as we did it in classroom.
+
+
+// 1. This is about "Different ways of creating an Object in javascript" (not TypeScript)
+// refer to https://coderwall.com/p/p5cf5w/different-ways-of-creating-an-object-in-javascript
+// copy and paste is allowed
+// you can create your own js file such as differentWaysToObject.js
+
+
+
+// 2. more detail about variables
+// refer to https://www.typescriptlang.org/docs/handbook/variable-declarations.html
+// NOTE: difference between var and let
+// copy and paste is allowed
+
+
+// 3. Generics in TypeScript
+// refer to https://www.typescriptlang.org/docs/handbook/generics.html
+// copy and paste is allowed
+
+
+// 4. Study about "decorator" in typescript
+// you can search for decorator in typescript and copy & paste code to run
+// Suggestion: https://www.spectory.com/blog/A%20deep%20dive%20into%20TypeScript%20decorators
+// but if you find better resource, please go ahead.

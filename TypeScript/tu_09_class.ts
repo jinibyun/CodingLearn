@@ -1,7 +1,7 @@
 // Class
 
 // see how it is transpiled into javascript
-class Person {}
+class Person { }
 
 // NOTE: Do not put "public" access modifier
 class Car {
@@ -48,8 +48,8 @@ class Root {
   str: string;
 }
 
-class Child extends Root {}
-class Leaf extends Child {} //indirectly inherits from Root by virtue of inheritance
+class Child extends Root { }
+class Leaf extends Child { } //indirectly inherits from Root by virtue of inheritance
 
 var objLeaf = new Leaf();
 objLeaf.str = "hello";
@@ -64,7 +64,7 @@ class PrinterClass {
 
 class StringPrinter extends PrinterClass {
   doPrint(): void {
-    super.doPrint();
+    super.doPrint();  // c#에선 base.
     console.log("doPrint() is printing a string…");
   }
 }
@@ -85,30 +85,30 @@ StaticMem.num = 12; // initialize the static variable
 StaticMem.disp(); // invoke the static method
 
 // instancof operator
-class Person2 {}
+class Person2 { }
 var objPerson2 = new Person2();
-var isPerson = objPerson2 instanceof Person2;
+var isPerson = objPerson2 instanceof Person2; // Person2의 instance인지 확인해서 true or false 반환
 console.log(" obj is an instance of Person " + isPerson);
 
 // Access Modifier
 
 // Class and interfaces
-interface ILoan { 
-    interest:number; 
- } 
- 
- class AgriLoan implements ILoan { 
-    interest:number ;
-    rebate:number ;
-    
-    constructor(interest:number,rebate:number) { 
-       this.interest = interest; 
-       this.rebate = rebate; 
-    } 
- } 
- 
- var objLoan = new AgriLoan(10,1); 
- console.log("Interest is : " + objLoan.interest + " Rebate is : "+ objLoan.rebate );
+interface ILoan {
+  interest: number;
+}
+
+class AgriLoan implements ILoan {
+  interest: number;
+  rebate: number;
+
+  constructor(interest: number, rebate: number) {
+    this.interest = interest;
+    this.rebate = rebate;
+  }
+}
+
+var objLoan = new AgriLoan(10, 1);
+console.log("Interest is : " + objLoan.interest + " Rebate is : " + objLoan.rebate);
 // COMPARE above
 //  var objLoan : ILoan = new AgriLoan(10,1); 
 //  console.log("Interest is : " + objLoan.interest + " Rebate is : "+ objLoan.rebate ); // compile error
@@ -130,59 +130,60 @@ interface ILoan {
 //     }, 
 //     key4:[“content1”, “content2”] //collection  
 //  };
-var teacher = { 
-    firstname:"Jini", 
-    lastname:"Byun" 
- }; 
- //access the object values 
- console.log(teacher.firstname);
- console.log(teacher.lastname);
- // teacher.sayHello = function(){ return "hello";} // compile error (not compile error in javascript)
+var teacher = {
+  firstname: "Jini",
+  lastname: "Byun"
+};
+//access the object values 
+console.log(teacher.firstname);
+console.log(teacher.lastname);
+// teacher.sayHello = function(){ return "hello";} // compile error (not compile error in javascript)
 
- // to resolve issue above
- var student = {
-    firstName:"Tom", 
-    lastName:"Hanks", 
-    sayHello:function() {  }  //Type template 
- } 
- student.sayHello = function() {  
-    console.log("hello "+ student.firstName);
- }  
- student.sayHello();
+// to resolve issue above
+var student = {
+  firstName: "Tom",
+  lastName: "Hanks",
+  sayHello: function () { }  //Type template ;  anonymous function으로 sayHello를 정의한 것
+  // 이름: 값   이렇게 있으면 ':'는 'as'로 생각하면 편함
+}
+student.sayHello = function () {
+  console.log("hello " + student.firstName);
+}
+student.sayHello();
 
- // object as function parameters
- var professor = { 
-    firstname:"Tom", 
-    lastname:"Hanks" 
- }; 
- var invokeperson = function(obj: { firstname:string, lastname :string }) { 
-    console.log("first name :"+obj.firstname) 
-    console.log("last name :"+obj.lastname) 
- } 
- invokeperson(professor);
+// object as function parameters
+var professor = {
+  firstname: "Tom",
+  lastname: "Hanks"
+};
+var invokeperson = function (obj: { firstname: string, lastname: string }) {
+  console.log("first name :" + obj.firstname)
+  console.log("last name :" + obj.lastname)
+}
+invokeperson(professor);
 
- // anonymous object
- var invokeperson2 = function(obj:{ firstname:string, lastname :string}) { 
-    console.log("first name :"+obj.firstname) 
-    console.log("last name :"+obj.lastname) 
- } 
- invokeperson2({firstname:"Sachin",lastname:"Tendulkar"});
+// anonymous object
+var invokeperson2 = function (obj: { firstname: string, lastname: string }) {
+  console.log("first name :" + obj.firstname)
+  console.log("last name :" + obj.lastname)
+}
+invokeperson2({ firstname: "Sachin", lastname: "Tendulkar" });
 
- // Duck-typing -->> infer
- // The following example shows how we can pass objects that don’t explicitly implement an interface but contain all of the required members to a function.
+// Duck-typing -->> infer
+// The following example shows how we can pass objects that don’t explicitly implement an interface but contain all of the required members to a function.
 
- interface IPoint { 
-    x:number; 
-    y:number;
- } 
- function addPoints(p1:IPoint,p2:IPoint):IPoint { 
-    var x = p1.x + p2.x ;
-    var y = p1.y + p2.y ;
-    return {x:x,y:y} 
- } 
- 
- //Valid 
- var newPoint = addPoints({x:3,y:4},{x:5,y:1})  ;
- 
+interface IPoint {
+  x: number;
+  y: number;
+}
+function addPoints(p1: IPoint, p2: IPoint): IPoint {
+  var a = p1.x + p2.x;
+  var b = p1.y + p2.y;
+  return { x: a, y: b }
+}
+
+//Valid 
+var newPoint = addPoints({ x: 3, y: 4 }, { x: 5, y: 1 });
+
  //Error 
  // var newPoint2 = addPoints({x:1},{x:4,y:3}); // compile error

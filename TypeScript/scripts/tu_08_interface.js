@@ -1,7 +1,12 @@
 /*
-Interfaces are not to be converted to JavaScript. It’s just part of TypeScript. If you see the screen shot of TS Playground tool there is no java script emitted when you declare an interface unlike a class. So interfaces have zero runtime JavaScript impact.
+Interfaces are not to be converted to JavaScript.
+It’s just part of TypeScript.
+If you see the screen shot of TS Playground tool
+there is no java script emitted when you declare an interface unlike a class.
+So interfaces have zero runtime JavaScript impact.
 */
 // implementation and anonymous object
+// an object can have multiple interface implementations
 var customer = {
     firstName: "Tom",
     lastName: "Hanks",

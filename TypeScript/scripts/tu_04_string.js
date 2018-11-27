@@ -1,3 +1,4 @@
+console.log("====== constructor ======");
 // constructor
 var str5 = new String("This is string");
 console.log("str.constructor is:" + str5.constructor);
@@ -13,5 +14,13 @@ console.log("Employee 's Id: " + emp.id);
 console.log("Employee's name: " + emp.name);
 console.log("Employee's Email ID: " + emp.email);
 // String method
-// charAt(), charCodeAt(), concat(), indexOf(), lastIndexOf(), localeCompare(), match(), replace(), search(), slice(), split(), substr()....
+// charAt(), charCodeAt(), concat(), indexOf(), lastIndexOf(),
+// localeCompare(), match(), replace(), search(), slice(), split(), substr()....
+var testString = "Korea will be reunited";
+console.log("toString(): " + testString.toString());
+console.log("charAt(4): " + testString.charAt(4));
+console.log("concat('...'): " + testString.concat(" Probably...."));
+console.log("indexOf('e'): " + testString.indexOf('e'));
+console.log("localeCompare('will be'): " + testString.localeCompare("will be"));
+console.log("localeCompare('Korea will be reunited'): " + testString.localeCompare("Korea will be reunited"));
 //# sourceMappingURL=tu_04_string.js.map

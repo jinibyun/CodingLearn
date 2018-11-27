@@ -1,5 +1,9 @@
 /*
-Interfaces are not to be converted to JavaScript. It’s just part of TypeScript. If you see the screen shot of TS Playground tool there is no java script emitted when you declare an interface unlike a class. So interfaces have zero runtime JavaScript impact.
+Interfaces are not to be converted to JavaScript.
+It’s just part of TypeScript. 
+If you see the screen shot of TS Playground tool 
+there is no java script emitted when you declare an interface unlike a class.
+So interfaces have zero runtime JavaScript impact.
 */
 
 // only defintion
@@ -10,6 +14,7 @@ interface IPerson {
 }
 
 // implementation and anonymous object
+// an object can have multiple interface implementations
 var customer: IPerson = {
   firstName: "Tom",
   lastName: "Hanks",
@@ -70,6 +75,7 @@ var drummer: Musician = {
   instrument: "Drums"
 };
 
+
 /*
 Same expression 
 var drummer = <Musician>{}; 
@@ -92,10 +98,10 @@ interface IParent2 {
 interface Child2 extends IParent1, IParent2 {
 
 }
-var Iobj: Child2 = 
-{ 
-      v1: 12
-    , v2: 23 
+var Iobj: Child2 =
+{
+  v1: 12
+  , v2: 23
 };
 
 console.log("value 1: " + Iobj.v1 + " value 2: " + Iobj.v2);

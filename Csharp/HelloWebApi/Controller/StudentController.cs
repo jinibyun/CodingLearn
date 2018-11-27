@@ -21,7 +21,6 @@ namespace HelloWebApi.Controller
         // Get Action Method with Primitive Parameter
         // http://localhost:55830/api/Student/GetStudent?id=1
         [HttpGet]
-
         public Student GetStudent(int id)
         {
             return new Student { Id = 1, Name = "Jini Byun" };

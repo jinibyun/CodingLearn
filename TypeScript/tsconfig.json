@@ -2,10 +2,11 @@
     "compilerOptions": {
         "target": "es5",
         "module": "amd",
-        "outDir": "scripts/",
-        "sourceMap": true
+        "outDir": "scripts/",   //여기에 complied된 JavaScripts를 넣는다. tsc 커맨드를 TERMINAL에서 치면 모든 TypeScript파일들이 Conver됨.
+        "sourceMap": true,
+        "experimentalDecorators": true  // this is for using Decorator
     },
-    "exclude": [
+    "exclude": [    // the folders included under "exclude" are not affected by 'tsc' command
         "namespace",
         "module",
         "ambient",
