@@ -17,4 +17,8 @@ function employee2(id:number,name:string) {
  // String method
  // charAt(), charCodeAt(), concat(), indexOf(), lastIndexOf(), localeCompare(), match(), replace(), search(), slice(), split(), substr()....
 
- 
+var testString:string = "The Korea Will be Reunited";
+console.log(testString.charAt(5));
+console.log(testString.concat(' is not true'));
+console.log(testString.charCodeAt(4));
+console.log(testString)

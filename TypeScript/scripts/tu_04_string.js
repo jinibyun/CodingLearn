@@ -14,4 +14,9 @@ console.log("Employee's name: " + emp.name);
 console.log("Employee's Email ID: " + emp.email);
 // String method
 // charAt(), charCodeAt(), concat(), indexOf(), lastIndexOf(), localeCompare(), match(), replace(), search(), slice(), split(), substr()....
+var testString = "The Korea Will be Reunited";
+console.log(testString.charAt(5));
+console.log(testString.concat(' is not true'));
+console.log(testString.charCodeAt(4));
+console.log(testString);
 //# sourceMappingURL=tu_04_string.js.map

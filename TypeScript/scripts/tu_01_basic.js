@@ -36,17 +36,18 @@ console.log("sum of the scores: " + sum);
 // type assertion
 var str = '1';
 var str2 = str; //str is now of type number 
-console.log(str2);
+console.log("type assertion: " + str2);
 // inferred typing: build error
-// var num = 2;    // data type inferred as  number 
-// console.log("value of num "+num); 
-// num = "12";
-// console.log(num);
+var num = 2; // data type inferred as  number 
+console.log("value of num " + num);
+//num = "12"            //error. Cannot assign string to number type
+num = "12";
+console.log(num);
 // variable scope
 var global_num = 12; //global variable 
 var Numbers = /** @class */ (function () {
     function Numbers() {
-        this.num_val = 13; //class variable 
+        this.num_val = 13; //class variable. Does not need var to declare
     }
     Numbers.prototype.storeNum = function () {
         var local_num = 14; //local variable 

@@ -2,6 +2,7 @@
 var message:string = "Hello World";
 console.log(message);
 
+
 // class
 class Greeting{
     greet():void {
@@ -36,20 +37,21 @@ console.log("second score: "+score2);
 console.log("sum of the scores: "+sum);
 
 // type assertion
-var str = '1' 
-var str2:number = <number><any> str   //str is now of type number 
-console.log(str2);
+var str = '1'; 
+var str2:number = <number><any> str;   //str is now of type number 
+console.log("type assertion: " + str2);
 
 // inferred typing: build error
-// var num = 2;    // data type inferred as  number 
-// console.log("value of num "+num); 
-// num = "12";
-// console.log(num);
+var num = 2;    // data type inferred as  number 
+console.log("value of num "+num); 
+//num = "12"            //error. Cannot assign string to number type
+num = <any>"12";
+console.log(num);
 
 // variable scope
 var global_num = 12;          //global variable 
 class Numbers { 
-   num_val = 13;             //class variable 
+   num_val = 13;             //class variable. Does not need var to declare
    static sval = 10;         //static field 
    
    storeNum():void { 

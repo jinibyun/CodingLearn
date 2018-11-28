@@ -14,6 +14,9 @@ if( month <= 0 || month > 12) {
    console.log("Value Accepted..") ;
 }
 
+function abc (id:number){
+   this.id= id;
+}
 // prototype
 function employee(id:number,name:string) { 
     this.id = id ;

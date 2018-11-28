@@ -176,9 +176,9 @@ var teacher = {
     y:number;
  } 
  function addPoints(p1:IPoint,p2:IPoint):IPoint { 
-    var x = p1.x + p2.x ;
-    var y = p1.y + p2.y ;
-    return {x:x,y:y} 
+    var a = p1.x + p2.x ;
+    var b = p1.y + p2.y ;
+    return {x:a,y:b} 
  } 
  
  //Valid 
