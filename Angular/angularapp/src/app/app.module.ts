@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule} from '@angular/common/http';
 import { FirstComponent } from './testComponents/firstExample/first.component';
@@ -22,7 +23,8 @@ import { HomeComponent } from './testComponents/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PostDetailComponent } from './testComponents/post-detail/post-detail.component';
 import { NotFoundComponent } from './testComponents/not-found/not-found.component';
-
+import { CustomerComponent } from './testComponents/customer/customer.component';
+import { RxJsExampleComponent } from './testComponents/rx-js-example/rx-js-example.component';
 
 @NgModule({
   declarations: [
@@ -38,11 +40,14 @@ import { NotFoundComponent } from './testComponents/not-found/not-found.componen
     NinthExampleComponent,
     HomeComponent,
     PostDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CustomerComponent,
+    RxJsExampleComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule
   ],
