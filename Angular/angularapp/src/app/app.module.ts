@@ -9,7 +9,7 @@ import { ThirdExampleComponent } from './testComponents/thirdExample/thirdExampl
 import { FourthExampleComponent } from './testComponents/fourthExample/fourthExample.component'; // navigation
 import { FifthExampleComponent } from './testComponents/fifthExample/fifthExample.component';
 import { SixthExampleComponent } from './testComponents/sixthExample/sixthExample.component';
-import { SeventhExampleComponent } from "./testComponents/seventhExample/seventhExample.component";
+import { SeventhExampleComponent } from './testComponents/seventhExample/seventhExample.component';
 import { DataService } from './services/data.service';
 
 import { PostService } from './services/post.service';

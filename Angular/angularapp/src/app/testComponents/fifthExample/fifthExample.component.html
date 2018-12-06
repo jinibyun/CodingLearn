@@ -6,6 +6,7 @@
   <li>ngModel and 2 way data binding</li>
 </ul>
 
+<!-- () html에서 코드로 영향을 끼침. 혹은 Function 호출 -->
 <button (click)="showUserForm = !showUserForm" class="btn btn-dark mb-3">Add User</button>
 <div class="card card-body mb-3" *ngIf="showUserForm">
   <h2>Add User</h2>
@@ -13,31 +14,35 @@
     <div class="form-group">
       <label>First Name</label>
       <!-- to use ngModel, "FormsModule" must be registered in app.module.ts -->
-      <input type="text" [(ngModel)] = "user.firstName" class="form-control" name="fristName">
+      <!-- [(ngModel)]를 사용하면 user.firstName이 자동적으로 binding되고 다시 코드로 되돌아나감. 코드에 addUser()참고
+          이렇게 되면 텍스트박스에 값을 넣을때마다 실시간으로 코드쪽에도 값을 주고 다시 그 값을 다시 가져오게 된다.
+      -->
+      <input type="text" [(ngModel)]="user.firstName" class="form-control" name="fristName">
     </div>
-<!-- {{ user.firstName }} -->
+    {{ user.firstName }} <!-- 그러면 위에 입력된 firstName 값이 실시간으로 보여지게 된다. -->
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" [(ngModel)] = "user.lastName" class="form-control" name="lastName">
+      <input type="text" [(ngModel)]="user.lastName" class="form-control" name="lastName">
     </div>
     <div class="form-group">
       <label>Age</label>
-      <input type="number" [(ngModel)] = "user.age" class="form-control" name="age">
+      <input type="number" [(ngModel)]="user.age" class="form-control" name="age">
     </div>
     <div class="form-group">
       <label>Street Address</label>
-      <input type="text" [(ngModel)] = "user.address.street" class="form-control" name="street">
+      <input type="text" [(ngModel)]="user.address.street" class="form-control" name="street">
     </div>
     <div class="form-group">
       <label>City</label>
-      <input type="text" [(ngModel)] = "user.address.city" class="form-control" name="city">
+      <input type="text" [(ngModel)]="user.address.city" class="form-control" name="city">
     </div>
     <div class="form-group">
       <label>State</label>
-      <input type="text" [(ngModel)] = "user.address.state" class="form-control" name="state">
+      <input type="text" [(ngModel)]="user.address.state" class="form-control" name="state">
     </div>
 
     <!-- event and event handler: javascript -->
+    <!-- [] 뒤에 = "" 안에는 typescript 문법을 따른다. -->
     <button (click)="addUser()" [disabled]="user.firstName == '' || user.lastName == '' " class="btn btn-block mb-3">Add
       New User</button>
 
@@ -46,7 +51,7 @@
 
 <h2>Users</h2>
 
-
+<!-- *ngIf로 해당 태그가 있느냐 없느냐를 결정. 보이고 안보이고, 보이고 숨기고 그런 문제가 아님. -->
 <ul class="list-unstyled" *ngIf="loaded && users?.length > 0;else noUsers">
   <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light]="user.isActive" [style.border-color]="user.isActive? 'green' : ''">
     <h3>

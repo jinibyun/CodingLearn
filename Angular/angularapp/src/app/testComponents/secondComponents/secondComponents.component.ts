@@ -5,6 +5,7 @@ Explanation:
 
 import { Component } from '@angular/core';
 import { User } from '../../models/User'; // call interface (manually create)
+// import 'logical' from 'physical'
 
 @Component({
   selector: 'app-second',
@@ -16,15 +17,15 @@ export class SecondComponentsComponent {
   // property as object
   user: User;
 
-  constructor() { 
+  constructor() {
     this.user = {
-      firstName : "John",
-      lastName : "Doe",
+      firstName: 'John',
+      lastName: 'Doe',
       age: 30,
-      address : {
-        street: "120 King St",
-        city: "Toronto",
-        state: "ON"
+      address: {
+        street: '120 King St',
+        city: 'Toronto',
+        state: 'ON'
       }
     }
   }

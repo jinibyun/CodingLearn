@@ -4,28 +4,39 @@
 
 <p>Explanation</p>
 <ul>
-    <li>generate component and ngInit</li>
-    <li>npm install bootstrap</li>
-    <li>
-      Template Syntax
-      <ul>
-        <li>property binding</li>
-        <li>bootstrap class binding</li>
-        <li>ngClass</li>
-        <li>ngStyle</li>
-        <li> | formating </li>
-      </ul>
-    </li>
-    
+  <li>generate component and ngInit</li>
+  <li>npm install bootstrap</li>
+  <li>
+    Template Syntax
+    <ul>
+      <li>property binding</li>
+      <li>bootstrap class binding</li>
+      <li>ngClass</li>
+      <li>ngStyle</li>
+      <li> | formating </li>
+    </ul>
+  </li>
+
 </ul>
 
 <h2>Users</h2>
 <!-- property binding and ngClass binding -->
-<button [disabled] = "!enabledAdd" class="btn btn-block mb-3" [ngClass]="currentClasses" >Add New User</button>
-
-<ul class="list-unstyled" *ngIf="loaded && users?.length > 0;else noUsers">
+<button [disabled]="!addUser" class="btn btn-block mb-3" [ngClass]="currentClasses">Add New User</button>  
+<!-- 
+  button의 disabled 프로퍼티를 설정함. 뒤에 오는 ""안에는 Angular문법을 따름. Code의 프로퍼티 가져옴 
+  []는 {{ }}와 거의 비슷함. Property binding에 쓰임. Code측의 variable을 불러오는 것.
+      ()는 event 알려줄 때 사용함.
+      {{}}는 둘다 됨
+      [()]이렇게 쓰면 property도, 메쏘드도 둘 다 사용 가능함.
+      확실하지 않으니 검색 해야함
+-->
+<!-- if 나 for는 *ng를 꼭 붙여야 한다.-->
+<ul class="list-unstyled" *ngIf="loaded && users?.length > 0;else noUsers"> <!--users가 null이 아니면 users.length > 0인지 체크하라. 아니라면 noUsers 선언. 아래 #noUsers 참고-->
   <!-- all structual directive start with * : if, switch, for -->
-  <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light] = "user.isActive" [style.border-color] ="user.isActive? 'green' : ''"> <!--bootstrap class binding -->
+  <!--JSP, ASP, PHP에서는 반복할 것들을 <%><li><li><li></%> 이렇게 태그로 감싸서 for 구문 돌려 여러 개체를 보여주는데 Angular는 직접 반복되는 문구 안에 씀. 아래 *ngFor 참고-->
+  <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light]="user.isActive" [style.border-color]="user.isActive? 'green' : ''">
+    <!-- let user of users : users의 user 들-->
+    <!--bootstrap class binding -->
 
     <div class="row">
       <div class="col-sm-4">
@@ -36,26 +47,30 @@
         <img *ngIf="user.image" bind-src="user.image" class="img-fluid" alt="">
       </div>
       <div class="col-sm-8">
-          <h3 [ngStyle]="currentStyles">
-            <!-- pipe : this is about formatting -->
-            {{ user.firstName | uppercase }} {{ user.lastName | lowercase }}
-            <!-- another way of property binding. interpolation is only for string. It is recommended for string as above -->
-            <!-- <span [textContent]="user.firstName"></span> -->
-          </h3>
-          <ul class="list-group" *ngIf="showExtended && user.age && user.address">
-            <li class="list-group-item">Age: {{ user.age }}</li>
-            <li class="list-group-item">Address: {{ user.address.city }} {{user.address.street}} {{user.address.state}}</li>
-            <li class="list-group-item">Balance:{{ user.balance | currency:"GBP" }} until {{ 1 | percent }}</li>
-            <li class="list-group-item">Joined:{{ user.registered | date: "yyyy-mm-dd" }}</li>
-            <li class="list-group-item" ngNonBindable>{{ 5 | number: "1.2"}}</li>
-          </ul>  
+        <h3 [ngStyle]="currentStyles">
+          <!-- pipe : this is about formatting -->
+          <!-- |는 filtering으로 불리는데 formatting으로 보면 된다 --> 
+          <!-- uppercase, lowercase는 Angular 키워드 -->
+          {{ user.firstName | uppercase }} {{ user.lastName | lowercase }}
+          <!-- another way of property binding. interpolation is only for string. It is recommended for string as above -->
+          <!-- <span [textContent]="user.firstName"></span> -->
+        </h3>
+        <ul class="list-group" *ngIf="showExtended && user.age && user.address">
+          <li class="list-group-item">Age: {{ user.age }}</li>
+          <li class="list-group-item">Address: {{ user.address.city }} {{user.address.street}} {{user.address.state}}</li>
+          <li class="list-group-item">Balance:{{ user.balance | currency:"GBP" }} until {{ 1 | percent }}</li>
+          <li class="list-group-item">Joined:{{ user.registered | date: "yyyy-mm-dd" }}</li>
+          <li class="list-group-item" ngNonBindable>{{ 5 | number: "1.2"}}</li>
+        </ul>
       </div>
     </div>
-    
+
   </li>
 </ul>
 
 <!-- ng-template -->
+<!-- ng-template 붙여두고 #name 붙이면 name으로 찾아 들어가서 보여줄 지 안보여줄 지 결정함.
+이 noUser는 <ul>에서 user가 없을 때 선언됨. -->
 <ng-template #noUsers>No Users Found</ng-template>
 <!-- <h4 *ngIf="users.length == 0">No Users Found</h4> -->
 <h4 *ngIf="!loaded">Loading users...</h4>
