@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './testComponents/home/home.component';
 
 // post and list components belows
@@ -10,12 +10,14 @@ import { PostDetailComponent } from './testComponents/post-detail/post-detail.co
 import { NotFoundComponent } from './testComponents/not-found/not-found.component';
 
 
-const routes : Routes = [
-  { path : '', component:HomeComponent},
-  { path : 'users', component:SeventhExampleComponent},
-  { path : 'posts', component:EigthExampleComponent},
-  { path : 'post/:id', component:PostDetailComponent},
-  { path : '**', component: NotFoundComponent}
+// path에 따라서 해당하는 component를 보여준다. '**'는 해당되는 path 외의 모든 path에 대해 다룬다.
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'users', component: SeventhExampleComponent },
+  { path: 'posts', component: EigthExampleComponent },
+  { path: 'post/:id', component: PostDetailComponent }, // :id에서 :는 url에서 query param에서 keyName이 id인 param의 값을 받아오는 것이다.
+                                                        // e.g.) http://localhost:4200/posts/11
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

@@ -68,7 +68,7 @@ export class FifthExampleComponent implements OnInit {
     // this.users.push(this.user);
     this.user.isActive = true;
     this.user.registered = new Date();
-    this.users.unshift(this.user);  // array 제일 앞쪽에 variable을 insert 하는 것이다. push를 쓰면 맨 뒤쪽에 추가한다.
+    this.users.unshift(this.user);  // unshift는 array 제일 앞쪽에 variable을 insert 하는 것이다. push를 쓰면 맨 뒤쪽에 추가한다.
     this.user = {
       firstName: '',
       lastName: '',

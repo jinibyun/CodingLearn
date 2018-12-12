@@ -6,6 +6,7 @@
 <button (click)="showUserForm = !showUserForm" class="btn btn-dark mb-3">Add User</button>
 <div class="card card-body mb-3" *ngIf="showUserForm">
   <h2>Add User</h2>
+  <!-- #에서 userForm 변수 선언. 아래 쪽에 사용되는 userForm과 코드쪽 참고 -->
   <form #userForm ="ngForm" (ngSubmit)="onSubmit(userForm)"> <!-- similar to submit -->
     <div class="form-group">
       <label>First Name</label>
@@ -16,11 +17,11 @@
       [ngClass]="{'is-invalid':userFirstName.errors && userFirstName.touched}"    
       class="form-control" 
       name="fristName"
-      #userFirstName="ngModel" 
+      #userFirstName="ngModel"  
       required
-      minlength="2">
+      minlength="2"><!-- Textbox 하나에다가 변수이름을 넣어 준 것. 변수처럼 사용 가능. 그냥 코드상에서 변수선언과 비슷하다 보면 됨. Template value라 보면 됨???? 검색 -->
       <div [hidden]="!userFirstName.errors?.required" class="invalid-feedback">First name required</div>
-      <div [hidden]="!userFirstName.errors?.minlength" class="invalid-feedback">Must be at least 2 characters</div>                            
+      <div [hidden]="!userFirstName.errors?.minlength" class="invalid-feedback">Must be at least 2 characters</div>      <!-- 위에서 선언된 변수를 여기서 쓰고 있다. -->                      
     </div>
 
 <!-- {{ user.firstName }} -->

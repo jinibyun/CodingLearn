@@ -10,7 +10,7 @@
 <button (click)="showUserForm = !showUserForm" class="btn btn-dark mb-3">Add User</button>
 <div class="card card-body mb-3" *ngIf="showUserForm">
   <h2>Add User</h2>
-  <form (submit)="onSubmit($event)">
+  <form (submit)="onSubmit($event)">  <!-- 버튼으로만 작동하게 한다? 버튼요청이 새나가지 않도록? 코드 쪽 참고 -->
     <div class="form-group">
       <label>First Name</label>
       <!-- to use ngModel, "FormsModule" must be registered in app.module.ts -->
@@ -42,7 +42,8 @@
     </div>
 
     <!-- event and event handler: javascript -->
-    <!-- [] 뒤에 = "" 안에는 typescript 문법을 따른다. -->
+    <!-- [] 뒤에 = "" 안에는 typescript 문법을 따른다 -->
+    <!-- click, disabled, class 등은 모두 Html의 속성이다. 근데 이름들이 완전 동일하진 않고... 실제 html click은 onclick이 되어야 한다던지 -->
     <button (click)="addUser()" [disabled]="user.firstName == '' || user.lastName == '' " class="btn btn-block mb-3">Add
       New User</button>
 

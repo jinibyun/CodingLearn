@@ -23,10 +23,10 @@ export class NinthExampleComponent implements OnInit {
   addPost(title, body) {
 
     // console.log(title, body);
-    if(!title || !body) {
+    if (!title || !body) {
       alert('Please add post');
     } else {
-      this.postService.savePost({title, body} as Post).subscribe(post => {
+      this.postService.savePost({ title, body } as Post).subscribe(post => {
         // console.log(post);
         // emit event to commnunicate different components
         this.newPost.emit(post);
@@ -34,13 +34,13 @@ export class NinthExampleComponent implements OnInit {
     }
   }
 
-  editPost(){
+  editPost() {
     // console.log(123);
     this.postService.updatePost(this.currentPost).subscribe(
-      post =>{
-         console.log(post);
-         this.isEdit = false;
-         this.updatePost.emit(post);
+      post => {
+        console.log(post);
+        this.isEdit = false;
+        this.updatePost.emit(post);
       }
     );
   }

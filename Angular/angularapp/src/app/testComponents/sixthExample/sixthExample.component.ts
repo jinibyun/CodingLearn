@@ -19,7 +19,7 @@ export class SixthExampleComponent implements OnInit {
   
   enabledAdd:boolean = false; // property binding
   showUserForm: boolean = false;
-  @ViewChild('userForm') form:any;
+  @ViewChild('userForm') form:any; // html에서 템플레이트 변수를 주면 그걸 @ViewChild를 통해 접근 가능하도록 함. 타입을 모르니 타입은 거의 form:any를 씀
 
   constructor() { }
 
@@ -67,6 +67,7 @@ export class SixthExampleComponent implements OnInit {
   // toggleHide(user:User3){
   //   user.hide = !user.hide;
   // }
+  // 오브젝트는 하나만 받는다. 자세히보면 {}가 하나뿐이다. 그 오브젝트 안에 user3, boolean과 같은 values가 들어 있는 것이다.
   onSubmit({value, valid}: {value:User3, valid:boolean}){
 	  if(!valid){
       console.log('Forms is not vaild');
