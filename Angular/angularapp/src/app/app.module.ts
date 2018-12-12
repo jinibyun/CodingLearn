@@ -24,7 +24,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { PostDetailComponent } from './testComponents/post-detail/post-detail.component';
 import { NotFoundComponent } from './testComponents/not-found/not-found.component';
 import { CustomerComponent } from './testComponents/customer/customer.component';
+import { Customer2Component } from './testComponents/customer/customer2.component';
 import { RxJsExampleComponent } from './testComponents/rx-js-example/rx-js-example.component';
+import { CustomerService } from './services/customer.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { RxJsExampleComponent } from './testComponents/rx-js-example/rx-js-examp
     PostDetailComponent,
     NotFoundComponent,
     CustomerComponent,
+    Customer2Component,
     RxJsExampleComponent
   ],
   imports: [
@@ -52,6 +55,7 @@ import { RxJsExampleComponent } from './testComponents/rx-js-example/rx-js-examp
     AppRoutingModule
   ],
   providers: [
+    CustomerService,
     DataService,
     PostService
   ],

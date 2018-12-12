@@ -1,0 +1,55 @@
+<h2>Customers</h2>
+
+<button (click)="showCustomerForm = !showCustomerForm" class="btn btn-dark mb-3">Add Customer</button>
+
+<div class="card card-body mb-3" *ngIf="showCustomerForm">
+  <h2>Add Customer</h2>
+  <form (submit)="onSubmit($event)">
+    <div class="form-group">
+      <label>Name</label>
+      <!-- to use ngModel, "FormsModule" must be registered in app.module.ts -->
+      <input type="text" [(ngModel)] = "customer.name" class="form-control" name="name">
+    </div>
+ <!-- {{ user.name }}  -->
+    <div class="form-group">
+      <label>MobilePhone</label>
+      <input type="text" [(ngModel)] = "customer.mobilePhone" class="form-control" name="mobilePhone">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" [(ngModel)] = "customer.eMail" class="form-control" name="eMail">
+    </div>
+    
+
+    <!-- event and event handler: javascript -->
+    <button (click)="addCustomer()" [disabled]="customer.name == ''" class="btn btn-block mb-3">Add
+      New Customer</button>
+
+  </form>
+</div>
+
+
+<ul class="list-unstyled" *ngIf="loaded && customers?.length > 0;else noCustomers">
+  
+  <li class="card card-body mb-2" *ngFor="let customer of customers" >
+    
+    <h3>
+      <!-- pipe : this is about formatting -->
+      {{ customer.name | uppercase }} 
+      <small *ngIf="!customer.isDeleted && customer.mobilePhone && customer.eMail"><button (click)="customer.hide = !customer.hide" class="btn btn-dark btn-sm"><i
+        [ngClass]="customer.hide ? 'fa fa-minus': 'fa fa-plus' "></i></button></small>
+      <!-- another way of property binding. interpolation is only for string. It is recommended for string as above -->
+      <!-- <span [textContent]="user.firstName"></span> -->
+    </h3>
+    <ul class="list-group" *ngIf="customer.hide && customer.mobilePhone && customer.eMail">
+      <li class="list-group-item">Mobole Phone Number: {{ customer.mobilePhone }}</li>
+      <li class="list-group-item">Email: {{ customer.eMail }} </li>
+    </ul>      
+   
+  </li>
+</ul>
+
+<!-- ng-template -->
+<ng-template #noCustomers>No Customers Found</ng-template>
+<!-- <h4 *ngIf="users.length == 0">No Users Found</h4> -->
+<h4 *ngIf="!loaded">Loading customers...</h4>

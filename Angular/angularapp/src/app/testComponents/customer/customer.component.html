@@ -4,25 +4,55 @@
 
 <div class="card card-body mb-3" *ngIf="showCustomerForm">
   <h2>Add Customer</h2>
-  <form (submit)="onSubmit($event)">
+  <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)">
     <div class="form-group">
       <label>Name</label>
       <!-- to use ngModel, "FormsModule" must be registered in app.module.ts -->
-      <input type="text" [(ngModel)] = "customer.name" class="form-control" name="name">
+      <input type="text"
+     [(ngModel)] = "customer.name" 
+     [ngClass]="{'is-invalid':customerName.errors && customerName.touched}"
+     class="form-control"
+     name="name"
+     #customerName="ngModel"
+     required
+     minLength="2">
+     <div [hidden]="!customerName.errors?.required" class="invalid-feedback">Name required</div>
+     
+     <div [hidden]="!customerName.errors?.minlength" class="invalid-feedback">Must be at least 2 characters</div>                            
     </div>
  <!-- {{ user.name }}  -->
     <div class="form-group">
       <label>MobilePhone</label>
-      <input type="text" [(ngModel)] = "customer.mobilePhone" class="form-control" name="mobilePhone">
+      <input type="text"
+     [(ngModel)] = "customer.mobilePhone" 
+      [ngClass]="{'is-invalid':customerMobilePhone.errors && customerMobilePhone.touched}"    
+      class="form-control" 
+      name="mobilePhone"
+      #customerMobilePhone="ngModel" 
+      required
+      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+      
+      <div [hidden]="!customerMobilePhone.errors?.required" class="invalid-feedback">Mobile Phone Number required</div>
+      <div [hidden]="!customerMobilePhone.errors?.pattern" class="invalid-feedback">Phone Number is not valid</div>
     </div>
+
     <div class="form-group">
       <label>Email</label>
-      <input type="text" [(ngModel)] = "customer.eMail" class="form-control" name="eMail">
+      <input type="text" 
+      [(ngModel)] = "customer.eMail"   
+      [ngClass]="{'is-invalid':customerEmail.errors && customerEmail.touched}"    
+      class="form-control" 
+      name="Email"
+      #customerEmail="ngModel" 
+      required
+      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+
+      <div [hidden]="!customerEmail.errors?.required" class="invalid-feedback">Email required</div>
+      <div [hidden]="!customerEmail.errors?.pattern" class="invalid-feedback">Email is not valid</div>
     </div>
     
 
-    <!-- event and event handler: javascript -->
-    <button (click)="addCustomer()" [disabled]="customer.name == ''" class="btn btn-block mb-3">Add
+    <button [disabled]="!customerForm.form.valid" class="btn btn-block mb-3">Add
       New Customer</button>
 
   </form>
@@ -34,15 +64,13 @@
   <li class="card card-body mb-2" *ngFor="let customer of customers" >
     
     <h3>
-      <!-- pipe : this is about formatting -->
-      {{ customer.name | uppercase }} 
-      <small *ngIf="!customer.isDeleted && customer.mobilePhone && customer.eMail"><button (click)="customer.hide = !customer.hide" class="btn btn-dark btn-sm"><i
+       {{ customer.name | uppercase }} 
+      <small><button (click)="customer.hide = !customer.hide" class="btn btn-dark btn-sm"><i
         [ngClass]="customer.hide ? 'fa fa-minus': 'fa fa-plus' "></i></button></small>
-      <!-- another way of property binding. interpolation is only for string. It is recommended for string as above -->
-      <!-- <span [textContent]="user.firstName"></span> -->
+      
     </h3>
-    <ul class="list-group" *ngIf="customer.hide && customer.mobilePhone && customer.eMail">
-      <li class="list-group-item">Mobole Phone Number: {{ customer.mobilePhone }}</li>
+    <ul class="list-group" *ngIf="customer.hide && !customer.isDeleted">
+      <li class="list-group-item">Mobile Phone Number: {{ customer.mobilePhone }}</li>
       <li class="list-group-item">Email: {{ customer.eMail }} </li>
     </ul>      
    

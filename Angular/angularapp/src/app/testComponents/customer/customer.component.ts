@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { Customer } from '../../models/Customer';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-customer',
@@ -21,44 +22,34 @@ export class CustomerComponent implements OnInit {
   enabledAdd:boolean = false; // property binding
   
   showCustomerForm: boolean = false;
+
+  @ViewChild('customerForm') form:any;
+  data:any;
  
-  constructor() { }
+  constructor(private customerService:CustomerService) { }
 
   ngOnInit() {
-    this.customers = [
-      {
-        name : "Amy",
-        mobilePhone : "647-123-4567",
-        eMail : "amy@gamil.com",
-        isDeleted: false
-        
-      },
-      {
-        name : "Monica",
-        mobilePhone : "647-365-4987",
-        eMail : "amoni@gamil.com",
-        isDeleted: true
-      },
-      {
-        name : "Mike",
-        mobilePhone : "647-998-7157",
-        eMail : "mikey@gyahoo.com",
-        isDeleted: false
-      }
-
-    ];
-  }
+    this.customerService.getData().subscribe(data => {
+      console.log(data);
+    });
+    this.customerService.getCustomers().subscribe(customers => {
+      this.customers = customers;
+      this.loaded = true;
+    }
+      );
+}
     
-addCustomer(){
-  // this.users.push(this.user);
 
-  this.customers.unshift(this.customer);
-  this.customer.isDeleted = false;
-  this.customer = {
-    name : '',
-    mobilePhone: '',
-    eMail : ''    
-   }
-  }  
+onSubmit({value, valid}: {value:Customer, valid:boolean}){
+  if(!valid){
+    console.log('Forms is not vaild');
+
+  }
+  else{
+    value.isDeleted = false;
+    this.customers.unshift(value);
+    this.form.reset();
+  }
+}
   
 }
