@@ -67,6 +67,8 @@ export class SixthExampleComponent implements OnInit {
   // toggleHide(user:User3){
   //   user.hide = !user.hide;
   // }
+
+  //one object with 2 members
   onSubmit({value, valid}: {value:User3, valid:boolean}){
 	  if(!valid){
       console.log('Forms is not vaild');

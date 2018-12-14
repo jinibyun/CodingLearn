@@ -22,7 +22,8 @@ import { HomeComponent } from './testComponents/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PostDetailComponent } from './testComponents/post-detail/post-detail.component';
 import { NotFoundComponent } from './testComponents/not-found/not-found.component';
-
+import { CustomerComponent } from './testComponents/customer/customer.component';
+import { Customer2Component } from './testComponents/customer2/customer2.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { NotFoundComponent } from './testComponents/not-found/not-found.componen
     NinthExampleComponent,
     HomeComponent,
     PostDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CustomerComponent,
+    Customer2Component
   ],
   imports: [
     BrowserModule,

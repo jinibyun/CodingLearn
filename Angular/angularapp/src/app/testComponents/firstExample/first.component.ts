@@ -29,7 +29,9 @@ export class FirstComponent{
     unusable : void;
     u:undefined;
     n:null;
+    tempVar: string ="This is a temp";
 
+    //object
     address = {
         street: '50 main st',
         city: 'Toronto'

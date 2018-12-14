@@ -44,6 +44,7 @@ constructor() {
 
   getUsers(): Observable<User3[]> {
     return of(this.users);
+    //return of == yield return (c#)
   }
     
   addUser(user:User3){

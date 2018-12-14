@@ -8,10 +8,12 @@ import { EigthExampleComponent } from './testComponents/eigthExample/eigthExampl
 import { PostDetailComponent } from './testComponents/post-detail/post-detail.component';
 
 import { NotFoundComponent } from './testComponents/not-found/not-found.component';
+import { Customer2Component } from './testComponents/customer2/customer2.component';
 
 
 const routes : Routes = [
   { path : '', component:HomeComponent},
+  { path : 'customers', component:Customer2Component},
   { path : 'users', component:SeventhExampleComponent},
   { path : 'posts', component:EigthExampleComponent},
   { path : 'post/:id', component:PostDetailComponent},

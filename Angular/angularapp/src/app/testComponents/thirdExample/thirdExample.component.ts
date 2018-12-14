@@ -12,7 +12,7 @@ import { User } from '../../models/User'; // call interface (manually create)
 })
 export class ThirdExampleComponent implements OnInit {  
   users:User[];
-  showExtended : boolean = false;
+  showExtended : boolean = true;
   loaded:boolean = true; // mimi data loading
   
   enabledAdd:boolean = true; // property binding
