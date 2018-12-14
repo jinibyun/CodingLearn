@@ -1,4 +1,5 @@
-﻿using DatingApp.BLL;
+﻿using AutoMapper;
+using DatingApp.BLL;
 using DatingApp.WebApiService.Models;
 using System.Web.Http;
 
@@ -10,7 +11,7 @@ namespace DatingApp.WebApiService.Controllers
     public class BaseApiController : ApiController
     {
         protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        protected readonly IDataService _service;
+        protected readonly IDataService _service;        
         private ModelFactory _modelFactory;
 
         public BaseApiController(IDataService service)

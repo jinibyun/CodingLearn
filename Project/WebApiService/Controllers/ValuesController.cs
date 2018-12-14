@@ -1,4 +1,5 @@
-﻿using DatingApp.BLL;
+﻿using AutoMapper;
+using DatingApp.BLL;
 using DatingApp.BLL.Interface;
 using DatingApp.WebApiService.Filters;
 using System;

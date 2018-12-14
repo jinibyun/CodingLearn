@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using DatingApp.WebApiService.App_Start;
+using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
@@ -23,7 +24,9 @@ namespace DatingApp.WebApiService
             // To prevent any anonymous request to your resources.
             config.Filters.Add(new AuthorizeAttribute());
 
-
+            // Auto Mapping
+            // initialize automapper between domain and Dto (Data Transfer Object)
+            AutoMapperConfiguration.Configure();
 
             //Support for CORS (Cross Origin Resource Sharing)
             EnableCorsAttribute CorsAttribute = new EnableCorsAttribute("*", "*", "GET,POST");

@@ -1,4 +1,5 @@
-﻿using DatingApp.BLL;
+﻿using AutoMapper;
+using DatingApp.BLL;
 using DatingApp.BLL.Interface;
 using DatingApp.Data;
 using DatingApp.WebApiService.Dto;
@@ -17,7 +18,8 @@ namespace DatingApp.WebApiService.Controllers
     [RoutePrefix("api/User")]
     public class UserController : BaseApiController
     {
-        private readonly IUserService UserService;           
+        private readonly IUserService UserService;  
+        
         public UserController(IDataService _service) : base(_service)
         {
             UserService = Service.UserService;            
@@ -26,7 +28,7 @@ namespace DatingApp.WebApiService.Controllers
         [HttpPost]
         [Route("Register")]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> Register([FromBody]UserDto user) // FromBody is automaticlly added. just explicit expression
+        public async Task<IHttpActionResult> Register([FromBody]UserForRegisterDto userForRegisterDto) // FromBody is automaticlly added. just explicit expression
         {
             // ModelState is always related "DataAnnotation"
             if (!ModelState.IsValid)
@@ -34,21 +36,19 @@ namespace DatingApp.WebApiService.Controllers
 
             try
             {
-                user.UserName = user.UserName.ToLower();
-                var existingUser = await UserService.GetUserByName(user.UserName);
+                userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+                var existingUser = await UserService.GetUserByName(userForRegisterDto.Username);
                 if (existingUser != null)
                 {
                     return BadRequest("UserName already exists");
                 }
 
-                var userToCreate = new User
-                {
-                    Username = user.UserName,
-                    Created = DateTime.Now,
-                    LastActive = DateTime.Now
+                var userToCreate = Mapper.Map<User>(userForRegisterDto);
 
-                };
-                var createdUser = await UserService.Register(userToCreate, user.Password);
+                var createdUser = await UserService.Register(userToCreate, userForRegisterDto.Password);
+                var userToReturn = Mapper.Map<UserForDetailedDto>(createdUser);
+
+                // return CreatedAtRoute("GetUser", new { controller = "Users", id = createdUser.Id }, userToReturn);
                 return StatusCode(HttpStatusCode.Created);
             }
             catch (Exception ex)
@@ -61,11 +61,11 @@ namespace DatingApp.WebApiService.Controllers
         [HttpPost]
         [Route("Login")]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> Login(UserDto user)
+        public async Task<IHttpActionResult> Login(UserForLoginDto user)
         {
             try
             {
-                var loginUser = await UserService.Login(user.UserName.ToLower(), user.Password);
+                var loginUser = await UserService.Login(user.Username.ToLower(), user.Password);
                 if(loginUser == null)
                 {
                     return Unauthorized();
@@ -73,10 +73,12 @@ namespace DatingApp.WebApiService.Controllers
 
                 var generatedToken = Utils.GenerateToken(loginUser.Username);
 
+                var userDto = Mapper.Map<UserForListDto>(loginUser);
+
                 return Ok(new
                 {
                     token = generatedToken,
-                    user
+                    userDto
                 });
 
                 // NOTE: how to test
@@ -91,5 +93,9 @@ namespace DatingApp.WebApiService.Controllers
                 return StatusCode(HttpStatusCode.ExpectationFailed);
             }
         }
+
+
+
+
     }
 }
