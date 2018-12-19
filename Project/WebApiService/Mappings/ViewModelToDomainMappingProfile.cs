@@ -9,6 +9,10 @@ namespace DatingApp.WebApiService.Mappings
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<UserForUpdateDto, User>();
+            CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<UserForRegisterDto, User>();
+            CreateMap<MessageForCreationDto, Message>().ReverseMap();
         }
     }
 }

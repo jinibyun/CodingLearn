@@ -11,9 +11,11 @@ namespace DatingApp.Data
     {
         IRepository<Value> Value { get; }
         IRepository<User> User { get; }
+        IRepository<Like> Like { get; }
         IRepository<Message> Message { get; }
         IRepository<Photo> Photo { get; }
         Task<int> SaveChangesAsync();
+        int SaveChanges();
 
     }
 }

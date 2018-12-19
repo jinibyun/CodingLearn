@@ -24,5 +24,30 @@ namespace DatingApp.BLL.Implementation
         {
             return await _photo.GetSingleAsync(p => p.Id == id);
         }
+
+        //public async Task<int> SaveChangesAsync()
+        //{
+        //    try
+        //    {
+        //        var a = await _repo.SaveChangesAsync();
+        //        return a;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }            
+        //}
+
+        public bool AddPhoto(Photo photo)
+        {
+            _photo.Add(photo);
+            return _repo.SaveChanges() > 0;
+        }
+
+        public void DeletePhoto(Photo photo)
+        {
+            _photo.Remove(photo);
+        }
     }
 }

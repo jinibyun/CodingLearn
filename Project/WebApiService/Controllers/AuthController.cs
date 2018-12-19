@@ -3,26 +3,25 @@ using DatingApp.BLL;
 using DatingApp.BLL.Interface;
 using DatingApp.Data;
 using DatingApp.WebApiService.Dto;
-using Microsoft.IdentityModel.Tokens;
+using DatingApp.WebApiService.Filters;
 using System;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
-using System.Security.Claims;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace DatingApp.WebApiService.Controllers
-{    
-    [RoutePrefix("api/User")]
-    public class UserController : BaseApiController
+{
+    [RoutePrefix("api/Auth")]
+    [JwtAuthentication]
+    public class AuthController : BaseApiController
     {
-        private readonly IUserService UserService;  
-        
-        public UserController(IDataService _service) : base(_service)
+        private readonly IUserService UserService;
+        public AuthController(IDataService _service) : base(_service)
         {
-            UserService = Service.UserService;            
+            UserService = Service.UserService;
         }
 
         [HttpPost]
@@ -61,24 +60,23 @@ namespace DatingApp.WebApiService.Controllers
         [HttpPost]
         [Route("Login")]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> Login(UserForLoginDto user)
+        public async Task<IHttpActionResult> Login(UserForLoginDto userDto)
         {
             try
             {
-                var loginUser = await UserService.Login(user.Username.ToLower(), user.Password);
-                if(loginUser == null)
+                var loginUser = await UserService.Login(userDto.Username.ToLower(), userDto.Password);
+                if (loginUser == null)
                 {
                     return Unauthorized();
                 }
 
                 var generatedToken = Utils.GenerateToken(loginUser.Username);
-
-                var userDto = Mapper.Map<UserForListDto>(loginUser);
+                var user = Mapper.Map<UserForListDto>(loginUser);
 
                 return Ok(new
                 {
                     token = generatedToken,
-                    userDto
+                    user
                 });
 
                 // NOTE: how to test
@@ -93,8 +91,6 @@ namespace DatingApp.WebApiService.Controllers
                 return StatusCode(HttpStatusCode.ExpectationFailed);
             }
         }
-
-
 
 
     }

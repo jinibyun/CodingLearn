@@ -14,6 +14,8 @@ namespace DatingApp.BLL.Interface
         Task<User> GetUserById(int id);
         Task<User> GetUserByName(string name);
         Task<PagedList<User>> GetUsers(UserParams userParams);
-        Task<IEnumerable<int>> GetUserLikes(int id, bool likers);
+        Task<IEnumerable<int>> GetUserLikes(int id, bool likers);        
+        Task<int> SaveChangesAsync();
+        
     }
 }

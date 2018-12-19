@@ -80,7 +80,5 @@ namespace DatingApp.Data.Implementation
         {
             _entities.RemoveRange(entities);
         }
-
-        
     }
 }

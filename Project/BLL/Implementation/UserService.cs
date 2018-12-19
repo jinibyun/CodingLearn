@@ -119,6 +119,11 @@ namespace DatingApp.BLL.Implementation
             }
         }
 
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _repo.SaveChangesAsync();
+        }
+
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -140,6 +145,6 @@ namespace DatingApp.BLL.Implementation
                 }
             }
             return true;
-        }
+        }        
     }
 }

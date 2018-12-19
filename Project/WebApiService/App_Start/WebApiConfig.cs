@@ -27,10 +27,17 @@ namespace DatingApp.WebApiService
             // Auto Mapping
             // initialize automapper between domain and Dto (Data Transfer Object)
             AutoMapperConfiguration.Configure();
-
+            
             //Support for CORS (Cross Origin Resource Sharing)
             EnableCorsAttribute CorsAttribute = new EnableCorsAttribute("*", "*", "GET,POST");
             config.EnableCors(CorsAttribute);
+
+            // conventional-base route
+            config.Routes.MapHttpRoute(
+                name: "PhotosController",
+                routeTemplate: "api/users/{userId}/photos",
+                defaults: new { controller = "Photos" }
+            );
 
             // default
             config.Routes.MapHttpRoute(
@@ -38,6 +45,11 @@ namespace DatingApp.WebApiService
                 routeTemplate: "api/{controller}/{id}", // URL pattern of the route
                 defaults: new { id = RouteParameter.Optional } // An object parameter that includes default route values
             );
+
+            
+
+
+
 
             // Now all JSON objects properties return in camel case
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();

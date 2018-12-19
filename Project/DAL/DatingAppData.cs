@@ -16,6 +16,7 @@ namespace DatingApp.Data
         public IRepository<User> User { get; private set; }
         public IRepository<Message> Message { get; private set; }
         public IRepository<Photo> Photo { get; private set; }
+        public IRepository<Like> Like { get; private set; }
 
         public DatingAppData(DatingAppEntities context)
         {
@@ -24,12 +25,18 @@ namespace DatingApp.Data
             User = new Repository<User>(_context);
             Message = new Repository<Message>(_context);
             Photo = new Repository<Photo>(_context);
+            Like = new Repository<Like>(_context);
         }
 
 
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
+        }
+
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
         }
 
         public void Dispose()

@@ -11,5 +11,9 @@ namespace DatingApp.BLL
     {
         IUserService UserService { get; }
         IValueService ValueService { get; }
+        ILikeService LikeService { get; }
+        IPhotoService PhotoService { get; }
+        IMessageService MessageService { get; }
+
     }
 }

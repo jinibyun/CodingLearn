@@ -9,42 +9,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  model: any = {};
+  photoUrl: string;
 
-  model : any = {};
-
-  constructor(public authService: AuthService, private alertify: AlertifyService, private router:Router) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService,
+      private router: Router) { }
 
   ngOnInit() {
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
-  login(){
-    this.authService.login(this.model).subscribe(
-      next => {
-        // console.log('login successful');
-        this.alertify.success('login successful');
-        
-      }, error =>{
-        // console.log('faile to login');
-        // NOTE: see error.interceptor.ts 
-        // console.log(error);
-        this.alertify.error(error);
-      },
-      () => {
-        this.router.navigate(['/members']);
-      }
-    );
+  login() {
+    this.authService.login(this.model).subscribe(next => {
+      this.alertify.success('Logged in successfully');
+    }, error => {
+      this.alertify.error(error);
+    }, () => {
+      this.router.navigate(['/members']);
+    });
   }
 
-  loggedIn(){
-    // const token = localStorage.getItem('token');
-    // return !!token; // !! means token is empty, return false.
-    return this.authService.loggedIn();
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('token');
-    // console.log('log out');
+    localStorage.removeItem('user');
+    this.authService.decodedToken = null;
+    this.authService.currentUser = null;
     this.alertify.message('logged out');
-    this.router.navigate(['home']);
+    this.router.navigate(['/home']);
   }
+
 }

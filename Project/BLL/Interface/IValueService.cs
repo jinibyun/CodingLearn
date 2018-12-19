@@ -11,5 +11,7 @@ namespace DatingApp.BLL.Interface
     {        
         Task<IEnumerable<Value>> GetAllValue();
         Task<Value> GetValue(int id);
+        Task<int> SaveChangesAsync();
+        int SaveChanges();
     }
 }

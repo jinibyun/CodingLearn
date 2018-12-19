@@ -11,5 +11,9 @@ namespace DatingApp.BLL.Interface
     {
         Task<Photo> GetMainPhotoForUser(int userId);
         Task<Photo> GetPhoto(int id);
+        void DeletePhoto(Photo message);
+        //Task<int> SaveChangesAsync();
+        //bool SaveChanges();
+        bool AddPhoto(Photo photo);
     }
 }

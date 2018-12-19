@@ -32,6 +32,7 @@ namespace DatingApp.WebApiService
             {
                 Subject = new ClaimsIdentity(new[]
                         {
+                        // new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                         new Claim(ClaimTypes.Name, username)
                     }),
 

@@ -15,6 +15,7 @@ namespace DatingApp.BLL
         public IValueService ValueService { get; private set; }        
         public IPhotoService PhotoService { get; private set; }
         public IMessageService MessageService { get; private set; }
+        public ILikeService LikeService { get; private set; }
 
         public DataService(IDatingAppData _repo)
         {
@@ -22,6 +23,7 @@ namespace DatingApp.BLL
             ValueService = new ValueService(_repo);
             PhotoService = new PhotoService(_repo);
             MessageService = new MessageService(_repo);
+            LikeService = new LikeService(_repo);
         }
     }
 }

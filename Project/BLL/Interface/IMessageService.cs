@@ -13,5 +13,8 @@ namespace DatingApp.BLL.Interface
         Task<Message> GetMessage(int id);
         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
+        void AddMessage(Message message);
+        void DeleteMessage(Message message);
+        Task<int> SaveChangesAsync();
     }
 }

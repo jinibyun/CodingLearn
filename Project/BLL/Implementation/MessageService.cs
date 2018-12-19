@@ -14,7 +14,7 @@ namespace DatingApp.BLL.Implementation
         public MessageService(IDatingAppData repo) : base(repo)
         {
 
-        }
+        }        
 
         public async Task<Message> GetMessage(int id)
         {
@@ -66,6 +66,21 @@ namespace DatingApp.BLL.Implementation
                                     
                                     );
             return await Task.FromResult(messages.OrderByDescending(m => m.MessageSent).ToList());
+        }
+
+        public void AddMessage(Message message)
+        {
+            _message.Add(message);
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {           
+            return await _repo.SaveChangesAsync();
+        }
+
+        public void DeleteMessage(Message message)
+        {
+            _message.Remove(message);
         }
     }
 }

@@ -69,10 +69,12 @@
     <Compile Include="Helper\UserParams.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="Implementation\BaseDataService.cs" />
+    <Compile Include="Implementation\LikeService.cs" />
     <Compile Include="Implementation\MessageService.cs" />
     <Compile Include="Implementation\PhotoService.cs" />
     <Compile Include="Implementation\UserService.cs" />
     <Compile Include="Implementation\ValueService.cs" />
+    <Compile Include="Interface\ILikeService.cs" />
     <Compile Include="Interface\IMessageService.cs" />
     <Compile Include="Interface\IPhotoService.cs" />
     <Compile Include="Interface\IUserService.cs" />

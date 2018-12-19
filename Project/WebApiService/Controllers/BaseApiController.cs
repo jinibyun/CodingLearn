@@ -1,6 +1,7 @@
-﻿using AutoMapper;
-using DatingApp.BLL;
+﻿using DatingApp.BLL;
 using DatingApp.WebApiService.Models;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace DatingApp.WebApiService.Controllers
@@ -16,7 +17,7 @@ namespace DatingApp.WebApiService.Controllers
 
         public BaseApiController(IDataService service)
         {
-            _service = service;
+            _service = service;           
         }
 
         protected IDataService Service
@@ -36,6 +37,15 @@ namespace DatingApp.WebApiService.Controllers
                     _modelFactory = new ModelFactory();
                 }
                 return _modelFactory;
+            }
+        }
+
+        protected IEnumerable<Claim> IdentityClaims
+        {
+            get
+            {
+                var identity = (ClaimsIdentity)User.Identity;
+                return identity.Claims;
             }
         }
     }

@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace DatingApp.WebApiService.Controllers
 {
+    
     [RoutePrefix("api/Values")]
     [JwtAuthentication]
     public class ValuesController : BaseApiController

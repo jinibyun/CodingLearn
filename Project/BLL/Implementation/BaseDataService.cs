@@ -14,18 +14,16 @@ namespace DatingApp.BLL.Implementation
         protected IRepository<User> _user { get; private set; }
         protected IRepository<Message> _message { get; private set; }
         protected IRepository<Photo> _photo { get; private set; }
+        protected IRepository<Like> _like { get; private set; }
 
         public BaseDataService(IDatingAppData repo)
         {
             _repo = repo;
-            _value = repo.Value;
+            _value = _repo.Value;
             _user = _repo.User;
             _photo = _repo.Photo;
-        }
-
-        protected async Task<int> SaveChangesAsync()
-        {
-            return await _repo.SaveChangesAsync();
-        }
+            _message = _repo.Message;
+            _like = _repo.Like;
+        }        
     }
 }

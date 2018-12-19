@@ -22,5 +22,14 @@ namespace DatingApp.BLL.Implementation
         {
             return await _value.GetSingleAsync(x => x.Id == id);
         }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _repo.SaveChangesAsync();
+        }
+        public int SaveChanges()
+        {
+            return _repo.SaveChanges();
+        }
     }
 }
