@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../_models/user';
-import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../services/user.service';
-import { AlertifyService } from '../../services/alertify.service';
+import { AuthService } from '../../_services/auth.service';
+import { UserService } from '../../_services/user.service';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-member-card',

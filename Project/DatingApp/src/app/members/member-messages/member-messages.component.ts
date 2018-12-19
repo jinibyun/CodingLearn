@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Message } from '../../_models/message';
-import { UserService } from '../../services/user.service';
-import { AuthService } from '../../services/auth.service';
-import { AlertifyService } from '../../services/alertify.service';
+import { UserService } from '../../_services/user.service';
+import { AuthService } from '../../_services/auth.service';
+import { AlertifyService } from '../../_services/alertify.service';
 import { tap } from 'rxjs/operators';
 
 @Component({
