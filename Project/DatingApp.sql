@@ -1,12 +1,11 @@
 USE [master]
 GO
 
-CREATE DATABASE [DatingApp]
-GO
+CREATE DATABASE [DatingApp] GO
 
 USE [DatingApp]
 GO
-
+/****** Object:  Table [dbo].[Likes]    Script Date: 12/19/2018 7:23:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,7 +22,7 @@ CREATE TABLE [dbo].[Likes](
 ) ON [PRIMARY]
 
 GO
-
+/****** Object:  Table [dbo].[Messages]    Script Date: 12/19/2018 7:23:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -45,7 +44,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-
+/****** Object:  Table [dbo].[Photos]    Script Date: 12/19/2018 7:23:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -65,7 +64,7 @@ CREATE TABLE [dbo].[Photos](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-
+/****** Object:  Table [dbo].[Users]    Script Date: 12/19/2018 7:23:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,7 +95,7 @@ CREATE TABLE [dbo].[Users](
 GO
 SET ANSI_PADDING OFF
 GO
-
+/****** Object:  Table [dbo].[Values]    Script Date: 12/19/2018 7:23:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
