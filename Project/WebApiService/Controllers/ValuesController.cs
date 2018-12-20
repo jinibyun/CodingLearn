@@ -13,6 +13,7 @@ namespace DatingApp.WebApiService.Controllers
     
     [RoutePrefix("api/Values")]
     [JwtAuthentication]
+    // [Authorize]
     public class ValuesController : BaseApiController
     {
         private readonly IValueService ValueService;
@@ -22,7 +23,7 @@ namespace DatingApp.WebApiService.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        // [AllowAnonymous]
         public async Task<IHttpActionResult> Get()
         {           
             try
