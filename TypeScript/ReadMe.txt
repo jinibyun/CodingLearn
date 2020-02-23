@@ -1,4 +1,8 @@
-** 다음의 순서대로 진행할 것
-1. 반드시 Node.js 와 npm 을 설치 혹은 업데이트 한다         http://www.mithunvp.com/learning-typescript-with-visual-studio-code/
-2. typescript 설치 npm install -g typescript 
-
+# Preparation of studying typescript
+1. Install Node.js
+2. Install npm  (this is included to Node.js)      
+3. Install typescript:  npm install -g typescript   
+    (with or without -g)
+4. Then opne this folder with vs code and Setup environment for learning TypeScript
+    ref: http://www.mithunvp.com/learning-typescript-with-visual-studio-code/
+    (Note: Step 4 is optional)
