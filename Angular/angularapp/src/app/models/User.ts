@@ -1,3 +1,5 @@
+// ref: https://www.tutorialspoint.com/typescript/typescript_interfaces.htm
+
 export interface User {
 	firstName : string,
 	lastName: string,

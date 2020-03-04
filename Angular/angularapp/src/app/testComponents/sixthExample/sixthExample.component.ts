@@ -16,10 +16,10 @@ export class SixthExampleComponent implements OnInit {
   users:User3[];
   showExtended : boolean = true;
   loaded:boolean = true; // mimi data loading
-  
+
   enabledAdd:boolean = false; // property binding
   showUserForm: boolean = false;
-  @ViewChild('userForm') form:any;
+  @ViewChild('userForm', {static: false}) form:any;
 
   constructor() { }
 
@@ -35,8 +35,8 @@ export class SixthExampleComponent implements OnInit {
         },
         {
           firstName : "Kevin",
-          lastName : "Johnson"   ,  
-          email: 'Kevin@gmail.com',        
+          lastName : "Johnson"   ,
+          email: 'Kevin@gmail.com',
 		      isActive: true   ,
           registered:new Date('03/11/2017 08:30:00') ,
           hide:false
@@ -49,7 +49,7 @@ export class SixthExampleComponent implements OnInit {
           registered:new Date('11/25/2017 10:30:00'),
           hide:true
         }
-      ]; 
+      ];
   }
 
   // addUser(){
@@ -62,7 +62,7 @@ export class SixthExampleComponent implements OnInit {
   //     lastName : '',
   //     email: ''
   //   }
-  // }  
+  // }
 
   // toggleHide(user:User3){
   //   user.hide = !user.hide;

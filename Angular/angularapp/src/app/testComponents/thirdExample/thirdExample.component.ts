@@ -10,11 +10,11 @@ import { User } from '../../models/User'; // call interface (manually create)
   templateUrl: './thirdExample.component.html',
   styleUrls: ['./thirdExample.component.css']
 })
-export class ThirdExampleComponent implements OnInit {  
+export class ThirdExampleComponent implements OnInit {
   users:User[];
   showExtended : boolean = false;
   loaded:boolean = true; // mimi data loading
-  
+
   enabledAdd:boolean = true; // property binding
   currentClasses = {}; // empty object
   currentStyles = {};
@@ -46,7 +46,7 @@ export class ThirdExampleComponent implements OnInit {
           image: 'https://imgplaceholder.com/600x600/cccccc/757575/glyphicon-picture'   ,
 		  isActive: false   ,
 		  balance:200,
-		  registered:new Date('03/11/2017 08:30:00') 
+		  registered:new Date('03/11/2017 08:30:00')
         },
         {
           firstName : "Caren",
@@ -61,7 +61,7 @@ export class ThirdExampleComponent implements OnInit {
 		  balance:50,
 		  registered:new Date('11/25/2017 10:30:00')
         }
-      ]; 
+      ];
 
       // test
       this.showExtended = true;
@@ -96,7 +96,7 @@ export class ThirdExampleComponent implements OnInit {
   setcurrentStyles(){
 	  this.currentStyles = {
 		  'padding-top': this.showExtended ?'0':'40px',
-		  'font-size': this.showExtended ? '': '40px' 
+		  'font-size': this.showExtended ? '': '40px'
 	  }
   }
 }

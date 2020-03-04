@@ -16,7 +16,7 @@ export class SecondComponentsComponent {
   // property as object
   user: User;
 
-  constructor() { 
+  constructor() {
     this.user = {
       firstName : "John",
       lastName : "Doe",

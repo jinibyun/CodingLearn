@@ -9,10 +9,12 @@
 <button (click)="showUserForm = !showUserForm" class="btn btn-dark mb-3">Add User</button>
 <div class="card card-body mb-3" *ngIf="showUserForm">
   <h2>Add User</h2>
+  <!--JavaScript: what is event bubbling? -->
   <form (submit)="onSubmit($event)">
     <div class="form-group">
       <label>First Name</label>
       <!-- to use ngModel, "FormsModule" must be registered in app.module.ts -->
+      <!-- two way binding -->
       <input type="text" [(ngModel)] = "user.firstName" class="form-control" name="fristName">
     </div>
 <!-- {{ user.firstName }} -->

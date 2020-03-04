@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { User3 } from '../../models/User'; // call interface 
+import { User3 } from '../../models/User'; // call interface
 import { DataService } from '../../services/data.service';
 @Component({
   selector: 'app-seventhExample',
@@ -16,13 +16,13 @@ export class SeventhExampleComponent implements OnInit {
   users:User3[];
   showExtended : boolean = true;
   loaded:boolean = true; // mimi data loading
-  
+
   enabledAdd:boolean = false; // property binding
   showUserForm: boolean = false;
-  @ViewChild('userForm') form:any;
+  @ViewChild('userForm', {static: false}) form:any;
   data:any;
   // dependency injection
-  constructor(private dataService:DataService) { 
+  constructor(private dataService:DataService) {
 
   }
 

@@ -21,7 +21,7 @@ export class FifthExampleComponent implements OnInit {
   users:User2[];
   showExtended : boolean = true;
   loaded:boolean = true; // mimi data loading
-  
+
   enabledAdd:boolean = false; // property binding
   showUserForm: boolean = false;
   constructor() { }
@@ -43,7 +43,7 @@ export class FifthExampleComponent implements OnInit {
         },
         {
           firstName : "Kevin",
-          lastName : "Johnson"   ,          
+          lastName : "Johnson"   ,
 		      isActive: true   ,
           registered:new Date('03/11/2017 08:30:00') ,
           hide:false
@@ -61,14 +61,15 @@ export class FifthExampleComponent implements OnInit {
           registered:new Date('11/25/2017 10:30:00'),
           hide:true
         }
-      ]; 
+      ];
   }
 
+  // NOTE: why there is no parameter? because of two way of data binding : ngModel
   addUser(){
-    // this.users.push(this.user);
+
     this.user.isActive = true;
     this.user.registered = new Date();
-    this.users.unshift(this.user);
+    this.users.unshift(this.user);// this.users.push(this.user);
     this.user = {
       firstName : '',
       lastName : '',
@@ -79,7 +80,7 @@ export class FifthExampleComponent implements OnInit {
         state: ''
       }
     }
-  }  
+  }
 
   // toggleHide(user:User2){
   //   user.hide = !user.hide;
