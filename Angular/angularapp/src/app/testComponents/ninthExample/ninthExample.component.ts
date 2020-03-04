@@ -9,12 +9,14 @@ import { Post } from '../../models/Post';
 })
 export class NinthExampleComponent implements OnInit {
 
+  // @Output and @Input are for "exposing property" to other component
   // post: Post;
   @Output() newPost: EventEmitter<Post> = new EventEmitter();
   @Output() updatePost: EventEmitter<Post> = new EventEmitter();
   @Input() currentPost: Post;
   @Input() isEdit: Boolean;
 
+  // Angular dependency Injection
   constructor(private postService: PostService) { }
 
   ngOnInit() {
@@ -29,6 +31,7 @@ export class NinthExampleComponent implements OnInit {
       this.postService.savePost({title, body} as Post).subscribe(post => {
         // console.log(post);
         // emit event to commnunicate different components
+        // It is like raise event after saving
         this.newPost.emit(post);
       });
     }
@@ -40,6 +43,8 @@ export class NinthExampleComponent implements OnInit {
       post =>{
          console.log(post);
          this.isEdit = false;
+
+         // It is like raise event after updating
          this.updatePost.emit(post);
       }
     );

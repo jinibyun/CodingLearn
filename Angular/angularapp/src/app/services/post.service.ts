@@ -9,12 +9,15 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 }
 
+// Please make sure in "service", they have different decorator(attribute), which is "Injectable".
+// Also keep in mind that this "service" must be registered in app.moulde.ts (providers section)
 @Injectable()
 export class PostService {
-  
+
   // ref: fake api : make sure https
   postsUrl: string = 'https://jsonplaceholder.typicode.com/posts';
 
+  // Angular Dependency Injection
   constructor(private http: HttpClient) { }
 
   getPosts() : Observable<Post[]> {

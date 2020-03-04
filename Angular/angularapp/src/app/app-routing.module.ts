@@ -14,8 +14,8 @@ const routes : Routes = [
   { path : '', component:HomeComponent},
   { path : 'users', component:SeventhExampleComponent},
   { path : 'posts', component:EigthExampleComponent},
-  { path : 'post/:id', component:PostDetailComponent},
-  { path : '**', component: NotFoundComponent}
+  { path : 'post/:id', component:PostDetailComponent}, // :id means {id} of parameter
+  { path : '**', component: NotFoundComponent} // ** means else (anything else other that above route signature)
 ];
 
 @NgModule({
