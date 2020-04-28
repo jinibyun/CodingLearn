@@ -37,9 +37,9 @@ The instructor will share source via github
 API project (back-end) should be opened in vs.net
 SPA project (front-end) should be opened in vs code
 
------
+--------
 # 1
------
+--------
 API Backend
 	> API Code Structure with folder structure
 		>> Remind all code first apporach
@@ -77,9 +77,9 @@ SPA Frontend
 		> go to "app.component.html" and see what has been changed for testing. It will have "value" component for testing.
 			>>> This is very basic communication between Front-End and Back End
 				
-----
+--------
 # 2
-----
+--------
 API Backend
 	> AuthController
 		> DTO: Data Transfer Object
@@ -101,7 +101,7 @@ SPA Frontend
 	> add service under _services folder
 		>> "auth.service"
 			>>> define login and register 
-			>>> store token in localstorage
+			>>> store token in localstorage (do not look at Angular JWT yet)
 	> Confirm auth.service is registered in app.module.ts
 	> add three components
 		>> home, nav and register
@@ -117,12 +117,41 @@ SPA Frontend
 				
 	> Login and Register Test
 
-----
-# 3
-----
+--------
+# 3 (section 5)
+--------
 API Backend
 	> global exception handling
 		>> See Startup.cs : app.UseExceptionHandler
 			>>> FYI, Extension.cs is created for defining extension method
+		>> To test, change productionMode, in launchSetting.cs and login method in Authcontroller(Uncomment throw exception part), then check if above app.UseExceptionHandler is handling error message in centralized place	
+			
 SPA Frontend
-	> Next -->> Module 5's error.interceptor.ts.......
+	> It is about "Production" error as above
+	> Handling error globally
+	> to see error in detail in browser, go to "nav.component.ts" login method (console.log(error))
+		>> Do not look at this.alertify ... yet
+	> error.interceptor.ts : centralized error interceptor
+
+----------------
+# 4 (section 6)
+----------------
+API Backend
+	NONE
+SPA Frontend
+	Third Party
+	> AlertifyJs
+		>> go to alertify.com to see it in action
+		>> npm install alertify.js
+		>> go to style.css and add relevant css
+		>> alertify.service.ts
+		>> go to nav.component and login() to apply it
+		>> go to register.component and login() to apply it
+	> Algular JWT
+		>> validate token from localstorage for "more" securable way
+		>> angular2 jwt in google search: https://github.com/auth0/angular2-jwt
+			>>> install : npm install @auth0/angular-jwt
+	> NGX BootStrap
+	> Bootswatch
+	
+	
