@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -12,14 +13,32 @@ namespace ConsoleAdoNet
             SqlConnection con = null;
             try
             {
+                int id = 102;
+                string name = "Jini Byun";
+                string email = "jinibyun@example.com";
+                string join_date = "1/12/2017";
+
                 // Creating Connection  
                 con = new SqlConnection(connectionString);
 
                 // writing sql query  
-                string sql = "insert into student  " + 
-                             "(id, name, email, join_date) values " + 
-                             "('101', 'Ronald Trump', 'ronald@example.com', '1/12/2017')";
-                SqlCommand cm = new SqlCommand(sql, con);  
+
+                // 1. no parameterized
+                //string sql = "insert into student  " + 
+                //             "(id, name, email, join_date) values " + 
+                //             "(101, 'Ronald Trump', 'ronald@example.com', '1/12/2017')";
+                // SqlCommand cm = new SqlCommand(sql, con);  
+
+                // 2. parameterized
+                string sql = "insert into student  " +
+                             "(id, name, email, join_date) values " +
+                             "(@id, @name, @email, @jon_date)";
+
+                SqlCommand cm = new SqlCommand(sql, con);
+                cm.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                cm.Parameters.Add("@name", SqlDbType.VarChar).Value = name;
+                cm.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
+                cm.Parameters.Add("@jon_date", SqlDbType.DateTime).Value = join_date;
 
                 // Opening Connection  
                 con.Open();

@@ -14,6 +14,7 @@ namespace ConsoleAdoNet
             {
                 // Creating Connection  
                 con = new SqlConnection(connectionString);
+                
                 // writing sql query  
                 SqlCommand cm = new SqlCommand("delete from student where id = '101'", con);
                 

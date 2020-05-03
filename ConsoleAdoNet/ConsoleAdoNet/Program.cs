@@ -13,7 +13,11 @@ namespace ConsoleAdoNet
             // obj = new _02InsertTable();
             // obj = new _03RetrieveRecord();
             // obj = new _04DeleteRecord();
-            obj = new _05DataSet();
+            // obj = new _05DataSet();
+            // obj = new _06StoredProc();
+            // obj = new _07StoredProcOutput();
+            // obj = new _08BCP();
+            obj = new _09BCPFromCSV();
             obj.Test();
 
         }
