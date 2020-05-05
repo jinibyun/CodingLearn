@@ -223,6 +223,40 @@ SELECT * FROM dbo.customersbycountry('CANADA')
 SELECT * FROM dbo.customersbycountry('ADF') 
 
 
+
+-- ANOTHER EXAMPLE
+CREATE FUNCTION dbo.Split
+(
+	@List nvarchar(2000),
+	@SplitOn nvarchar(5)
+)  
+RETURNS @RtnValue table 
+(
+		
+	Id int identity(1,1),
+	Value nvarchar(100)
+) 
+AS  
+BEGIN
+	While (Charindex(@SplitOn,@List)>0)
+	Begin
+		Insert Into @RtnValue (value)
+		Select Value = ltrim(rtrim(Substring(@List,1,Charindex(@SplitOn,@List)-1)))
+		Set @List = Substring(@List,Charindex(@SplitOn,@List)+len(@SplitOn),len(@List))
+	End
+
+	Insert Into @RtnValue (Value)
+    Select Value = ltrim(rtrim(@List))
+
+	Return
+END
+
+declare @employeeList nvarchar(2000)
+set @employeeList = 'a,b,c,d,e,f,1,2,3,4'
+select * from dbo.Split(@employeeList,',')
+
+
+
 /* Difference Between Function and Stored Procedure */
 /*
 SP: Pre-Comipled
