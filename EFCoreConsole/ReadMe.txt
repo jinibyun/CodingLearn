@@ -1,5 +1,13 @@
 ﻿## using dotnet cli, how to migrate, update database etc
 
+########### A. db first approach ###########
+It is reverse engineering from db entity to object
+
+dotnet ef dbcontext scaffold "Server=.\SQLEXPRESSDEV;Database=Northwind;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o NorthwindModel
+
+NOTE: Note: Once you have created the model, you must use the Migration commands whenever you change the model to keep the database up to date with the model.
+
+########### B. code first approach ###########
 0. Make sure SQL server is accessbile
 
 1. preparation: to create the database from the model (entities and context) by adding a migration.
