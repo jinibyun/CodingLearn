@@ -50,7 +50,7 @@ namespace DatingApp.API.Controllers
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
 
-            // return StatusCode(201);
+            // return Ok(userToReturn);
             return CreatedAtRoute("GetUser", new {controller = "Users", id = createdUser.Id}, userToReturn);
         }
 
@@ -80,8 +80,8 @@ namespace DatingApp.API.Controllers
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
+                Subject = new ClaimsIdentity(claims), // payload
+                Expires = DateTime.Now.AddDays(1), // payload
                 SigningCredentials = creds
             };
 

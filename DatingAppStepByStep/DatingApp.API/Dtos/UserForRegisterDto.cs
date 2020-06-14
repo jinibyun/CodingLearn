@@ -12,19 +12,19 @@ namespace DatingApp.API.Dtos
         [StringLength(8, MinimumLength = 4, ErrorMessage = "You must specify a password between 4 and 8 characters")]
         public string Password { get; set; }
 
-        [Required]
+        //[Required]
         public string Gender { get; set; }
 
-        [Required]
+        //[Required]
         public string KnownAs { get; set; }
 
-        [Required]
-        public DateTime DateOfBirth { get; set; }
+        //[Required]
+        public DateTime? DateOfBirth { get; set; }
 
-        [Required]
+        //[Required]
         public string City { get; set; }
 
-        [Required]
+        //[Required]
         public string Country { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
