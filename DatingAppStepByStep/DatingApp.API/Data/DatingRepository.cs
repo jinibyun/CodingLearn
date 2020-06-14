@@ -46,6 +46,7 @@ namespace DatingApp.API.Data
 
         public async Task<User> GetUser(int id)
         {
+            // eager binding
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
 
             return user;

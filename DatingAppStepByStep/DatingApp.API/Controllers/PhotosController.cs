@@ -16,7 +16,7 @@ namespace DatingApp.API.Controllers
 {
     [Authorize]
     [Route("api/users/{userId}/photos")]
-    [ApiController]
+    [ApiController] // 1. Automatically Deserialize and 2. check Model State
     public class PhotosController : ControllerBase
     {
         private readonly IDatingRepository _repo;
@@ -24,6 +24,7 @@ namespace DatingApp.API.Controllers
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
 
+        // NOTE: IOptions
         public PhotosController(IDatingRepository repo, IMapper mapper,
             IOptions<CloudinarySettings> cloudinaryConfig)
         {
@@ -31,6 +32,7 @@ namespace DatingApp.API.Controllers
             _mapper = mapper;
             _repo = repo;
 
+            // cloudinary account
             Account acc = new Account(
                 _cloudinaryConfig.Value.CloudName,
                 _cloudinaryConfig.Value.ApiKey,
@@ -50,6 +52,8 @@ namespace DatingApp.API.Controllers
             return Ok(photo);
         }
 
+        // FromHome is just for testing
+        // When sending file from postman... check it out file
         [HttpPost]
         public async Task<IActionResult> AddPhotoForUser(int userId,
             [FromForm]PhotoForCreationDto photoForCreationDto)
@@ -61,23 +65,25 @@ namespace DatingApp.API.Controllers
 
             var file = photoForCreationDto.File;
 
-            var uploadResult = new ImageUploadResult();
+            var uploadResult = new ImageUploadResult(); // cloudinary
 
             if (file.Length > 0)
             {
                 using (var stream = file.OpenReadStream())
                 {
-                    var uploadParams = new ImageUploadParams()
+                    var uploadParams = new ImageUploadParams() // cloudinary
                     {
                         File = new FileDescription(file.Name, stream),
                         Transformation = new Transformation()
                             .Width(500).Height(500).Crop("fill").Gravity("face")
                     };
 
+                    // actually upload to cloudinary
                     uploadResult = _cloudinary.Upload(uploadParams);
                 }
             }
 
+            // response back from cloudinary
             photoForCreationDto.Url = uploadResult.Uri.ToString();
             photoForCreationDto.PublicId = uploadResult.PublicId;
 
@@ -91,7 +97,12 @@ namespace DatingApp.API.Controllers
             if (await _repo.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
+
+                // return from "another" route action method. It is saved in "header" of response message 
+                // NOTE: how to pass parameter
                 return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
+
+                // return Ok
             }
 
             return BadRequest("Could not add the photo");

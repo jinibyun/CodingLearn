@@ -25,6 +25,7 @@ API Backend
 SPA Frontend
 	> go to "app.component.html" and comment/uncomment
 	> npm install bootstrap and font-awesome
+		>> example, copy & paste into nav component. A bit of tweak
 		>> go to "style.css" to see how it import relevant css files
 	> add service under _services folder
 		>> "auth.service"
@@ -42,5 +43,6 @@ SPA Frontend
 			>>> see how register.component is call authService.register method
 			>>> see how register.component is rasing event "cancelRegister" and how home.component is handling
 				(This is about communication between two components)
-				
-	> Login and Register Test
+			>>> output property
+	> Login and Register Testng 
+		>> raise some of error on purpose as well.

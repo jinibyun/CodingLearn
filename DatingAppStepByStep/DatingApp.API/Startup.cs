@@ -41,17 +41,19 @@ namespace DatingApp.API
 
             // ref: https://stackoverflow.com/questions/58006152/net-core-3-not-having-referenceloophandling-in-addjsonoptions?noredirect=1&lq=1
             // ref: https://stackoverflow.com/questions/57684093/using-usemvc-to-configure-mvc-is-not-supported-while-using-endpoint-routing
+            // NOTE: when upgrading from 2.2 to 3.x, then use AddNewtonsoftJson
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Latest)
-                .AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
+                .AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; }); // avoid self referencing error (such as user and photos)
 
             services.AddCors();
             
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
-            
+
             // ref: https://www.codementor.io/@zedotech/how-to-using-automapper-on-asp-net-core-3-0-via-dependencyinjection-zq497lzsq
-            services.AddAutoMapper(typeof(Startup)); 
-            
+            // services.AddAutoMapper(typeof(Startup)); 
+            services.AddAutoMapper(typeof(DatingRepository).Assembly);
+
             services.AddTransient<Seed>();
             // Dependency Injection
             services.AddScoped<IAuthRepository, AuthRepository>(); 
@@ -94,7 +96,7 @@ namespace DatingApp.API
                         var error = context.Features.Get<IExceptionHandlerFeature>();
                         if (error != null) 
                         {
-                            // extension method
+                            // extension method: To add response header properly and get rid of misleading information such as CORS issue, which does not actually happens
                             context.Response.AddApplicationError(error.Error.Message);
                             await context.Response.WriteAsync(error.Error.Message);
                         }
