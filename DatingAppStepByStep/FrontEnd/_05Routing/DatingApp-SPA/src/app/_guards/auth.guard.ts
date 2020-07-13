@@ -7,13 +7,14 @@ import { AlertifyService } from '../_services/alertify.service';
 // CanActivate is about route protection
 // use this on routes.ts
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // we do not need to register it over app.module
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router,
     private alertify: AlertifyService) {}
 
-    // returing boolean is good enough
+	// returing boolean is good enough
+	// c.f: canActivate returuns "union" type. Among them, just pick up boolean type
   canActivate(): boolean {
     if (this.authService.loggedIn()) {
       return true;

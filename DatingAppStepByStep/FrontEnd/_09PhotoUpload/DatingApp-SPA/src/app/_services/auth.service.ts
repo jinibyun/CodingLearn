@@ -14,13 +14,13 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   currentUser: User;
-  photoUrl = new BehaviorSubject<string>('../../assets/user.png');
-  currentPhotoUrl = this.photoUrl.asObservable();
+  photoUrl = new BehaviorSubject<string>('../../assets/user.png'); // it requires init value
+  currentPhotoUrl = this.photoUrl.asObservable(); // it can be subscribed
 
   constructor(private http: HttpClient) {}
 
   changeMemberPhoto(photoUrl: string) {
-    this.photoUrl.next(photoUrl);
+    this.photoUrl.next(photoUrl); // updated
   }
 
   login(model: any) {
@@ -29,7 +29,7 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem('token', user.token);
-          localStorage.setItem('user', JSON.stringify(user.user));
+          localStorage.setItem('user', JSON.stringify(user.user)); // Backend should return user (not only token)
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           this.currentUser = user.user;
           this.changeMemberPhoto(this.currentUser.photoUrl);

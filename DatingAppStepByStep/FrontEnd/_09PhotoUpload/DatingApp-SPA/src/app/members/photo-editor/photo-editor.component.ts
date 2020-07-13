@@ -63,11 +63,21 @@ export class PhotoEditorComponent implements OnInit {
 
   setMainPhoto(photo: Photo) {
     this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(() => {
-      this.currentMain = this.photos.filter(p => p.isMain === true)[0];
+	  // set old Main to false
+	  this.currentMain = this.photos.filter(p => p.isMain === true)[0];
       this.currentMain.isMain = false;
-      photo.isMain = true;
-      this.authService.changeMemberPhoto(photo.url);
-      this.authService.currentUser.photoUrl = photo.url;
+
+	  // set new Main to true
+	  photo.isMain = true;
+
+	  // old way: It only works between parent and child
+	  // this.getMemberPhotoChange.emit(photo.url);
+
+	  // new way : any to any communication
+	  this.authService.changeMemberPhoto(photo.url);
+	  this.authService.currentUser.photoUrl = photo.url;
+
+	  // NOTE: localstorage should be updated as well
       localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
     }, error => {
       this.alertify.error(error);
