@@ -6,6 +6,7 @@ import { AlertifyService } from '../_services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+// NOTE: BEFORE data is activated via route, it resolves data at first
 // it needs to be registered at "route"
 @Injectable()
 export class MemberDetailResolver implements Resolve<User> {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; // note httpClient should be from HttpClient
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 
@@ -26,7 +26,7 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrl + 'users');// , httpOptions);
   }
-  
+
   getUser(id): Observable<User> {
     return this.http.get<User>(this.baseUrl + 'users/' + id); //, httpOptions);
   }

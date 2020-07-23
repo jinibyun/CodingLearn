@@ -16,7 +16,7 @@ export class MemberDetailComponent implements OnInit {
   user: User;
 
   // ref: npmjs.com/package/ngx-gallery
-  
+
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
@@ -28,7 +28,7 @@ export class MemberDetailComponent implements OnInit {
     //this.loadUser();
     // instead...
 
-    // use resolve in route and use it as below
+    // use "resolve" in route and use it as below
     this.route.data.subscribe(data => {
       this.user = data['user'];
     });
@@ -48,15 +48,16 @@ export class MemberDetailComponent implements OnInit {
 
   // NOTE: if we use this way, BEFORE getUser merthod get called, this page is loaded, which raise an issue : this.user object gets null. Therefore we will have to use above way: "RoutingResolve"
 
-  // loadUser(){
-  //   this.userService.getUser(this.route.snapshot.params['id']).subscribe(
-  //     (user:User) =>{
-  //       this.user = user;
-  //     }, error =>{
-  //       this.alertify.error(error);
-  //     }
-  //   );
-  // }
+  // + means change parameter (string) to integer
+//   loadUser(){
+//     this.userService.getUser(+this.route.snapshot.params['id']).subscribe(
+//       (user:User) =>{
+//         this.user = user;
+//       }, error =>{
+//         this.alertify.error(error);
+//       }
+//     );
+//   }
 
   getImages() {
     const imageUrls = [];
