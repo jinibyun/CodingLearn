@@ -16,7 +16,7 @@ Updating Resource
 		
 		create prevent-unsaved-changes.ts
 		
-		another tip: look at HostListener
+		another tip: look at HostListener decorator
 	
 	Persisting changes to the API
 		go to back-end section, then after successful testing...

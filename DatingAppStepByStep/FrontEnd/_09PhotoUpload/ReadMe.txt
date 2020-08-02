@@ -9,6 +9,10 @@ Back-End
 		
 		download nuget package: Cloudinary.Dotnet (get latest)
 		
+			Then, try to show all relevant code for Cloudinary in back-end
+		
+		PublicId column in Photo table
+		
 		Create PhotoController
 		
 		PhotoForCreationDto
