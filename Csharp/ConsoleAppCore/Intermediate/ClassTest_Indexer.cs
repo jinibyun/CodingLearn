@@ -21,5 +21,7 @@ namespace ConsoleAppCore.Intermediate
             get { return words[wordNum]; }
             set { words[wordNum] = value; }
         }
+
+        public string TempName { get; set; }
     }
 }

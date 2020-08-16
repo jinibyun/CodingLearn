@@ -8,19 +8,28 @@ Back-End
 Front-End
 
 	Reactive Forms (Compared with template form)
-		Change Registration Form
+		Change Registration Form (just a bit more flexible)
 		
 		register.component
-			FormGroup
+			FormGroup type must be used (look at ngOnInit)
 		check it out app.module has "RactiveFormModule"
+		rewrite register()
+		
+		remove template form in register.component.html (replace it with formGroup). We also not using two  way binding
+		replace formName with formControlName
+		
+			check it out register.component.html (very below code section)
 
 	(NOTE, first look at userName and password, passwordMatch)
 
 		Validation
-			It is supported by Angular itself
+			It is supported by Angular itself (no 3rd party support is required)
 			register.component.html
 			
-			testing with register.component.html (very bottom section p tag: Leave it on until this chapter ends)
+			testing with register.component.html (very bottom section p tag: Leave it on until this chapter ends: Form Status valid or invalid)
+			
+			
+			
 		Custom Validation
 			For custom validation, developer should define it.
 		

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace ConsoleAppCore.Beginner
             bool result2;
             int firstNumber2 = 10, secondNumber2 = 20;
 
-            result2 = (firstNumber2 == secondNumber2);
+            result2 = firstNumber2 == secondNumber2;
             Console.WriteLine("{0} == {1} returns {2}", firstNumber, secondNumber, result2);
 
             result2 = (firstNumber2 > secondNumber2);
@@ -60,13 +61,20 @@ namespace ConsoleAppCore.Beginner
             int number = 10;
             string result3;
 
+            // ? operator
+            int? xyz = null;
+
+            if(xyz.HasValue) // is not null
+            {
+
+            }
+
             result3 = (number % 2 == 0) ? "Even Number" : "Odd Number";
             Console.WriteLine("{0} is {1}", number, result3);
 
-            // 4. ?? operator
-
-
-
+            // 4. ?? operator (is null)
+            int? abc = null;
+            int? re = abc ?? -1;// abc.HasValue ? abc : -1;
         }
     }
 }

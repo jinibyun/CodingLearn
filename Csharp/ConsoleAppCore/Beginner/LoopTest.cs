@@ -25,8 +25,11 @@ namespace ConsoleAppCore.Beginner
                 i2++;
             }
 
+            // Fibanocci Array:
+            // 0, 1, 1, 2, 3, 5, 8, 13, 21.....
+
             // sum of n
-            int n = 5, sum = 0;
+            int n = 100, sum = 0;
 
             for (int i = 1; i <= n; i++)
             {
@@ -65,13 +68,16 @@ namespace ConsoleAppCore.Beginner
                 i5++;
             } while (i5 <= 10);
 
+     
+            // for loop: read , write possible
+            // forach loop: only read
 
             // 4. forach loop
             char[] myArray = { 'H', 'e', 'l', 'l', 'o' };
 
-            foreach (char ch in myArray)
+            foreach (char xxxxxxx in myArray)
             {
-                Console.WriteLine(ch);
+                Console.WriteLine(xxxxxxx);
             }
 
             // 

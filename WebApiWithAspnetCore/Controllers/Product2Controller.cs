@@ -37,6 +37,8 @@ namespace Module1.Controllers
             else
                 products = productRepository.GetProducts();
 
+            return products;
+
             // automatically, status will be returned "204: No Content"
             if (!products.Any())
                 return null;

@@ -18,7 +18,8 @@
 		<input type="text" [ngClass]="{'is-invalid': registerForm.get('username').errors
         && registerForm.get('username').touched}" class="form-control" formControlName="username"
 			placeholder="Username">
-		<!-- invalid-feedback is automatically affected by is-invalid within same form-group -->
+		<!-- "invalid-feedback" is automatically affected by "is-invalid" within same form-group. Therefore the below does not have any if logic -->
+
 		<div class="invalid-feedback">Please choose a username</div>
 	</div>
 

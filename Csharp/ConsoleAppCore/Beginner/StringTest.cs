@@ -11,7 +11,7 @@ namespace ConsoleAppCore.Beginner
         public void Test()
         {
             // immutable
-            string s1 = "C#";
+            string s1 = "C#" ;
             string s2 = "Programming";
 
             // char 
@@ -20,9 +20,10 @@ namespace ConsoleAppCore.Beginner
 
             // concatenation
             string s3 = s1 + " " + s2;
-            Console.WriteLine("String: {0}", s3);
+            Console.WriteLine("String: {0} {1} {2}", s1, s2, s3);
 
             // substring
+
             string s3substring = s3.Substring(1, 5);
             Console.WriteLine("Substring: {0}", s3substring);
 
@@ -47,18 +48,30 @@ namespace ConsoleAppCore.Beginner
             char[] charArray2 = { 'A', 'B', 'C', 'D' };
             s = new string(charArray2);
 
-            Console.WriteLine(s);
+            Console.WriteLine(s); // ABCD
 
             // one char has one ASCII code which is actual number value. Therefore it can be operated with plus, minus, multiply and divide
             // NOTE: char operation is different from string operation
             // ref: 
             char c11 = 'A';
-            char c22 = (char)(c11 + 3);
-            Console.WriteLine(c22);
+            char c22 = (char)(c11 + 3); // int("35") : to integer
+            Console.WriteLine(c22); // D
 
             // string and stringBuilder
-            StringBuilder sb = new StringBuilder();
+            string msg = " Hello User";
+            msg += "sdfdsfdsfdsfdsf";
+            msg += "sdfdsfdsfdsfdsf";
+            msg += "sdfdsfdsfdsfdsf";
+            msg += "sdfdsfdsfdsfdsf";
+            msg += "sdfdsfdsfdsfdsf";
+            // .. 
+            StringBuilder msg2 = new StringBuilder();
+            msg2.Append("sdfdsf");
+            msg2.Append("xfdgfdgfdgfdg");
+            msg2.Append("hertrdyerfrewf");
 
+            StringBuilder sb = new StringBuilder();
+            
             for (int i = 1; i <= 26; i++)
             {
                 sb.Append(i.ToString());

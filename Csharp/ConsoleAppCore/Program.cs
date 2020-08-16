@@ -5,6 +5,8 @@ using ConsoleAppCore.Assignment;
 using ConsoleAppCore.Beginner;
 using ConsoleAppCore.Intermediate;
 using ConsoleAppCore.Advanced;
+using System.Collections;
+
 namespace ConsoleAppCore
 {
     class Program
@@ -12,13 +14,13 @@ namespace ConsoleAppCore
         static void Main(string[] args)
         {
             // A. Basic - Syntax
-            Basic();
+            // Basic();
 
             // B. Intermediate - OOP 3 Characteristics & Other things of class
             // Intermediate_OOP3Characteristics();
             // Intermediate_OtherThings();
             // C. Advanced
-            // Advanced();         
+            Advanced();         
 
             // D. Assignment
             // AssignmentTest();
@@ -65,11 +67,12 @@ namespace ConsoleAppCore
             {
                 Console.WriteLine(member);
             }
-
+            
             Console.WriteLine("============= .NET Generic Class: Dictionary =========");
             Dictionary<string, int> dic = new Dictionary<string, int>();
             dic["aaa"] = 100;
             dic["bbb"] = 90;
+            dic.Add("ccc", -987);
 
             foreach (var member in dic)
             {
@@ -182,39 +185,47 @@ namespace ConsoleAppCore
 
         private static void Intermediate_OOP3Characteristics()
         {
-            // 1. Class basic 1
-            Console.WriteLine("=================== Class basic 1 ================");
-            var classTest = new ClassTest_Basic1("Jini", 32, 'F');
-            Console.WriteLine(string.Format("{0}:{1}:{2}", classTest.Name, classTest.Age, classTest.Gender));
-            Console.WriteLine(classTest.GetCustomerData());
+            //// 1. Class basic 1
+            //Console.WriteLine("=================== Class basic 1 ================");
+            //var classTest = new ClassTest_Basic1("Jini", 32, 'F');
 
-            // event
-            // event subscription :  +=
-            //classTest.NameChanged += ClassTest_NameChanged;
-            //classTest.BalanceChanged += ClassTest_BalanceChanged;
-            classTest.Name = "Jane";
+            //classTest.Birthday = DateTime.Now;
 
-            // overloading method
-            Console.WriteLine(classTest.Foo(1D));
-            Console.WriteLine(classTest.Foo(1));
-            Console.WriteLine(classTest.Foo(1F, 2));
-            Console.WriteLine(classTest.Foo(2, 1F));
+            //Console.WriteLine(string.Format("{0}:{1}:{2}", classTest.Name, classTest.Age, classTest.Gender));
+            //Console.WriteLine(classTest.GetCustomerData());
+
+            //// event
+            //// event subscription :  +=
+            ////classTest.NameChanged += ClassTest_NameChanged;
+            ////classTest.BalanceChanged += ClassTest_BalanceChanged;
+            //classTest.Name = "Jane";
+
+            //// overloading method
+            //Console.WriteLine(classTest.Foo(1D));
+            //Console.WriteLine(classTest.Foo(1));
+            //Console.WriteLine(classTest.Foo(1F, 2));
+            //Console.WriteLine(classTest.Foo(2, 1F));
 
             // 2. Class basic 2 Encapsulation
-            Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
+            //Console.WriteLine("======== OOP characteristic 1 of 3: Encapsulation ======");
 
-            var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
+            ////var classTest_Basic22 = new ClassTest_Basic2();
+            ////classTest_Basic22.CurrentPrice = 50;
+            ////classTest_Basic22.SharesOwned = 100;
+            ////classTest_Basic22.BenchmarkPrice = 49.99M;
+            //var classTest_Basic2 = new ClassTest_Basic2 { CurrentPrice = 50, SharesOwned = 100, BenchmarkPrice = 49.99M };
 
-            Console.WriteLine(classTest_Basic2.Worth);
-            Console.WriteLine(classTest_Basic2.BenchmarkPrice);
-            Console.WriteLine(classTest_Basic2.BenchmarkShare);
+            //Console.WriteLine(classTest_Basic2.Worth);
+            //Console.WriteLine(classTest_Basic2.BenchmarkPrice);
+            //Console.WriteLine(classTest_Basic2.BenchmarkShare);
 
             // 3. Property: Indexer
-            Console.WriteLine("=================== Property: Indexer  ================");
-            var classTest2 = new ClassTest_Indexer();
-            Console.WriteLine(classTest2[3]);       // fox
-            classTest2[3] = "kangaroo";
-            Console.WriteLine(classTest2[3]);       // kangaroo           
+            //Console.WriteLine("=================== Property: Indexer  ================");
+            //var classTest2 = new ClassTest_Indexer();
+
+            //Console.WriteLine(classTest2[3]);       // fox
+            //classTest2[2] = "kangaroo";
+            //Console.WriteLine(classTest2[3]);       // kangaroo           
 
             // partial class and partial method
             // only explanation
@@ -237,7 +248,10 @@ namespace ConsoleAppCore
             // Upcast & Downcast
             // An upcast creates a base class reference from a subclass reference:
             Stock msft2 = new Stock();
-            Asset a = msft2;
+            Asset a = msft2; // implicit conversion
+
+            //int i = 0;
+            //long l = (long)i;
 
             // After the upcast, the two variables still references the same Stock object:
             Console.WriteLine("Data Type Comparison: ");
@@ -246,6 +260,7 @@ namespace ConsoleAppCore
             // A downcast operation creates a subclass reference from a base class reference.
             Stock msft3 = new Stock();
             Asset a2 = msft3;                      // Upcast
+            
             Stock s2 = (Stock)a2;                  // Downcast
             Console.WriteLine(s2.SharesOwned);   // <No error>
             Console.WriteLine(s2 == a2);          // True
@@ -257,6 +272,12 @@ namespace ConsoleAppCore
             // Stock s3 = (Stock)a3;       // ERROR: Downcast fails: a3 is not a Stock 
 
             // TEST: is and as operator
+            //if (a3 is Asset)
+            //{
+
+            //}
+
+            //Asset a4 = h as Asset;
 
             // 6. virtaul Function
             Console.WriteLine("========== virtual function, sealed, abstract ========");
@@ -268,8 +289,18 @@ namespace ConsoleAppCore
             Console.WriteLine(subManager.ToString());
 
             // 7. abstract class
-            Dog dog = new Dog();
-            Console.WriteLine(dog.Describe());
+            FourLeggedAnimal animal;
+            if (true)
+            {
+                animal = new Dog();
+            }
+            else
+            {
+                animal = new Cat();
+            }
+            
+            animal.Cry();
+            animal.Describe();
 
             // 8. Polymorphism
             // A variable of type x can refer to an object that subclasses x.
@@ -306,14 +337,14 @@ namespace ConsoleAppCore
         private static void Basic()
         {
             // 1. DataType
-            Console.WriteLine("=================== Data Type ================");
-            var dt = new DataType();
-            dt.Test();
+            //Console.WriteLine("=================== Data Type ================");
+            //var dt = new DataType();
+            //dt.Test();
 
             //// 2. Variable And Constant
-            Console.WriteLine("=================== Variable & Constant ================");
-            var vnc = new VariableAndConstant();
-            vnc.Test();
+            //Console.WriteLine("=================== Variable & Constant ================");
+            //var vnc = new VariableAndConstant();
+            //vnc.Test();
 
             //// 3. Array
             //Console.WriteLine("=================== Array ================");
@@ -367,10 +398,11 @@ namespace ConsoleAppCore
 
             //// 13. Method
             //Console.WriteLine("=================== Method ================");
-            //var methodTest = new MethodTest();
+            var methodTest = new MethodTest();
             //// 13-1
             //int val = 1000;
             //methodTest.TestPassByValue(val);
+
 
             //Console.WriteLine("variable val's value is not changed: {0}", val);
             //// 13-2
@@ -394,9 +426,9 @@ namespace ConsoleAppCore
             //Console.WriteLine("Default parameter test: " + returnValue);
             //var returnValue2 = methodTest.TestDefaultParam(1, 2, "-----");
 
-            //// 13-5.            
-            //var returnParamsValue = methodTest.TestParams(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-            //Console.WriteLine("params keyword test: " + returnParamsValue);
+            //// 13-5. 
+            var returnParamsValue = methodTest.TestParams(1, 2, 3, 4, 5, 0, -983, 6, 7, 8, 9, 10, 34, 25, 77, 99);
+            Console.WriteLine("params keyword test: " + returnParamsValue);
         }
 
         private static void ClassTest_NameChanged(object sender, EventArgs e)

@@ -18,13 +18,23 @@ namespace ConsoleAppCore.Intermediate
         private string name;
         private int age;
         private readonly string gender;
+        private DateTime birthday;
 
         // difference between readonly varialbes and constant
 
         // event 
         public event EventHandler NameChanged;
 
-        // Constructor
+        // Constructor = special method
+        public ClassTest_Basic1()
+        {
+
+        }
+        public ClassTest_Basic1(string pname, int page)
+        {
+            name = pname;
+            age = page;
+        }
         public ClassTest_Basic1(string pname, int page, char pgender = 'M')
         {
             name = pname;
@@ -32,7 +42,7 @@ namespace ConsoleAppCore.Intermediate
             gender = pgender == 'M' ? "Male" :"Female";
         }
 
-        // Property
+        // Property == special method
         public string Name
         {
             get { return this.name; }
@@ -48,15 +58,23 @@ namespace ConsoleAppCore.Intermediate
                 }
             }
         }
+
         public int Age
         {
             get { return this.age; }
             set { this.age = value; }
         }
 
+        // readonly
         public string Gender
         {
             get { return this.gender; }
+        }
+
+        // writeonly
+        public DateTime Birthday
+        {
+            set { this.birthday = value; }
         }
 
         // Method
@@ -67,7 +85,7 @@ namespace ConsoleAppCore.Intermediate
             return data;
         }
 
-        // Method Overloading
+        // Method Overloading : Same method name with two different thing: 1. parameter count 2. parameter type (NOTE: never related to retur
         public string Foo(int x)
         {
             return string.Format("returning integer: {0}", x);
@@ -84,6 +102,11 @@ namespace ConsoleAppCore.Intermediate
         public string Foo(float x, int y)
         {
             return string.Format("returning float and integer: {0},{1}", x, y);
+        }
+
+        public string Foo(float x, float y, bool t)
+        {
+            return "";
         }
 
         // difference between overloading and overriding

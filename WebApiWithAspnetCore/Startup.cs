@@ -46,6 +46,7 @@ namespace Module1
 
             });
 
+            services.AddCors();
             // contend negotiation(accept type should be matching with mime type)
             // to send xml type if client (browser) wants
             services.AddMvc().AddXmlSerializerFormatters();
@@ -88,6 +89,12 @@ namespace Module1
             {
                 app.UseHsts();
             }
+
+            app.UseCors(x => 
+                // x.WithOrigins("http://localhost:4200", "230.123.24.193")
+                x.AllowAnyOrigin()
+                .AllowAnyHeader().AllowAnyMethod().AllowCredentials()
+                );
 
             app.UseHttpsRedirection();
             app.UseMvc();

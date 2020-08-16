@@ -36,13 +36,15 @@ namespace ConsoleAppCore.Intermediate
         }
     }
 
-    // sealed
+    // sealed : not inheritable
     public sealed class SubManager: Manager
     {
         public SubManager(decimal salary, string email, string name):base(salary, email, name)
         {
 
         }
+
+        public override decimal Salary {  get { return 9000; } }
     }
 
     //public sealed class SubSubManager : SubManager

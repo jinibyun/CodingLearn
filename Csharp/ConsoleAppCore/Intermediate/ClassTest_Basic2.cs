@@ -8,19 +8,22 @@ namespace ConsoleAppCore.Intermediate
 {
     public class ClassTest_Basic2
     {
+        decimal currentPrice;           // The private "backing" field
+        decimal sharesOwned;           // The private "backing" field
+        decimal interestRate = 0.012456M;
+        // decimal benchmarkPrice;
+
         public ClassTest_Basic2()
         {
             BenchmarkShare = 99;
         }
-
-        decimal currentPrice;           // The private "backing" field
+        
         public decimal CurrentPrice     // The public property
         {
             get { return currentPrice; }
             set { currentPrice = value; }
         }
 
-        decimal sharesOwned;           // The private "backing" field
         public decimal SharesOwned     // The public property
         {
             get { return sharesOwned; }
@@ -28,10 +31,8 @@ namespace ConsoleAppCore.Intermediate
         }
 
         // automatic property
-        public decimal BenchmarkPrice { get; set; }
+        public decimal BenchmarkPrice { get; set; } // automatically it generates variable on compile
 
-
-        decimal benchmarkPrice;
         public decimal BenchemarkPrice
         {
             get;
@@ -46,6 +47,5 @@ namespace ConsoleAppCore.Intermediate
         {
             get { return currentPrice * sharesOwned; }
         }
-
     }
 }

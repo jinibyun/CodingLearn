@@ -16,7 +16,7 @@ namespace ConsoleAppCore.Advanced
 
     public interface IMachine
     {
-        void Print(Document d);
+        public void Print(Document d);
         void Fax(Document d);
         void Scan(Document d);
     }

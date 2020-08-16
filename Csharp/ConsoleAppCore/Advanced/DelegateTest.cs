@@ -18,16 +18,15 @@ namespace ConsoleAppCore.Advanced
         public void Test1()
         {
             // m Contains to pointer to method
-            MyDelegate m = new MyDelegate(StringToInt);
+            MyDelegate m = new MyDelegate(StringToInt); 
 
             // passing delegate == passing method pointer
             Run(m);
-
         }
 
         public void Test2()
         {
-            RunDelegate run = new RunDelegate(RunThis);            
+            RunDelegate run = new RunDelegate(RunThis);
             run(1024);
 
             //run = new RunDelegate(RunThat);
@@ -39,11 +38,11 @@ namespace ConsoleAppCore.Advanced
         public void Test3()
         {
             Procedure someProcs = null;
-            someProcs += new Procedure(Method1);
-            someProcs += new Procedure(Method2);            
-            someProcs();
-            someProcs -= Method2;
-            someProcs();
+            someProcs += Method1;
+            someProcs += Method2;      // method register      
+            someProcs(); // broadcasting
+            someProcs -= Method2; // method deregister
+            someProcs(); // unicasting
 
         }
 

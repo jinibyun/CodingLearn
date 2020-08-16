@@ -13,7 +13,8 @@ namespace ConsoleAppCore.Intermediate
             return "Not much is known about this four legged animal!";
         }
 
-        public abstract void Cry();
+        // must
+        public abstract void Cry(); // only definition
     }
 
     public class Dog : FourLeggedAnimal
@@ -26,7 +27,20 @@ namespace ConsoleAppCore.Intermediate
         //}
         public override void Cry()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Wal Wal");
+        }
+    }
+    public class Cat : FourLeggedAnimal
+    {
+        //public override string Describe()
+        //{
+        //    string result = base.Describe();
+        //    result += " In fact, it's a dog!";
+        //    return result;
+        //}
+        public override void Cry()
+        {
+            Console.WriteLine("Meow, Meow");
         }
     }
 }

@@ -13,20 +13,21 @@ namespace ConsoleAppCore.Beginner
         double _Sum = 0;
         DateTime _Time;
         bool? _Selected;
-
         public void Test(int? i, double? d, DateTime? time, bool? selected)
         {
             if (i.HasValue && d.HasValue)
-                this._Sum = (double)i.Value + (double)d.Value;
+                _Sum = (double)i.Value + (double)d.Value;
 
             // check whehter time is null or not
-            if (!time.HasValue)
-                throw new ArgumentException();
+            if (!time.HasValue) 
+            { 
+                throw new Exception();
+            }
             else
-                this._Time = time.Value;
+                _Time = time.Value;
 
             // often used with ?? operator
-            this._Selected = selected ?? false;
+            _Selected = selected ?? false;
         }        
     }
 }
