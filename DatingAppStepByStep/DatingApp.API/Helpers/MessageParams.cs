@@ -11,7 +11,8 @@ namespace DatingApp.API.Helpers
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value;}
         }
 
+        // NOTE: It could be either senderId and recepientId
         public int UserId { get; set; }
-        public string MessageContainer { get; set; } = "Unread";
+        public string MessageContainer { get; set; } = "Unread"; // Inbox, outbox and default which is "unread"
     }
 }

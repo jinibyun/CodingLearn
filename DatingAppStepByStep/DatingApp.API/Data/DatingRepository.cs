@@ -126,7 +126,7 @@ namespace DatingApp.API.Data
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {
             var messages = _context.Messages
-                .Include(u => u.Sender).ThenInclude(p => p.Photos)
+                .Include(u => u.Sender).ThenInclude(p => p.Photos) // NOTE: ThenInclude
                 .Include(u => u.Recipient).ThenInclude(p => p.Photos)
                 .AsQueryable();
 
@@ -146,6 +146,7 @@ namespace DatingApp.API.Data
                     break;
             }
 
+            // do not forget to ordering
             messages = messages.OrderByDescending(d => d.MessageSent);
 
             return await PagedList<Message>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);

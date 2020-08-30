@@ -72,6 +72,7 @@ namespace DatingApp.API.Controllers
             return Ok(messageThread);
         }
 
+        // Actual Sending Message
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, MessageForCreationDto messageForCreationDto)
         {
@@ -87,12 +88,13 @@ namespace DatingApp.API.Controllers
             if (recipient == null)
                 return BadRequest("Could not find user");
             
-            var message = _mapper.Map<Message>(messageForCreationDto);
+            var message = _mapper.Map<Message>(messageForCreationDto); // NOTE: go to AutoMapperProfile
 
             _repo.Add(message);
 
             if (await _repo.SaveAll())
             {
+                // we need another dto as return value (AutoMapper: ReverseMap())
                 var messageToReturn = _mapper.Map<MessageToReturnDto>(message);
                 return CreatedAtRoute("GetMessage", new {id = message.Id}, messageToReturn);
             }

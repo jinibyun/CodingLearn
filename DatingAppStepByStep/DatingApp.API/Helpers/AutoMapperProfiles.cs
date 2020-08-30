@@ -33,6 +33,9 @@ namespace DatingApp.API.Helpers
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
+
+            // NOTE: KnownAs is automatically mapped by SenderKnownAs and ReceipientKnownAs by AutoMapper even if KnownAs does not exist
+            // That is AutoMapper's assumption for mapping logic
             CreateMap<Message, MessageToReturnDto>()
                 .ForMember(m => m.SenderPhotoUrl, opt => opt
                     .MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
