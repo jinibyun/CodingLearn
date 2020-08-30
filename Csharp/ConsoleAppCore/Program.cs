@@ -124,6 +124,7 @@ namespace ConsoleAppCore
             var publisher = new Publisher();
             // Event Handling
             // publisher.ButtonClicked += new ButtonClickedHandler(Publisher_ButtonClicked);            
+            
             // antoher way 1
             // publisher.ButtonClicked += Publisher_ButtonClicked;
             // antoher way 2: anonymouse method: other method does not need to be defined
@@ -149,6 +150,8 @@ namespace ConsoleAppCore
             Console.WriteLine("============= Extension Method =============");
             string s = "This is a Test";
             string s2 = s.ToChangeCase();
+            // ExtensionMethodTest.ToChangeCase(s);
+
             bool found = s.Found('z');
             Console.WriteLine(s2);
             Console.WriteLine(found);
@@ -156,7 +159,7 @@ namespace ConsoleAppCore
             // Extension method with very common case
             List<int> nums = new List<int> { 55, 44, 33, 66, 11 };
 
-            // Where extension method
+            // Where extension method: filter
             var v = nums.Where(p => p % 3 == 0);
             List<int> arr = v.ToList<int>();
             arr.ForEach(n => Console.WriteLine(n));

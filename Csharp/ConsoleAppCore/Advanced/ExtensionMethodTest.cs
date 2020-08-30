@@ -34,5 +34,10 @@ namespace ConsoleAppCore.Advanced
             int position = str.IndexOf(ch);
             return position >= 0;
         }
+
+        public static string Title(this String str )
+        {
+            return "";
+        }
     }
 }

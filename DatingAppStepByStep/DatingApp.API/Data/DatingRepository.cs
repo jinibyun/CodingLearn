@@ -48,7 +48,6 @@ namespace DatingApp.API.Data
         {
             // eager binding
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
-
             return user;
         }
 

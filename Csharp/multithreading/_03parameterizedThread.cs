@@ -16,7 +16,7 @@ namespace multithreading
             t2.Start(10.00);
             
             // ThreadStart: by using this way, we can still pass parameter
-            Thread t3 = new Thread(() => Sum(10, 20, 30));
+            Thread t3 = new Thread(() => Sum(10, 20, 30, 1.1F));
             t3.Start();
         }
 
@@ -32,7 +32,7 @@ namespace multithreading
             Console.WriteLine("r={0},area={1}", r, area);
         }
 
-        void Sum(int d1, int d2, int d3)
+        void Sum(int d1, int d2, int d3, float f1)
         {
             int sum = d1 + d2 + d3;
             Console.WriteLine(sum);

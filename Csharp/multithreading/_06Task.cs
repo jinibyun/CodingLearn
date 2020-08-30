@@ -32,12 +32,14 @@ namespace multithreading
             });
 
             // Task thread start
-            t1.Start();
-            t2.Start();
+            t1.Start(); // 7 seconds
+            t2.Start(); // 3 seconds
 
             // wait for Task to be finished
             t1.Wait();
             t2.Wait();
+
+            // save data from t1's result, t2's result
 
             Console.ReadLine();
         }

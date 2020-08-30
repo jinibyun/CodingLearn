@@ -22,7 +22,7 @@ namespace multithreading
             DataParallel();
 
             // 2
-            TaskParallel();
+            // TaskParallel();
         }
 
         private void DataParallel()
@@ -32,7 +32,7 @@ namespace multithreading
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            for (int i = 0; i < 5000; i++)
+            for (int i = 0; i < 50000; i++)
             {
                 Console.WriteLine("{0}: {1}",
                     Thread.CurrentThread.ManagedThreadId, i);
@@ -48,7 +48,7 @@ namespace multithreading
             //
             stopwatch.Reset();
             stopwatch.Start();
-            Parallel.For(0, 5000, (i) => {
+            Parallel.For(0, 50000, (i) => {
                 Console.WriteLine("{0}: {1}",
                     Thread.CurrentThread.ManagedThreadId, i);
             });
