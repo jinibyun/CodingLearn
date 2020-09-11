@@ -44,7 +44,8 @@ export class MessagesComponent implements OnInit {
         this.alertify.success('Message has been deleted');
       }, error => {
         this.alertify.error('Failed to delete the message');
-      });
+	  });
+
     });
   }
 

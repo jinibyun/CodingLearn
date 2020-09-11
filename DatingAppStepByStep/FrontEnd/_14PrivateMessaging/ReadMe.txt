@@ -25,6 +25,18 @@
 			MessageController
 		Test with POSTMAN
 			
+	
+	Delete message
+		MessageController > soft delete: HttpPost >DeleteMessage()
+		(NOTE: This is not HttpDelete)
+	
+		(NOTE: only both side delete, then delete it permanently)
+	DatingRepository > GetMessagesForUser(), GetMessageThread() : look at "inbox", .... to see how above logic were applied
+	
+	
+	Mark read
+		MessageController > MarkMessageAsRead()
+		
 (FE)
 	create message.ts 	(interface): Message Model
 	user.service.ts (getMessage())
@@ -49,3 +61,30 @@
 	
 	member-messages.component.css
 		(look at card-body: overflow-y: scroll)
+		
+	member-detail.component: queryParams
+	
+	user.service.ts > sendMessage method
+	
+	memberMessaeComponent.html > #messageForm = ngForm
+	
+	memberMessaeComponent.ts > add newMessage member-detail / sendMessage() call user.service.ts's sendMessage() 
+		
+	
+	deleting meessage > user.service.ts > deleteMessage (NOTE: this is POST, not Delete)
+	
+	meessage.component.ts > deleteMessage() : call above message from user.service.ts
+	
+		message.component.html (add event)
+		
+	
+	
+	user.service.ts > markAsRead()
+	meessage.component.ts > look at loadMessage() pipe ... (we need to check if it is read or not)
+		rs.js's "tap()" operator
+		NOTE: +this.authService.decodedToken.nameid > + means change type to number type
+	
+		Inside loadMessage, it call userService.markAsRead() method
+		
+	
+	
