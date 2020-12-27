@@ -11,7 +11,7 @@ namespace ConsoleAppCore.Intermediate
         decimal currentPrice;           // The private "backing" field
         decimal sharesOwned;           // The private "backing" field
         decimal interestRate = 0.012456M;
-        // decimal benchmarkPrice;
+
 
         public ClassTest_Basic2()
         {

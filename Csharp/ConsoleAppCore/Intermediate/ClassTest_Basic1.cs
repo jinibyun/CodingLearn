@@ -45,7 +45,7 @@ namespace ConsoleAppCore.Intermediate
         // Property == special method
         public string Name
         {
-            get { return this.name; }
+            get { return this.name.ToUpper() ; }
             set
             {
                 if (this.name != value)
@@ -90,6 +90,7 @@ namespace ConsoleAppCore.Intermediate
         {
             return string.Format("returning integer: {0}", x);
         }
+
         public string Foo(double x)
         {
             return string.Format("returning double: {0}", x);

@@ -18,6 +18,7 @@ namespace ConsoleAdoNet
 
         public override void Test()
         {
+            // preparation
             var dt = new DataTable();
             dt.Columns.Add("EmployeeID");
             dt.Columns.Add("Name");
@@ -25,6 +26,7 @@ namespace ConsoleAdoNet
             for (var i = 1; i <= 1000000; i++)
                 dt.Rows.Add(i + 1, "Name " + i + 1);
 
+            // actual bulk copy
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -40,11 +42,11 @@ namespace ConsoleAdoNet
                         sqlBulk.WriteToServer(dt);
                     }
 
-                    transaction.Commit();
+                    transaction.Commit(); // 100 % insert
                 }
                 catch (Exception ex)
                 {
-                    transaction.Rollback();
+                    transaction.Rollback(); // 100 % cancel
                     Console.WriteLine(ex.Message);
                 }
             }

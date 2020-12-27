@@ -25,13 +25,33 @@ namespace ConsoleAdoNet
                 // Executing the SQL query  
                 SqlDataReader sdr = cm.ExecuteReader();
 
+                List<student> students = new List<student>();
+
                 // Data Record Read
                 while (sdr.Read())
                 {
-                    Console.WriteLine(sdr["id"] + " " + sdr["name"] + " " + sdr["email"]); // Displaying Record  
+                    // untyped
+                    string id = sdr["id"] != null ? sdr["id"].ToString() : "";
+                    string name = sdr["name"] != null ? sdr["name"].ToString() : "";
+                    string email = sdr["email"] != null ? sdr["email"].ToString() : "";
+
+                    Console.WriteLine(id + " " + name + " " + email); // Displaying Record 
+
+                    // typed
+                    students.Add(new student { 
+                         id = sdr["id"] != null ? int.Parse(sdr["id"].ToString()) : -1,
+                         name = sdr["name"] != null ? sdr["name"].ToString() : "",
+                         email = sdr["email"] != null ? sdr["email"].ToString() : "",
+                         join_date = sdr["join_date"] != null ? DateTime.Parse(sdr["join_date"].ToString()) : DateTime.MinValue
+                    });
                 }
 
-                // NOTE: Always close
+                foreach(var member in students)
+                {
+                    // TODO
+                }
+
+                // NOTE: Must close
                 sdr.Close();
 
                 // How to get single value such as count, min, max, avg, sum
@@ -53,6 +73,7 @@ namespace ConsoleAdoNet
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }

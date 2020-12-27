@@ -20,8 +20,9 @@ namespace ConsoleAdoNet
             END 
             */
 
-            int price = 10;
+            decimal price = 20.00M;
 
+            // using () : try finally (without catch)
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("uspGetTitleWithPrice", con))
@@ -31,7 +32,7 @@ namespace ConsoleAdoNet
                     // cmd.Parameters.AddWithValue("@v_price", price);
 
                     // 2
-                    var param1 = new SqlParameter("@v_price", SqlDbType.Int);
+                    var param1 = new SqlParameter("@v_price", SqlDbType.Money);
                     param1.Value = price;
                     cmd.Parameters.Add(param1);
 
@@ -44,9 +45,7 @@ namespace ConsoleAdoNet
                         title = reader["title"] != DBNull.Value ? reader["title"].ToString() : "";
                         Console.WriteLine(title);
                     }
-                }
-
-                
+                } 
             }
         }
     }

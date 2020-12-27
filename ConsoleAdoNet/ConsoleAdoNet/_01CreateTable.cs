@@ -7,6 +7,7 @@ namespace ConsoleAdoNet
 {
     public class _01CreateTable : BaseClass
     {
+
         public override void Test()
         {
             SqlConnection con = null;
@@ -16,7 +17,7 @@ namespace ConsoleAdoNet
                 con = new SqlConnection(connectionString);
 
                 // writing sql query  
-                string sql = "create table student(id int not null, " +  
+                string sql = "create table student4(id int not null, " +  
                                                    "name varchar(100), " + 
                                                    "email varchar(50), " +
                                                    "join_date date)";
@@ -40,6 +41,7 @@ namespace ConsoleAdoNet
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }

@@ -24,10 +24,10 @@ namespace ConsoleAdoNet
                 // writing sql query  
 
                 // 1. no parameterized
-                //string sql = "insert into student  " + 
-                //             "(id, name, email, join_date) values " + 
+                //string sql = "insert into student  " +
+                //             "(id, name, email, join_date) values " +
                 //             "(101, 'Ronald Trump', 'ronald@example.com', '1/12/2017')";
-                // SqlCommand cm = new SqlCommand(sql, con);  
+                //SqlCommand cm = new SqlCommand(sql, con);
 
                 // 2. parameterized
                 string sql = "insert into student  " +
@@ -36,9 +36,12 @@ namespace ConsoleAdoNet
 
                 SqlCommand cm = new SqlCommand(sql, con);
                 cm.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                //SqlParameter param1 = cm.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                //param1.Value = id;
+
                 cm.Parameters.Add("@name", SqlDbType.VarChar).Value = name;
                 cm.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
-                cm.Parameters.Add("@jon_date", SqlDbType.DateTime).Value = join_date;
+                cm.Parameters.Add("@jon_date", SqlDbType.Date).Value = join_date;
 
                 // Opening Connection  
                 con.Open();
@@ -57,6 +60,7 @@ namespace ConsoleAdoNet
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }

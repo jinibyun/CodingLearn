@@ -26,6 +26,7 @@ namespace ConsoleAdoNet
 
         public override void Test()
         {
+            // preparation
             // 1. read csv into datatable
             DataTable dt = new DataTable();
             string line = null;

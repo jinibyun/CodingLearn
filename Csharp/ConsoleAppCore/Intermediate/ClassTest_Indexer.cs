@@ -9,6 +9,8 @@ namespace ConsoleAppCore.Intermediate
     public class ClassTest_Indexer
     {
         string[] words = "The quick brown fox".Split();
+        
+        string[] words2 = "The quick brown fox".Split();
 
         /*
         Indexers provide a natural syntax for accessing elements in a class or struct that
@@ -20,6 +22,12 @@ namespace ConsoleAppCore.Intermediate
         {
             get { return words[wordNum]; }
             set { words[wordNum] = value; }
+        }
+
+        public string getWords2(int i)
+        {
+            // ....
+            return words2[i];
         }
 
         public string TempName { get; set; }

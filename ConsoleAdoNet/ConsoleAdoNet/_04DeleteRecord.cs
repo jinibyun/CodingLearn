@@ -16,7 +16,7 @@ namespace ConsoleAdoNet
                 con = new SqlConnection(connectionString);
                 
                 // writing sql query  
-                SqlCommand cm = new SqlCommand("delete from student where id = '101'", con);
+                SqlCommand cm = new SqlCommand("delete from student where id = 101", con);
                 
                 // Opening Connection  
                 con.Open();
@@ -33,6 +33,7 @@ namespace ConsoleAdoNet
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }
