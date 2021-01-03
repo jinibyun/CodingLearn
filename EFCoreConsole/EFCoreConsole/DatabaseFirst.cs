@@ -31,12 +31,17 @@ namespace EFCoreConsole
 
             using (var context = new NorthwindContext())
             {
+                // LINQ : Language INtegrated Query
                 var region = context.Region.Where(x => x.RegionId == regionId).FirstOrDefault<Region>();
                 
                 if (region != null)
                 {
                     region.RegionDescription = regionDescription;
                     context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine("There is no region id : " + regionId.ToString());
                 }
             }
         }
@@ -47,7 +52,7 @@ namespace EFCoreConsole
             using (var context = new NorthwindContext())
             {
                 // First and FirstOrDefault
-                var region = context.Region.FirstOrDefault<Region>();
+                var region = context.Region.Where(x => x.RegionId == regionIde).FirstOrDefault();
 
                 if (region != null)
                 {
@@ -66,7 +71,7 @@ namespace EFCoreConsole
             using (var context = new NorthwindContext())
             {
                 // explanation
-                // What is difference between IQueryable and IEnumerable
+                // NOTE: What is difference between IQueryable and IEnumerable
 
                 var lstRegions = context.Region.ToList<Region>();
                 foreach (var member in lstRegions)
@@ -80,7 +85,9 @@ namespace EFCoreConsole
         {
             using (var context = new NorthwindContext())
             {
-                var regionDesc = context.Region.Where(s => s.RegionDescription == regionDescription).Any() ? context.Region.Where(s => s.RegionDescription == regionDescription).ToList<Region>() : null;
+                var regionDesc = context.Region.Where(s => s.RegionDescription == regionDescription).Any() ? 
+                                        context.Region.Where(s => s.RegionDescription == regionDescription).ToList<Region>() 
+                                        : null;
 
                 var found = 0;
                 if (regionDesc != null)
@@ -97,10 +104,24 @@ namespace EFCoreConsole
                 // Lazy loading brings in the related data on an as-needed basis
 
                 // Eager Loading                
-                var regionWithTerritories = context.Region 
+                var regionWithTerritories = context.Region
                            .Where(s => s.RegionDescription == regionDescription)
                            .Include(s => s.Territories)
                            .FirstOrDefault();
+                // lazy loading (default)
+                var regionWithTerritories2 = context.Region
+                           .Where(s => s.RegionDescription == regionDescription)
+                           .FirstOrDefault();
+
+
+
+                if (regionWithTerritories2 != null)
+                {
+                    int regionId = regionWithTerritories2.RegionId;
+                    var territories = context.Territories.Where(x => x.RegionId == regionId).ToList<Territories>();
+                }
+
+
                 if (regionWithTerritories != null)
                 {
                     var territoryDescriptions = regionWithTerritories.Territories;
@@ -116,7 +137,7 @@ namespace EFCoreConsole
         {
             using (var context = new NorthwindContext())
             {
-                var lstCustomers = context.Customers.FromSql("Select * from Students").ToList<Customers>();
+                var lstCustomers = context.Customers.FromSqlRaw("Select * from Customers").ToList<Customers>();
                 foreach (var member in lstCustomers)
                 {
                     Console.WriteLine(string.Format("Customer Id: {0}, Customer Name: {1}", member.CustomerId, member.ContactName));
@@ -131,8 +152,8 @@ namespace EFCoreConsole
                 // TODO: using second parameter to pass database parameter to database
                 // TODO
                 //Insert command
-                string insertSQL = "";
-                int noOfRowInsert = context.Database.ExecuteSqlCommand(insertSQL);
+                string insertSQL = "exec CustOrdersDetail {0}";
+                int noOfRowInsert = context.Database.ExecuteSqlCommand(new RawSqlString(insertSQL), 12);
 
                 string updateSQL = "";
                 //Update command

@@ -30,10 +30,10 @@ namespace EFCoreConsole
         {
             var obj = new DatabaseFirst();
             // 1. Add
-            //obj.AddData(5, "NorthEast");
+            // obj.AddData(5, "NorthEast");
 
             // 2. Update
-            //obj.UpdateData(5, "NorthEast-Update");
+            // obj.UpdateData(5, "NorthEast-Update");
 
             // 3. Delete
             // obj.DeleteData(5);
@@ -48,7 +48,7 @@ namespace EFCoreConsole
             // obj.GetDataUsingRawSQL();
 
             // 7. Execute SQL (INSERT, UPDATE and DELETE) using Raw SQL
-            // obj.ExecuteSqlCommand();
+            obj.ExecuteSqlCommand();
 
             // 8. Transaction Support
             // obj.TransactionSupport();
@@ -57,7 +57,7 @@ namespace EFCoreConsole
 
         private static void CodeFirstApporach()
         {
-            var obj = new CodeFirstApporach();
+            // var obj = new CodeFirstApporach();
 
             //// 1. Add
             //obj.AddData("Steve");

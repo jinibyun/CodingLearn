@@ -1,10 +1,9 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EFCoreConsole.Migrations
 {
-    public partial class init : Migration
+    public partial class firstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +12,7 @@ namespace EFCoreConsole.Migrations
                 columns: table => new
                 {
                     GradeId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     GradeName = table.Column<string>(nullable: true),
                     Section = table.Column<string>(nullable: true)
                 },
@@ -23,17 +22,17 @@ namespace EFCoreConsole.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Standard",
+                name: "Standards",
                 columns: table => new
                 {
                     StandardId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StandardName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Standard", x => x.StandardId);
+                    table.PrimaryKey("PK_Standards", x => x.StandardId);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,7 +40,7 @@ namespace EFCoreConsole.Migrations
                 columns: table => new
                 {
                     StudentID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StudentName = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: true),
                     Photo = table.Column<byte[]>(nullable: true),
@@ -60,30 +59,30 @@ namespace EFCoreConsole.Migrations
                         principalColumn: "GradeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Students_Standard_StandardId",
+                        name: "FK_Students_Standards_StandardId",
                         column: x => x.StandardId,
-                        principalTable: "Standard",
+                        principalTable: "Standards",
                         principalColumn: "StandardId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teacher",
+                name: "Teachers",
                 columns: table => new
                 {
                     TeacherId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TeacherName = table.Column<string>(nullable: true),
                     StandardId = table.Column<int>(nullable: true),
                     TeacherType = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teacher", x => x.TeacherId);
+                    table.PrimaryKey("PK_Teachers", x => x.TeacherId);
                     table.ForeignKey(
-                        name: "FK_Teacher_Standard_StandardId",
+                        name: "FK_Teachers_Standards_StandardId",
                         column: x => x.StandardId,
-                        principalTable: "Standard",
+                        principalTable: "Standards",
                         principalColumn: "StandardId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -93,7 +92,7 @@ namespace EFCoreConsole.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StudentID = table.Column<int>(nullable: false),
                     Address1 = table.Column<string>(nullable: true),
                     Address2 = table.Column<string>(nullable: true),
@@ -116,7 +115,7 @@ namespace EFCoreConsole.Migrations
                 columns: table => new
                 {
                     CourseId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CourseName = table.Column<string>(nullable: true),
                     TeacherId = table.Column<int>(nullable: true)
                 },
@@ -124,12 +123,32 @@ namespace EFCoreConsole.Migrations
                 {
                     table.PrimaryKey("PK_Courses", x => x.CourseId);
                     table.ForeignKey(
-                        name: "FK_Courses_Teacher_TeacherId",
+                        name: "FK_Courses_Teachers_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teacher",
+                        principalTable: "Teachers",
                         principalColumn: "TeacherId",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Teachers",
+                columns: new[] { "TeacherId", "StandardId", "TeacherName", "TeacherType" },
+                values: new object[] { 1, null, "William", null });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "CourseId", "CourseName", "TeacherId" },
+                values: new object[] { 3, "Hamlet", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "CourseId", "CourseName", "TeacherId" },
+                values: new object[] { 4, "King Lear", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "CourseId", "CourseName", "TeacherId" },
+                values: new object[] { 5, "Othello", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_TeacherId",
@@ -152,8 +171,8 @@ namespace EFCoreConsole.Migrations
                 column: "StandardId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teacher_StandardId",
-                table: "Teacher",
+                name: "IX_Teachers_StandardId",
+                table: "Teachers",
                 column: "StandardId");
         }
 
@@ -166,7 +185,7 @@ namespace EFCoreConsole.Migrations
                 name: "StudentAddress");
 
             migrationBuilder.DropTable(
-                name: "Teacher");
+                name: "Teachers");
 
             migrationBuilder.DropTable(
                 name: "Students");
@@ -175,7 +194,7 @@ namespace EFCoreConsole.Migrations
                 name: "Grade");
 
             migrationBuilder.DropTable(
-                name: "Standard");
+                name: "Standards");
         }
     }
 }

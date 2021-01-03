@@ -10,6 +10,9 @@ namespace EFCoreConsole.Model
         // NOTE: Following two properties do NOT affect database migration itself.
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Standard> Standards { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
 
         // ref: https://blog.bitscry.com/2017/05/30/appsettings-json-in-net-core-console-app/
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

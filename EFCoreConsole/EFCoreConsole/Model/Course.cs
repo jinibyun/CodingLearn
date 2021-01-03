@@ -10,6 +10,8 @@ namespace EFCoreConsole.Model
         public string CourseName { get; set; }
         public Nullable<int> TeacherId { get; set; }
         public virtual Teacher Teacher { get; set; }
+
+        public DateTime? CourseDate { get; set; }
         // public ICollection<Student> Students { get; set; }
     }
 }

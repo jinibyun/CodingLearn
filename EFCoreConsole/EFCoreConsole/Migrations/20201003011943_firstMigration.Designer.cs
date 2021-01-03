@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreConsole.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20200510224113_fixCourseDetail")]
-    partial class fixCourseDetail
+    [Migration("20201003011943_firstMigration")]
+    partial class firstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -25,11 +25,14 @@ namespace EFCoreConsole.Migrations
                 {
                     b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CourseName");
+                    b.Property<string>("CourseName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeacherId");
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
 
                     b.HasKey("CourseId");
 
@@ -62,11 +65,14 @@ namespace EFCoreConsole.Migrations
                 {
                     b.Property<int>("GradeId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("GradeName");
+                    b.Property<string>("GradeName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Section");
+                    b.Property<string>("Section")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GradeId");
 
@@ -77,36 +83,47 @@ namespace EFCoreConsole.Migrations
                 {
                     b.Property<int>("StandardId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StandardName");
+                    b.Property<string>("StandardName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StandardId");
 
-                    b.ToTable("Standard");
+                    b.ToTable("Standards");
                 });
 
             modelBuilder.Entity("EFCoreConsole.Model.Student", b =>
                 {
                     b.Property<int>("StudentID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DateOfBirth");
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("GradeId");
+                    b.Property<int?>("GradeId")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("Height");
+                    b.Property<decimal>("Height")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<byte[]>("Photo");
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<int?>("StandardId");
+                    b.Property<int?>("StandardId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("StudentName");
+                    b.Property<string>("StudentName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Weight");
+                    b.Property<float>("Weight")
+                        .HasColumnType("real");
 
                     b.HasKey("StudentID");
 
@@ -121,17 +138,23 @@ namespace EFCoreConsole.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address1");
+                    b.Property<string>("Address1")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Address2");
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State");
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudentID");
+                    b.Property<int>("StudentID")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -144,19 +167,23 @@ namespace EFCoreConsole.Migrations
                 {
                     b.Property<int>("TeacherId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("StandardId");
+                    b.Property<int?>("StandardId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("TeacherName");
+                    b.Property<string>("TeacherName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeacherType");
+                    b.Property<int?>("TeacherType")
+                        .HasColumnType("int");
 
                     b.HasKey("TeacherId");
 
                     b.HasIndex("StandardId");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
 
                     b.HasData(
                         new
@@ -179,7 +206,7 @@ namespace EFCoreConsole.Migrations
                         .WithMany("Students")
                         .HasForeignKey("GradeId");
 
-                    b.HasOne("EFCoreConsole.Model.Standard")
+                    b.HasOne("EFCoreConsole.Model.Standard", null)
                         .WithMany("Students")
                         .HasForeignKey("StandardId");
                 });
@@ -189,7 +216,8 @@ namespace EFCoreConsole.Migrations
                     b.HasOne("EFCoreConsole.Model.Student", "Student")
                         .WithMany("StudentAddresses")
                         .HasForeignKey("StudentID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EFCoreConsole.Model.Teacher", b =>
