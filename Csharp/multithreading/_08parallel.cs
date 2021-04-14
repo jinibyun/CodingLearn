@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,11 +20,59 @@ namespace multithreading
     public class _08parallel
     {
         public void DoTest(){
+            // 0.
+            testWithoutParallel();
+            testWithParallel();
+
             // 1
-            DataParallel();
+            // DataParallel();
 
             // 2
             // TaskParallel();
+        }        
+
+        private void testWithoutParallel()
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            List<int> integerList = Enumerable.Range(1, 10).ToList();
+            foreach (int i in integerList)
+            {
+                long total = DoSomeIndependentTimeconsumingTask();
+                Console.WriteLine("{0} - {1}", i, total);
+            };
+            stopwatch.Stop();
+            Console.WriteLine($"Non-Parallel Execution time: { stopwatch.ElapsedMilliseconds}");
+        }
+
+        private void testWithParallel()
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            List<int> integerList = Enumerable.Range(1, 10).ToList();
+            Parallel.ForEach(integerList, i =>
+            {
+                long total = DoSomeIndependentTimeconsumingTask();
+                Console.WriteLine("{0} - {1}", i, total);
+
+                // for showing thread
+                Console.WriteLine(@"value of i = {0}, thread = {1}",
+                    i, Thread.CurrentThread.ManagedThreadId);
+            });
+            stopwatch.Stop();
+            Console.WriteLine($"Parallel Execution time: { stopwatch.ElapsedMilliseconds}");
+        }
+
+        private long DoSomeIndependentTimeconsumingTask()
+        {
+            //Do Some Time Consuming Task here
+            //Most Probably some calculation or DB related activity
+            long total = 0;
+            for (int i = 1; i < 100000000; i++)
+            {
+                total += i;
+            }
+            return total;
         }
 
         private void DataParallel()
