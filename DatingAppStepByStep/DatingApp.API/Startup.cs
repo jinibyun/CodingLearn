@@ -109,7 +109,7 @@ namespace DatingApp.API
 
             // only when data needs to be initialized for testing purpose
             // seeder.SeedUsers();
-            app.UseCors(x => x.WithOrigins("http://localhost:4200")
+            app.UseCors(x => x.WithOrigins("http://localhost:4200", "http://localhost:4201")
                 .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
 
             // Token Authentication
