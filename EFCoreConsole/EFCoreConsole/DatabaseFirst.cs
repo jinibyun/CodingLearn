@@ -20,8 +20,8 @@ namespace EFCoreConsole
                     RegionDescription = regionDescription,
                     RegionId = regionId
                 };
-                context.Region.Add(region);
-                context.SaveChanges();
+                context.Region.Add(region); // apply to memory db
+                context.SaveChanges(); // apply memory db to real db
             }
         }
 
@@ -56,8 +56,8 @@ namespace EFCoreConsole
 
                 if (region != null)
                 {
-                    context.Region.Remove(region);
-                    context.SaveChanges();
+                    context.Region.Remove(region); // Memory
+                    context.SaveChanges(); // DB
                 }
                 else
                 {
@@ -74,6 +74,7 @@ namespace EFCoreConsole
                 // NOTE: What is difference between IQueryable and IEnumerable
 
                 var lstRegions = context.Region.ToList<Region>();
+                
                 foreach (var member in lstRegions)
                 {
                     Console.WriteLine(string.Format("Region Id: {0}, Region Description: {1}", member.RegionId, member.RegionDescription));
@@ -107,19 +108,20 @@ namespace EFCoreConsole
                 var regionWithTerritories = context.Region
                            .Where(s => s.RegionDescription == regionDescription)
                            .Include(s => s.Territories)
+                           .ThenInclude(s => s.EmployeeTerritories)
                            .FirstOrDefault();
                 // lazy loading (default)
-                var regionWithTerritories2 = context.Region
-                           .Where(s => s.RegionDescription == regionDescription)
-                           .FirstOrDefault();
+                //var regionWithTerritories2 = context.Region
+                //           .Where(s => s.RegionDescription == regionDescription)
+                //           .FirstOrDefault();
 
 
 
-                if (regionWithTerritories2 != null)
-                {
-                    int regionId = regionWithTerritories2.RegionId;
-                    var territories = context.Territories.Where(x => x.RegionId == regionId).ToList<Territories>();
-                }
+                //if (regionWithTerritories2 != null)
+                //{
+                //    int regionId = regionWithTerritories2.RegionId;
+                //    var territories = context.Territories.Where(x => x.RegionId == regionId).ToList<Territories>();
+                //}
 
 
                 if (regionWithTerritories != null)

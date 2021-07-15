@@ -8,6 +8,10 @@ namespace EFCoreConsole.Model
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string FacilityName { get; set; }
+
+        public DateTime? LastModifiedDate { get; set; }
+
+        public double Price { get; set; }
     }
 }

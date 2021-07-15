@@ -14,6 +14,8 @@ namespace EFCoreConsole.Model
         public DbSet<Standard> Standards { get; set; }
         public DbSet<Facility> Facilities { get; set; }
 
+        public DbSet<Exam> Exams { get; set; }
+
         // ref: https://blog.bitscry.com/2017/05/30/appsettings-json-in-net-core-console-app/
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,7 +25,8 @@ namespace EFCoreConsole.Model
 
             IConfigurationRoot configuration = builder.Build();
 
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyConnection"));
+            // optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyConnection"));
+            optionsBuilder.UseSqlServer("Server=JINIDEV\\SQLEXPRESSDEV;Database=SchoolDBCodeFirst;Trusted_Connection=True;");
         }
 
         // data seed

@@ -22,7 +22,7 @@ namespace EFCoreConsole
             DataBaseFirstApproach();
 
             // 2. 
-            // CodeFirstApporach();
+            //CodeFirstApporach();
 
         }
 
@@ -42,13 +42,13 @@ namespace EFCoreConsole
             // obj.GetData();
 
             // 5. Query
-            // obj.GetData("Eastern");
+            obj.GetData("Eastern");
 
             // 6. Raw SQL
             // obj.GetDataUsingRawSQL();
 
             // 7. Execute SQL (INSERT, UPDATE and DELETE) using Raw SQL
-            obj.ExecuteSqlCommand();
+            //obj.ExecuteSqlCommand();
 
             // 8. Transaction Support
             // obj.TransactionSupport();
@@ -57,10 +57,10 @@ namespace EFCoreConsole
 
         private static void CodeFirstApporach()
         {
-            // var obj = new CodeFirstApporach();
+            //var obj = new CodeFirstApporach();
 
-            //// 1. Add
-            //obj.AddData("Steve");
+            // 1. Add
+            // obj.AddData("Steve");
 
             //// 1-1 
             //var stdAddress = new StudentAddress()
@@ -70,20 +70,20 @@ namespace EFCoreConsole
             //};
             //obj.AddData("Jini", stdAddress);
 
-            //// 2. Update
-            //obj.UpdateData(1, "Jini");
+            // 2. Update
+            // obj.UpdateData(1, "Jini");
 
             //// 3. Delete
-            //obj.DeleteData(1);
+            // obj.DeleteData(1);
 
-            //// 4. Query
-            //obj.GetData();
+            // 4. Query
+            // obj.GetData();
 
             //// 5. Query
-            //obj.GetData("Jini");
+            // obj.GetData("Jini");
 
             //// 6. Raw SQL (SELECT)
-            //obj.GetDataUsingRawSQL();
+            // obj.GetDataUsingRawSQL();
 
             //// 7. Execute SQL (INSERT, UPDATE and DELETE) using Raw SQL
             //obj.ExecuteSqlCommand();

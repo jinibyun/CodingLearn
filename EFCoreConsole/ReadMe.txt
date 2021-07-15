@@ -16,10 +16,10 @@ NOTE: Note: Once you have created the model, you must use the Migration commands
 0. Make sure SQL server is accessbile
 
 1. preparation: to create the database from the model (entities and context) by adding a migration.
-dotnet ef migrations add CreateSchoolDB
+dotnet ef migrations add CreateSchoolDB2 --context SchoolContext
 
 2. Applying migration 
-dotnet ef database update
+dotnet ef database
 
 3. NOTE: After upgrading to .net core 3.*, dotnet ef is missing  (from CLI)
 Therefore, we added global.json based on following url recommendation: https://github.com/dotnet/efcore/issues/18282

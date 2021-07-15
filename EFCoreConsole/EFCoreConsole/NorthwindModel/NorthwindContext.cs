@@ -43,6 +43,7 @@ namespace EFCoreConsole.NorthwindModel
         public virtual DbSet<SummaryOfSalesByQuarter> SummaryOfSalesByQuarter { get; set; }
         public virtual DbSet<SummaryOfSalesByYear> SummaryOfSalesByYear { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
+        public virtual DbSet<Temporary> Temporary { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -795,6 +796,19 @@ namespace EFCoreConsole.NorthwindModel
                 entity.Property(e => e.PostalCode).HasMaxLength(10);
 
                 entity.Property(e => e.Region).HasMaxLength(15);
+            });
+
+            modelBuilder.Entity<Temporary>(entity =>
+            {
+                entity.ToTable("temporary");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(10)
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<Territories>(entity =>

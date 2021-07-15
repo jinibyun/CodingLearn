@@ -62,7 +62,7 @@ namespace EFCoreConsole
         {
             using (var context = new SchoolContext())
             {
-                var lstStudents = context.Students.FromSql("Select * from Students").ToList<Student>();
+                var lstStudents = context.Students.FromSqlRaw("");
                 foreach (var member in lstStudents)
                 {
                     Console.WriteLine(string.Format("Student Id: {0}, Student Name: {1}", member.StudentID, member.StudentName));
