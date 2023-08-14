@@ -19,7 +19,7 @@ NOTE: Note: Once you have created the model, you must use the Migration commands
 dotnet ef migrations add CreateSchoolDB2 --context SchoolContext
 
 2. Applying migration 
-dotnet ef database
+dotnet ef database update
 
 3. NOTE: After upgrading to .net core 3.*, dotnet ef is missing  (from CLI)
 Therefore, we added global.json based on following url recommendation: https://github.com/dotnet/efcore/issues/18282
