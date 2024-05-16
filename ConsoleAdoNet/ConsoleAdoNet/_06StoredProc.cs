@@ -12,7 +12,7 @@ namespace ConsoleAdoNet
         {
             /*
             CREATE PROC [dbo].[uspGetTitleWithPrice]
-            @v_price int
+            @v_price money
             AS
             BEGIN
 	            SELECT * FROM titles 
@@ -22,7 +22,7 @@ namespace ConsoleAdoNet
 
             decimal price = 20.00M;
 
-            // using () : try finally (without catch)
+            // using () {} : try finally (without catch)
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("uspGetTitleWithPrice", con))

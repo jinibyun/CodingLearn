@@ -17,6 +17,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using EFCoreConsole.NorthwindModel;
 
 namespace WebApiWithAspnetCore31
 {
@@ -51,11 +52,17 @@ namespace WebApiWithAspnetCore31
             services.Add(new ServiceDescriptor(typeof(IProduct), typeof(ProductRepository), ServiceLifetime.Scoped));
             services.Add(new ServiceDescriptor(typeof(IProductService), typeof(ProductService), ServiceLifetime.Scoped));
             services.Add(new ServiceDescriptor(typeof(IAuthRepository), typeof(AuthRepository), ServiceLifetime.Scoped));
+            services.Add(new ServiceDescriptor(typeof(IRegion), typeof(RegionRepository), ServiceLifetime.Scoped));
+            
             services.AddAutoMapper(typeof(AuthRepository).Assembly);
 
             // entiry framework connection string            
             var connString = Configuration.GetConnectionString("ProductDbContext");
             services.AddDbContext<ProductDbContext>(option => option.UseSqlServer(connString));
+
+            // entiry framework connection string            
+            var connStringNorthwindContext = Configuration.GetConnectionString("NorthwindContext");
+            services.AddDbContext<NorthwindContext>(option => option.UseSqlServer(connStringNorthwindContext));
 
             // it interacts with [Authorize] or [AllowAnonymous]...
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

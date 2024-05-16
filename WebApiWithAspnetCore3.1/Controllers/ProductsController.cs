@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WebApiWithAspnetCore31.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,13 +11,14 @@ namespace WebApiWithAspnetCore31.Controllers
 {
     // [Produces("application/json")]
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] // automatic (de)serialization
     public class ProductsController : Controller
     {
         static List<Product> _products = new List<Product>()
             {
                 new Product() { ProductId = 1, ProductName = "Laptop", ProductPrice = 99.23M },
-                new Product() { ProductId = 2, ProductName = "Desktop", ProductPrice = 55.34M }
+                new Product() { ProductId = 2, ProductName = "Desktop", ProductPrice = 55.34M },
+                new Product() { ProductId = 3, ProductName = "Apple", ProductPrice = 12.23M },
             };
 
         // GET: api/<controller>
@@ -56,12 +58,12 @@ namespace WebApiWithAspnetCore31.Controllers
         
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post(Product product) // automatic deserialization
+        public IActionResult sdfsdfg(Product product) // automatic deserialization
         {
             try
             {
                 _products.Add(product);
-                return StatusCode(StatusCodes.Status201Created);
+                return Ok(_products); // StatusCode(StatusCodes.Status201Created);
             }
             catch (Exception ex)
             {
@@ -72,16 +74,37 @@ namespace WebApiWithAspnetCore31.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, Product product)
+        public IActionResult Put(int id, Product product)
         {
-            _products[id] = product;
+            try
+            {
+                var p = _products.Where(x => x.ProductId == id).FirstOrDefault();
+                if (p != null)
+                {
+                    p.ProductName = product.ProductName;
+                    p.ProductPrice = product.ProductPrice;
+                    return Ok(_products);
+                }
+
+                return BadRequest($"there is no product for {id}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            _products.RemoveAt(id);
+            var p = _products.Where(x => x.ProductId == id).FirstOrDefault();
+            if (p != null)
+            {
+                _products.Remove(p);
+                 return Ok(_products);
+            }
+            return BadRequest($"there is no product for {id}");
         }
     }
 }

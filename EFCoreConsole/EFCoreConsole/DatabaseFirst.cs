@@ -20,8 +20,9 @@ namespace EFCoreConsole
                     RegionDescription = regionDescription,
                     RegionId = regionId
                 };
-                context.Region.Add(region); // apply to memory db
-                context.SaveChanges(); // apply memory db to real db
+                context.Region.Add(region); // apply to "memory" db
+                
+                context.SaveChanges(); // apply memory db to "real db": it is like Execute Command in ado.net
             }
         }
 
@@ -86,19 +87,21 @@ namespace EFCoreConsole
         {
             using (var context = new NorthwindContext())
             {
-                var regionDesc = context.Region.Where(s => s.RegionDescription == regionDescription).Any() ? 
-                                        context.Region.Where(s => s.RegionDescription == regionDescription).ToList<Region>() 
-                                        : null;
+                //var regionDesc = context.Region.Where(s => s.RegionDescription.ToLower().Trim() == regionDescription.ToLower().Trim()).Any() ? 
+                //                       context.Region.Where(s => s.RegionDescription == regionDescription).ToList<Region>() 
+                //                        : null;
 
-                var found = 0;
-                if (regionDesc != null)
-                {
-                    found = regionDesc.Count;
-                }
-                Console.WriteLine("Region found: " + found);
+                var regionDescCount = context.Region.Where(s => s.RegionDescription.ToLower().Trim() == regionDescription.ToLower().Trim()).Count();
+
+                //var found = 0;
+                //if (regionDesc != null)
+                //{
+                //    found = regionDesc.Count;
+                //}
+                Console.WriteLine("Region found: " + regionDescCount);
 
                 // explanation
-                // Difference Between Eager Loading and Lazy Loading
+                // Difference Between Eager Loading(Diligent Loading) and Lazy Loading (default)
                 // ref: https://www.itorian.com/2013/06/what-is-eager-loading-and-what-is-lazy.html
                 // Eager Loading: It loads the related data in scalar and navigation properties along with query result at first shot.
                 // Lazy Loading:  EF loads only the data for the primary object in the LINQ query (the Friend) and leaves the Contact object.
@@ -149,22 +152,22 @@ namespace EFCoreConsole
 
         public void ExecuteSqlCommand()
         {
-            using (var context = new NorthwindContext())
-            {
-                // TODO: using second parameter to pass database parameter to database
-                // TODO
-                //Insert command
-                string insertSQL = "exec CustOrdersDetail {0}";
-                int noOfRowInsert = context.Database.ExecuteSqlCommand(new RawSqlString(insertSQL), 12);
+            //using (var context = new NorthwindContext())
+            //{
+            //    // TODO: using second parameter to pass database parameter to database
+            //    // TODO
+            //    //Insert command
+            //    string insertSQL = "exec CustOrdersDetail {0}";
+            //    int noOfRowInsert = context.Database.ExecuteSqlCommand(new RawSqlString(insertSQL), 12);
 
-                string updateSQL = "";
-                //Update command
-                int noOfRowUpdate = context.Database.ExecuteSqlCommand(updateSQL);
+            //    string updateSQL = "";
+            //    //Update command
+            //    int noOfRowUpdate = context.Database.ExecuteSqlCommand(updateSQL);
 
-                string deleteSQL = "";
-                //Delete command
-                int noOfRowDeleted = context.Database.ExecuteSqlCommand(deleteSQL);
-            }
+            //    string deleteSQL = "";
+            //    //Delete command
+            //    int noOfRowDeleted = context.Database.ExecuteSqlCommand(deleteSQL);
+            //}
         }
 
         public void TransactionSupport()

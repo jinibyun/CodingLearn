@@ -23,11 +23,11 @@ namespace WebApiWithAspnetCore31.Controllers
         [HttpGet("claimtype")]
         public string GetClaimType()
         {
-            return User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return "You are king"; // User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
         [AllowAnonymous]
-        // GET api/values/5
+        // GET api/values/5   == api/values?id=5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
@@ -36,19 +36,19 @@ namespace WebApiWithAspnetCore31.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void sdfsdgfdg([FromBody] string value)
         {
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void sdfsdfsd(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void fsfgfgfdg(int id)
         {
         }
     }

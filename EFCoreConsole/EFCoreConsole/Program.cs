@@ -33,7 +33,7 @@ namespace EFCoreConsole
             // obj.AddData(5, "NorthEast");
 
             // 2. Update
-            // obj.UpdateData(5, "NorthEast-Update");
+            //obj.UpdateData(5, "NorthEast-Update");
 
             // 3. Delete
             // obj.DeleteData(5);

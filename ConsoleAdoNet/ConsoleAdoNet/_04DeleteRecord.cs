@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -14,10 +15,13 @@ namespace ConsoleAdoNet
             {
                 // Creating Connection  
                 con = new SqlConnection(connectionString);
-                
+
                 // writing sql query  
-                SqlCommand cm = new SqlCommand("delete from student where id = 101", con);
-                
+                // SqlCommand cm = new SqlCommand("delete from student4 where id = 101", con);
+                var sql = "delete from student4 where id = @id";
+                SqlCommand cm = new SqlCommand(sql, con);
+                cm.Parameters.Add("@id", SqlDbType.Int).Value = 101;
+
                 // Opening Connection  
                 con.Open();
 

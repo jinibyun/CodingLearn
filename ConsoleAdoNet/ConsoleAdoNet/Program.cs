@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Xml.Linq;
 
 namespace ConsoleAdoNet
 {
@@ -14,11 +15,19 @@ namespace ConsoleAdoNet
             // obj = new _03RetrieveRecord();
             // obj = new _04DeleteRecord();
             // obj = new _05DataSet();
-            //obj = new _06StoredProc();
+            // obj = new _06StoredProc();
             // obj = new _07StoredProcOutput();
             // obj = new _08BCP();
             obj = new _09BCPFromCSV();
             obj.Test();
+
+
+            //var client = new _03RetrieveRecord();
+            //var result = client.GetStudents();
+            //foreach(var m in result)
+            //{
+            //    Console.WriteLine(m.id + " " + m.name + " " + m.email + "  " + m.join_date); // Displaying Record
+            //}
 
         }
     }

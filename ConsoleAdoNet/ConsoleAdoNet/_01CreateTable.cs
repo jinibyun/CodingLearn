@@ -15,6 +15,9 @@ namespace ConsoleAdoNet
             {
                 // Creating Connection  
                 con = new SqlConnection(connectionString);
+                
+                // Opening Connection  
+                con.Open();
 
                 // writing sql query  
                 string sql = "create table student4(id int not null, " +  
@@ -22,10 +25,9 @@ namespace ConsoleAdoNet
                                                    "email varchar(50), " +
                                                    "join_date date)";
 
-                SqlCommand cm = new SqlCommand(sql, con);  
+                SqlCommand cm = new SqlCommand(sql, con);
 
-                // Opening Connection  
-                con.Open();
+
 
                 // Executing the SQL query  
                 cm.ExecuteNonQuery();

@@ -23,8 +23,8 @@ namespace ConsoleAdoNet
 
                 // writing sql query  
 
-                // 1. no parameterized
-                //string sql = "insert into student  " +
+                // 1.no parameterized
+                //string sql = "insert into student4 " +
                 //             "(id, name, email, join_date) values " +
                 //             "(101, 'Ronald Trump', 'ronald@example.com', '1/12/2017')";
                 //SqlCommand cm = new SqlCommand(sql, con);
@@ -32,7 +32,7 @@ namespace ConsoleAdoNet
                 // 2. parameterized
                 string sql = "insert into student  " +
                              "(id, name, email, join_date) values " +
-                             "(@id, @name, @email, @jon_date)";
+                             "(@id, @name, @email, @jon_date)"; // @: parameter
 
                 SqlCommand cm = new SqlCommand(sql, con);
                 cm.Parameters.Add("@id", SqlDbType.Int).Value = id;

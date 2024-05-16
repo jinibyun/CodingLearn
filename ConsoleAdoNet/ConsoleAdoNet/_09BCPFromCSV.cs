@@ -54,12 +54,13 @@ namespace ConsoleAdoNet
                 }
             }
 
-
             // 2. datatable into sql table
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (SqlBulkCopy copy = new SqlBulkCopy(connection))
+                var transaction = connection.BeginTransaction();
+
+                using (SqlBulkCopy copy = new SqlBulkCopy(connection, SqlBulkCopyOptions.Default, transaction))
                 {
                     copy.ColumnMappings.Add(0, 0);
                     copy.ColumnMappings.Add(1, 1);
@@ -72,12 +73,13 @@ namespace ConsoleAdoNet
                     {
                         copy.WriteToServer(dt);
                         Console.WriteLine("Successful");
+                        transaction.Commit();
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);                     
+                        Console.WriteLine(ex.Message);
+                        transaction.Rollback();
                     }
-                    
                 }
             }
         }
